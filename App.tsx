@@ -26,6 +26,7 @@
    LearnMoreLinks,
    ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
+import StorybookUIRoot from './storybook';
 
  const Section: React.FC<{
    title: string;
@@ -111,5 +112,9 @@
      fontWeight: '700',
    },
  });
+
+const Storybook = () => {
+  return <StorybookUIRoot />;
+}
 
  export default App;
