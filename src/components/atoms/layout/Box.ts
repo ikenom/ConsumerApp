@@ -1,28 +1,21 @@
 import styled from 'styled-components/native';
 import {
-  border,
-  boxShadow,
-  color,
-  layout,
-  opacity,
-  position,
   space,
-  zIndex,
-  BorderProps,
-  BoxShadowProps,
-  ColorProps,
-  LayoutProps,
-  OpacityProps,
-  PositionProps,
   SpaceProps,
-  ZIndexProps,
+  color,
+  ColorProps,
+  layout,
+  LayoutProps,
   flexbox,
-  margin,
-  display,
   FlexboxProps,
-  MarginProps,
-  DisplayProps,
-} from 'styled-system';
+  border,
+  BorderProps,
+  position,
+  PositionProps,
+  compose,
+  opacity,
+  OpacityProps,
+ } from "styled-system";
 
 export interface IBoxProps
   extends LayoutProps,
@@ -30,21 +23,19 @@ export interface IBoxProps
     ColorProps,
     BorderProps,
     PositionProps,
-    BoxShadowProps,
-    OpacityProps,
-    ZIndexProps {}
+    FlexboxProps,
+    OpacityProps {}
 
-export const Box = styled.View<IBoxProps>`
-  ${layout};
-`;
+ export const viewProps = compose(
+  layout,
+  color,
+  space,
+  border,
+  position,
+  flexbox,
+  opacity,
+);
+
+export const Box = styled.View<IBoxProps>(viewProps);
 
 Box.displayName = 'Box';
-
-/**
- * A flexbox component
- */
- export const Flexbox = styled(Box)<FlexboxProps & MarginProps & DisplayProps>`
-  ${flexbox};
-  ${margin};
-  ${display}; /** really only want this to be "flex", but could be "inline-flex" */
-`;

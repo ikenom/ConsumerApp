@@ -6,17 +6,12 @@ import {Box} from '../../src/components/atoms/layout/Box';
 
 
 storiesOf('Layout', module).add('to Storybook', () => {
-  const children = text(
-    'text',
-    'The quick brown fox jumped over the lazy dog.'
-  );
-
-  const margin = number('margin', 0);
-  const padding = number('padding', 0);
+  const margin = number('margin', 100);
+  const padding = number('padding', 100);
 
   return (
-    <Box color={'#4785FE'} bg={'#123456'} m={margin} p={padding}>
-      <Text>The quick brown fox jumped over the lazy dog.'</Text>
+    <Box bg="#4785FE" alignitems="center" mt={margin} p={padding}>
+      <Text>Hello from a box component!</Text>
     </Box>
   );
 });
