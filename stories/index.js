@@ -1,3 +1,4 @@
 import './Button/Button.stories';
 import './Welcome/Welcome.stories';
-import './Box/Box.stories';
+import './atoms/layout/Box.stories';
+import './atoms/layout/Flexbox.stories';
