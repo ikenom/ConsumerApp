@@ -12394,6 +12394,11 @@ react-native-ratings@^7.3.0:
     lodash "^4.17.15"
     prop-types "^15.7.2"
 
+react-native-responsive-screen@^1.4.2:
+  version "1.4.2"
+  resolved "https://npm.ojointernal.com/repository/npm/react-native-responsive-screen/-/react-native-responsive-screen-1.4.2.tgz#45280826d24f9accbfdf46a36cb8e6d780f76f28"
+  integrity sha512-BLYz0UUpeohrib7jbz6wDmtBD5OmiuMRko4IT8kIF63taXPod/c5iZgmWnr5qOnK8hMuKiGMvsM3sC+eHX/lEQ==
+
 react-native-size-matters@^0.3.1:
   version "0.3.1"
   resolved "https://npm.ojointernal.com/repository/npm/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz"
