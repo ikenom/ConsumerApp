@@ -6,38 +6,20 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {Image} from 'react-native';
+import { MealCardType, Dimension, getMealCardLayoutDimensions } from './util';
 
-type MealCardType = 'horizontal' | 'vertical';
-
-const VERTICAL_DIM: Dimension = {
-  width: wp('44%'),
-  height: hp('23%'),
-  contentHeight: hp('6.7%')
-}
-
-const HORIZONTAL_DIM: Dimension = {
-  width: wp('58%'),
-  height: hp('18%'),
-  contentHeight: hp('5%')
-}
-
-interface Dimension {
-  width: number;
-  height: number;
-  contentHeight: number;
-} 
-interface MealCardProps {
+export interface MealCardProps {
   mealName: string;
   price: string;
   image: any;
-  type: MealCardType;
+  layoutType: MealCardType;
 }
 
 export const MealCard = (props: MealCardProps) => {
 
-  const { mealName, price, image, type } = props;
+  const { mealName, price, image, layoutType } = props;
 
-  const dimensions: Dimension = type === 'horizontal' ? HORIZONTAL_DIM : VERTICAL_DIM
+  const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
   return (
     <Box
       height={dimensions.height}
