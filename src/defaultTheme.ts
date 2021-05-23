@@ -2,6 +2,11 @@ export const defaultTheme = {
   colors: {
     black: "#121212",
     white: "#FFFFFF",
+    blue: '#4785FE',
+    greyOne: "#F9F9F9",
+    greyTwo: "#A0A0A0",
+    greyThree: "#E3E1D3",
+    greyFour: "#EEEEEF",
   },
   fontFamily: {
     dual_sm: "Dual-300",

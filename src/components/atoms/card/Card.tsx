@@ -7,12 +7,21 @@ import {
 } from 'react-native-responsive-screen';
 import {Image} from 'react-native';
 import { MealCardType, Dimension, getMealCardLayoutDimensions } from './util';
+import { Meal } from '../../../models/meal/meal';
 
 export interface MealCardProps {
   mealName: string;
   price: string;
   image: any;
   layoutType: MealCardType;
+}
+
+export const mealToMealCardProp = (meal: Meal): Omit<MealCardProps, 'layoutType'> => {
+  return {
+    mealName: meal.name,
+    price: meal.price,
+    image: meal.image,
+  }
 }
 
 export const MealCard = (props: MealCardProps) => {
@@ -22,18 +31,16 @@ export const MealCard = (props: MealCardProps) => {
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
   return (
     <Box
-      height={dimensions.height}
-      width={dimensions.width}
       position={'absolute'}
       overflow={'hidden'}
       right={0}
       left={0}
       bottom={0}
       top={0}
-      borderRadius={'25px'}>
-
-      <Image style={{flex: 1, height: undefined, width: undefined}} source={image} />
-
+      borderRadius={'15px'}>
+      <Box height={dimensions.height} width={dimensions.width}>
+        <Image style={{flex: 1, height: undefined, width: undefined}} source={image} />
+      </Box>
       <FlexBox top={-dimensions.contentHeight} bg={'#000000'} height={dimensions.contentHeight} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
         <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
         {mealName}
@@ -44,7 +51,6 @@ export const MealCard = (props: MealCardProps) => {
           </Text>
         </FlexBox>
       </FlexBox>
-
     </Box>
   );
 };
