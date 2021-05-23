@@ -1,0 +1,99 @@
+import { Restaurant } from "../../../models/restaurant/restaurant";
+import { FlexBox, Box } from "../../atoms/layout/Box";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import { defaultTheme } from "../../../defaultTheme";
+import React from "react";
+import {Image} from 'react-native';
+
+import { Meal } from "../../../models/meal/meal";
+import { Text } from "../../atoms/typography/Text";
+import { Ionicon } from "../../atoms/icons/Ionicons";
+import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
+import { CardCarousel } from "../../atoms/card/CardCarousel";
+import { mealToMealCardProp } from "../../atoms/card/Card";
+import { Button } from "react-native-elements/dist/buttons/Button";
+
+interface RestaurantViewProps {
+  restaurant: Restaurant;
+  meals: RestaurantViewMeals;
+}
+
+export interface RestaurantViewMeals {
+  all: Meal[];
+  recommendations: Meal[];
+}
+
+export const RestaurantView = (props: RestaurantViewProps) => {
+
+  const { restaurant, meals } = props;
+
+  const { businessHours } = restaurant
+  return(
+    <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
+      <Box>
+        <Box 
+          width={wp('99%')} 
+          height={hp('23%')} 
+          overflow={'hidden'}
+          borderRadius={'5px'}>
+          <Image style={{flex: 1, height: undefined, width: undefined}} source={restaurant.image} />
+        </Box>
+        <FlexBox bottom={hp('23%')} right={wp('45%')}>
+          <Button icon={<Ionicon name="chevron-back-circle-sharp" size={30} color={defaultTheme.colors.greyOne} style={{borderColor: defaultTheme.colors.black}}/>}/>
+        </FlexBox>
+      </Box>
+      <Box pl={'16px'} bottom={hp('5px')}>
+          <Box mb={hp('1%')} width={wp('72%')}>
+            <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.xlg} color={defaultTheme.colors.white}>
+              {restaurant.name}
+            </Text>
+          </Box>
+          <Box mb={hp('1.5%')} fontSize={defaultTheme.fontSize.m} width={wp('72%')}>
+            <Text color={defaultTheme.colors.white}>
+              {restaurant.description}
+            </Text>
+          </Box>
+          <FlexBox flexDirection={'row'} alignContent={'center'} mb={hp('1.5%')}>
+            <MaterialCommunityIcon name={'clock-time-three-outline'} size={23} color={defaultTheme.colors.greyTwo}/>
+            <Box ml={wp('2%')} pt={'2px'} fontSize={defaultTheme.fontSize.m}>
+              <Text color={defaultTheme.colors.white}>
+                {`${businessHours.openingTime.toFormat('t')} - ${businessHours.closingHourTime.toFormat('t')}`}
+              </Text>
+            </Box>
+          </FlexBox>
+          <FlexBox flexDirection={'row'} alignContent={'center'}>
+            <Box pt={hp('0.4%')}>
+              <Ionicon name={'md-location-sharp'} size={25} color={defaultTheme.colors.greyTwo}/>
+            </Box>
+            <FlexBox ml={wp('2%')} fontSize={defaultTheme.fontSize.m} flexDirection={'column'}>
+              <Text color={defaultTheme.colors.blue} style={{textDecorationLine: 'underline'}}>
+                {`${restaurant.location.street}`}
+              </Text>
+              <Text color={defaultTheme.colors.blue} style={{textDecorationLine: 'underline'}}>
+                {`${restaurant.location.city}, ${restaurant.location.state} ${restaurant.location.zip}`}
+              </Text>
+            </FlexBox>
+          </FlexBox>
+          <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
+            <Text color={defaultTheme.colors.white} fontWeight={'500'} fontSize={defaultTheme.fontSize.lg}>
+              For You
+            </Text>
+            <Box mt={hp('1.5%')}>
+              <CardCarousel layoutType='horizontal' meals={meals.recommendations.map(meal => mealToMealCardProp(meal))} />
+            </Box>
+          </FlexBox>
+          <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
+            <Text color={defaultTheme.colors.white} fontWeight={'500'} fontSize={defaultTheme.fontSize.lg}>
+              All
+            </Text>
+            <Box mt={hp('1.5%')}>
+              <CardCarousel layoutType='vertical' meals={meals.all.map(meal => mealToMealCardProp(meal))} />
+            </Box>
+          </FlexBox>
+        </Box>
+    </FlexBox>
+  )
+}

@@ -28,15 +28,16 @@ export const CardCarousel = (props: CardCarouselProps) => {
     )
   }
   return(
-    <Box height={dimensions.height} p={2}>
+    <Box height={dimensions.height} >
       <Carousel 
-        vertical={layoutType === 'vertical'}
+        firstItem={1}
+        vertical={false}
         data={meals} 
         renderItem={CardWrapper} 
-        sliderWidth={wp('95%')} 
+        sliderWidth={wp('94%')} 
         itemWidth={dimensions.width}
         enableMomentum={true} 
-        enableSnap={true}
+        activeSlideOffset={0}
         windowSize={10}/>
     </Box>
   )
