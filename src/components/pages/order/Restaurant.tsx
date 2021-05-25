@@ -34,11 +34,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
   return(
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <Box>
-        <Box 
-          width={wp('99%')} 
-          height={hp('23%')} 
-          overflow={'hidden'}
-          borderRadius={'5px'}>
+        <Box width={wp('99%')}  height={hp('23%')} overflow={'hidden'} borderRadius={'5px'}>
           <Image style={{flex: 1, height: undefined, width: undefined}} source={restaurant.image} />
         </Box>
         <FlexBox bottom={hp('23%')} right={wp('45%')}>
