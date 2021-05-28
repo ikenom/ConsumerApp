@@ -23,12 +23,10 @@ import { getFatsInCalories, getProteinInCalories } from "../../../models/meal/ut
 import { Easing } from "react-native-reanimated";
 import { isOpen, MOCK_DISTANCE } from "../../../models/restaurant/util";
 import { RestaurantInfoModal } from "../../atoms/modals/RestaurantInfoModal";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { RestaurantParamList } from "../../../../App";
 
 LogBox.ignoreLogs(['Easing', 'expected']);
-interface MealViewProps {
-  meal: Meal;
-  restaurant: Restaurant;
-}
 
 const StyledDivider = styled(Divider)`
   backgroundColor: ${defaultTheme.colors.greyFive};
@@ -36,13 +34,34 @@ const StyledDivider = styled(Divider)`
   margin-bottom: ${hp("2%")}
 `;
 
+export const MealNavigatorContainer = (props: StackScreenProps<RestaurantParamList, 'MealView'>) => {
+  const { navigation, route } = props;
+  return (
+    <MealOrderView {...route.params} navigation={navigation} />
+  )
+}
+export interface MealViewProps {
+  meal: Meal;
+  restaurant: Restaurant;
+  navigation?: StackNavigationProp<RestaurantParamList, 'MealView'>
+}
+
 export const MealOrderView = (props: MealViewProps) => {
-  const { meal, restaurant } = props;
+  const { meal, restaurant, navigation } = props;
 
   const [isModalOpen, setModalVisibility] = useState(false);
 
   const toggleModal = () => {
     setModalVisibility(!isModalOpen)
+  }
+
+  const onBackPressed = () => {
+    navigation?.pop();
+  }
+
+  const onNavigateToRestaurant = () => {
+    // Get meals of restaurant from store
+    // navigate
   }
 
   return (
@@ -52,7 +71,7 @@ export const MealOrderView = (props: MealViewProps) => {
           <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
         </Box>
         <Box bottom={hp('26%')} right={wp('43%')}>
-          <Button icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
+          <Button onPress={onBackPressed} icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </Box>
         <FlexBox top={-hp('12.9%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
           <Box mt={hp('1%')}>
