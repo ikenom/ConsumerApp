@@ -105,20 +105,22 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
 
 
   return(
-    <FlexBox flexDirection={'row'} mb={"4%"} justifyContent={"space-between"}>
-      <FlexBox flexDirection={'column'} mb={"1%"}>
-        <Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'} mb={hp('1.3%')}>
-        {restaurant.name}
-        </Text>
-        <FlexBox flexDirection={'row'}>
-          <MaterialCommunityIcon name={'clock-time-three-outline'} size={23} color={defaultTheme.colors.greyTwo}/>
-          <Text  mt={'1px'} ml={wp('2.3%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{isOpen(restaurant.businessHours) ? 'Open' : 'Closed'}</Text>
-          <Ionicon name={'md-location-sharp'} size={25} color={defaultTheme.colors.greyTwo}/>
-          <Text  mt={'1px'} ml={wp('2%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${MOCK_DISTANCE} mi`}</Text>
+    <TouchableOpacity activeOpacity={.5} onPress={toggleModal}>
+      <FlexBox flexDirection={'row'} mb={"4%"} justifyContent={"space-between"}>
+        <FlexBox flexDirection={'column'} mb={"1%"}>
+          <Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'} mb={hp('1.3%')}>
+          {restaurant.name}
+          </Text>
+          <FlexBox flexDirection={'row'}>
+            <MaterialCommunityIcon name={'clock-time-three-outline'} size={23} color={defaultTheme.colors.greyTwo}/>
+            <Text  mt={'1px'} ml={wp('2.3%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{isOpen(restaurant.businessHours) ? 'Open' : 'Closed'}</Text>
+            <Ionicon name={'md-location-sharp'} size={25} color={defaultTheme.colors.greyTwo}/>
+            <Text  mt={'1px'} ml={wp('2%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${MOCK_DISTANCE} mi`}</Text>
+          </FlexBox>
         </FlexBox>
+        <Button onPress={toggleModal} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
       </FlexBox>
-      <Button onPress={toggleModal} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
-    </FlexBox>
+    </TouchableOpacity>
   )
 }
 
