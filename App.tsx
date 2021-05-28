@@ -1,6 +1,6 @@
 import React from 'react';
-import { SafeAreaView, StatusBar } from 'react-native';
-import { RestaurantView } from './src/components/pages/order/Restaurant';
+import { SafeAreaView } from 'react-native';
+import { MealOrderView } from './src/components/pages/order/Meal';
 import { defaultTheme } from './src/defaultTheme';
 import { MOCK_MEALS } from './src/models/meal/util';
 import { MOCK_RESTAURANT } from './src/models/restaurant/util';
@@ -13,7 +13,8 @@ const App = () => {
     <>
       <SafeAreaView style={{flex: 0, backgroundColor: defaultTheme.colors.black}}/>
       <SafeAreaView style={{flex: 1, backgroundColor: defaultTheme.colors.black}}>
-        <RestaurantView restaurant={MOCK_RESTAURANT} meals={{all: MOCK_MEALS, recommendations: MOCK_MEALS}}/>
+        {/* <RestaurantView restaurant={MOCK_RESTAURANT} meals={{all: MOCK_MEALS, recommendations: MOCK_MEALS}}/> */}
+        <MealOrderView meal={MOCK_MEALS[0]} restaurant={MOCK_RESTAURANT}/>
       </SafeAreaView>
     </>
   )

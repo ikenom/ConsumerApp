@@ -1,22 +1,22 @@
 
 export interface Meal {
-  image: string;
+  image: any;
   name: string;
   price: string;
   description: string;
-  nutrition?: Nutrition;
+  nutrition: Nutrition;
 }
 
-interface Nutrition {
-  calories: string;
+export interface Nutrition {
+  calories: number;
   macros: MacroNutrition;
-  micros: MicroNutrition;
+  micros?: MicroNutrition;
 }
 
 interface MacroNutrition {
-  proteinInGrams: string;
-  carbsInGrams: string;
-  fatsInGrams: string;
+  proteinInGrams: number;
+  carbsInGrams: number;
+  fatsInGrams: number;
 }
 
 interface MicroNutrition {
@@ -25,3 +25,7 @@ interface MicroNutrition {
   cholesterolInGrams: number;
   sodiumInGrams: number;
 }
+
+export const PROTEIN_CALORIES_PER_GRAM = 4;
+export const CARBS_CALORIES_PER_GRAM = 4;
+export const FAT_CALORIES_PER_GRAM = 9;

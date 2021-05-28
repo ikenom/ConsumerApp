@@ -7,6 +7,7 @@ export const defaultTheme = {
     greyTwo: "#A0A0A0",
     greyThree: "#E3E1D3",
     greyFour: "#EEEEEF",
+    greyFive: "#444444"
   },
   fontFamily: {
     dual_sm: "Dual-300",

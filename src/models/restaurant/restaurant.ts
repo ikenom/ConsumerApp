@@ -9,9 +9,9 @@ export interface Restaurant {
 }
 
 
-interface BusinessHours {
-  openingTime: DateTime;
-  closingHourTime: DateTime;
+export interface BusinessHours {
+  openingTime: string;
+  closingHourTime: string;
 }
 
 interface Location {

@@ -56,7 +56,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
             <MaterialCommunityIcon name={'clock-time-three-outline'} size={23} color={defaultTheme.colors.greyTwo}/>
             <Box ml={wp('2%')} pt={'2px'} fontSize={defaultTheme.fontSize.m}>
               <Text color={defaultTheme.colors.white}>
-                {`${businessHours.openingTime.toFormat('t')} - ${businessHours.closingHourTime.toFormat('t')}`}
+                {`${businessHours.openingTime} - ${businessHours.closingHourTime}`}
               </Text>
             </Box>
           </FlexBox>
