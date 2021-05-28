@@ -8,7 +8,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {Text} from '../../atoms/typography/Text';
-import React from "react";
+import React, { useState } from "react";
 import { Image, TouchableOpacity } from 'react-native';
 import { Divider } from 'react-native-elements';
 import { Button } from "react-native-elements/dist/buttons/Button";
@@ -22,6 +22,7 @@ import styled from "styled-components";
 import { getFatsInCalories, getProteinInCalories } from "../../../models/meal/util";
 import { Easing } from "react-native-reanimated";
 import { isOpen, MOCK_DISTANCE } from "../../../models/restaurant/util";
+import { RestaurantInfoModal } from "../../atoms/modals/RestaurantInfoModal";
 
 LogBox.ignoreLogs(['Easing', 'expected']);
 interface MealViewProps {
@@ -38,6 +39,12 @@ const StyledDivider = styled(Divider)`
 export const MealOrderView = (props: MealViewProps) => {
   const { meal, restaurant } = props;
 
+  const [isModalOpen, setModalVisibility] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisibility(!isModalOpen)
+  }
+
   return (
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <Box width= {wp('99%')} height={hp('26%')} mb={"6%"}>
@@ -47,10 +54,12 @@ export const MealOrderView = (props: MealViewProps) => {
         <Box bottom={hp('26%')} right={wp('43%')}>
           <Button icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </Box>
-        <FlexBox top={-hp('11.7%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('13%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
-          <Text fontWeight={'500'} fontSize={'28px'} color={'#FFFFFF'}>
-          {meal.name}
-          </Text>
+        <FlexBox top={-hp('12.9%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+          <Box mt={hp('1%')}>
+            <Text fontWeight={'500'} fontSize={'28px'} color={'#FFFFFF'} >
+            {meal.name}
+            </Text>
+          </Box>
         </FlexBox>
       </Box>
       <Box pl={'5%'} pr={"5%"} height={hp('43%')}>
@@ -60,7 +69,7 @@ export const MealOrderView = (props: MealViewProps) => {
           </Text>
         </Box>
         <StyledDivider />
-          <RestaurantInfo restaurant={restaurant}/>
+          <RestaurantInfo restaurant={restaurant} toggleModal={toggleModal}/>
         <StyledDivider />
         <FlexBox width={wp("93%")}>
             <NutritionDropDown nutrition={meal.nutrition} />
@@ -81,34 +90,37 @@ export const MealOrderView = (props: MealViewProps) => {
           icon={<Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'}>{`$${meal.price}`}</Text>}
         />
       </FlexBox>
+      {isModalOpen ? <RestaurantInfoModal restaurant={restaurant} isVisible={isModalOpen} onClose={toggleModal}/> : <Box></Box>}
     </FlexBox >
   )
 }
 
 interface RestaurantInfoProps {
   restaurant: Restaurant;
+  toggleModal: () => void
 }
 
 const RestaurantInfo = (props: RestaurantInfoProps) => {
-  const { restaurant } = props;
+  const { restaurant, toggleModal } = props;
+
 
   return(
-    <FlexBox flexDirection={'row'} mb={"4%"} justifyContent={"space-between"}>
-      <FlexBox flexDirection={'column'} mb={"1%"}>
-        <Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'} mb={hp('1.3%')}>
-        {restaurant.name}
-        </Text>
-        <FlexBox flexDirection={'row'}>
-          <MaterialCommunityIcon name={'clock-time-three-outline'} size={23} color={defaultTheme.colors.greyTwo}/>
-          <Text  mt={'1px'} ml={wp('2.3%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{isOpen(restaurant.businessHours) ? 'Open' : 'Closed'}</Text>
-          <Ionicon name={'md-location-sharp'} size={25} color={defaultTheme.colors.greyTwo}/>
-          <Text  mt={'1px'} ml={wp('2%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${MOCK_DISTANCE} mi`}</Text>
+    <TouchableOpacity activeOpacity={.5} onPress={toggleModal}>
+      <FlexBox flexDirection={'row'} mb={"4%"} justifyContent={"space-between"}>
+        <FlexBox flexDirection={'column'} mb={"1%"}>
+          <Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'} mb={hp('1.3%')}>
+          {restaurant.name}
+          </Text>
+          <FlexBox flexDirection={'row'}>
+            <MaterialCommunityIcon name={'clock-time-three-outline'} size={23} color={defaultTheme.colors.greyTwo}/>
+            <Text  mt={'1px'} ml={wp('2.3%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{isOpen(restaurant.businessHours) ? 'Open' : 'Closed'}</Text>
+            <Ionicon name={'md-location-sharp'} size={25} color={defaultTheme.colors.greyTwo}/>
+            <Text  mt={'1px'} ml={wp('2%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${MOCK_DISTANCE} mi`}</Text>
+          </FlexBox>
         </FlexBox>
+        <Button onPress={toggleModal} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
       </FlexBox>
-      <Button 
-        icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>}
-      />
-    </FlexBox>
+    </TouchableOpacity>
   )
 }
 
@@ -138,23 +150,30 @@ const NutritionDropDown = (props: NutritionDropdownProps) => {
             <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{calories}</Text>
           </FlexBox>
           <StyledDivider />
-          <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={"2%"}>
-            <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`Protein   ${((getProteinInCalories(macros.proteinInGrams) / calories) * 100).toPrecision(2)}%`}</Text>
-            <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${macros.proteinInGrams}g`}</Text>
-          </FlexBox>
+          <NutritionItem label={"Protein"} percentage={((getProteinInCalories(macros.proteinInGrams) / calories) * 100).toPrecision(2)} grams={macros.proteinInGrams}/>
           <StyledDivider />
-          <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={"2%"}>
-            <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`Fat   ${((getFatsInCalories(macros.fatsInGrams) / calories) * 100).toPrecision(2)}%`}</Text>
-            <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${macros.fatsInGrams}g`}</Text>
-          </FlexBox>
+          <NutritionItem label={"Fat"} percentage={((getFatsInCalories(macros.fatsInGrams) / calories) * 100).toPrecision(2)} grams={macros.fatsInGrams}/>
           <StyledDivider />
-          <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={"2%"}>
-            <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`Carbs   ${((getFatsInCalories(macros.carbsInGrams) / calories) * 100).toPrecision(2)}%`}</Text>
-            <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${macros.carbsInGrams}g`}</Text>
-          </FlexBox>
+          <NutritionItem label={"Carbs"} percentage={((getFatsInCalories(macros.carbsInGrams) / calories) * 100).toPrecision(2)} grams={macros.carbsInGrams}/>
           <StyledDivider />
         </FlexBox>
       </AnimatedSection>
     </TouchableOpacity>
   );
 };
+
+interface NutritionItemProps {
+  label: string;
+  percentage: string;
+  grams: number;
+}
+
+const NutritionItem = (props: NutritionItemProps) => {
+  const { label, percentage, grams } = props;
+  return(
+    <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={"2%"}>
+      <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${label}   ${percentage}%`}</Text>
+      <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${grams}g`}</Text>
+    </FlexBox>
+  )
+}
