@@ -4,26 +4,27 @@ import Carousel from 'react-native-snap-carousel';
 import { MealCard, MealCardProps } from "./Card";
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import React from 'react';
+import { Meal } from "../../../models/meal/meal";
 
 interface CardCarouselProps {
   layoutType: MealCardType;
-  meals: Omit<MealCardProps, 'layoutType'>[];
+  meals: Meal[];
+  onPress: (mealViewProps: Meal) => void;
 }
 
 export const CardCarousel = (props: CardCarouselProps) => {
 
-  const { layoutType, meals } = props;
+  const { layoutType, meals, onPress } = props;
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
 
   //@ts-ignore
   const CardWrapper = ({item, index}) => {
-    const meal = item as MealCardProps;
+    const meal = item as Meal;
     return(
       <MealCard 
-        mealName={meal.mealName} 
-        price={meal.price} 
-        image={meal.image}
+        meal={meal}
         layoutType={layoutType}
+        onPress={onPress}
       />
     )
   }

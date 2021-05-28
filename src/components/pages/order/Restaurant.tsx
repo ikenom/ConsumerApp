@@ -7,18 +7,20 @@ import {
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
 import {Image} from 'react-native';
-
 import { Meal } from "../../../models/meal/meal";
 import { Text } from "../../atoms/typography/Text";
 import { Ionicon } from "../../atoms/icons/Ionicons";
 import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
 import { CardCarousel } from "../../atoms/card/CardCarousel";
-import { mealToMealCardProp } from "../../atoms/card/Card";
 import { Button } from "react-native-elements/dist/buttons/Button";
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
+import { RestaurantParamList } from "../../../../App";
 
-interface RestaurantViewProps {
+
+export interface RestaurantViewProps {
   restaurant: Restaurant;
   meals: RestaurantViewMeals;
+  navigation?: StackNavigationProp<RestaurantParamList, 'RestaurantView'>
 }
 
 export interface RestaurantViewMeals {
@@ -26,11 +28,23 @@ export interface RestaurantViewMeals {
   recommendations: Meal[];
 }
 
+export const RestaurantNavigatorContainer = (props: StackScreenProps<RestaurantParamList, 'RestaurantView'>) => {
+const { navigation, route } = props;
+  return (
+    <RestaurantView {...route.params} navigation={navigation} />
+  )
+}
+
 export const RestaurantView = (props: RestaurantViewProps) => {
 
-  const { restaurant, meals } = props;
+  const { restaurant, meals, navigation } = props;
 
-  const { businessHours } = restaurant
+  const { businessHours } = restaurant;
+
+
+  const onPressMeal = (meal: Meal) => {
+    navigation?.push('MealView', {meal: meal, restaurant: restaurant});
+  }
   return(
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <Box>
@@ -78,7 +92,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               For You
             </Text>
             <Box mt={hp('1.5%')}>
-              <CardCarousel layoutType='horizontal' meals={meals.recommendations.map(meal => mealToMealCardProp(meal))} />
+              <CardCarousel onPress={onPressMeal} layoutType='horizontal' meals={meals.recommendations} />
             </Box>
           </FlexBox>
           <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
@@ -86,7 +100,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               All
             </Text>
             <Box mt={hp('1.5%')}>
-              <CardCarousel layoutType='vertical' meals={meals.all.map(meal => mealToMealCardProp(meal))} />
+              <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.all} />
             </Box>
           </FlexBox>
         </Box>
