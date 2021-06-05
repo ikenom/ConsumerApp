@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import StorybookUIRoot from './storybook';
 import { RestaurantNavigatorContainer, RestaurantViewProps } from './src/components/pages/order/Restaurant';
+import { OrderConfirmationCart } from './src/components/pages/order/Cart';
 
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
@@ -33,9 +34,18 @@ const App = () => {
   )
 };
 
+const TestApp = () => {
+  return (
+    <>
+      <SafeAreaView style={{flex: 0, backgroundColor: defaultTheme.colors.black}}/>
+      <SafeAreaView style={{flex: 1, backgroundColor: defaultTheme.colors.black}}>
+        <OrderConfirmationCart restaurant={MOCK_RESTAURANT} meal={MOCK_MEALS[0]}/>
+      </SafeAreaView>
+    </>
+  )
+};
 
-        // {/* <RestaurantView restaurant={MOCK_RESTAURANT} meals={{all: MOCK_MEALS, recommendations: MOCK_MEALS}}/> */}
-        // <MealOrderView meal={MOCK_MEALS[0]} restaurant={MOCK_RESTAURANT}/>
+
 const Storybook = () => {
   return <StorybookUIRoot />;
 };

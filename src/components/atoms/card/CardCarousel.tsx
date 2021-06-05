@@ -15,7 +15,7 @@ interface CardCarouselProps {
 export const CardCarousel = (props: CardCarouselProps) => {
 
   const { layoutType, meals, onPress } = props;
-  const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
+  const dimensions: Dimension = getMealCardLayoutDimensions(layoutType);
 
   //@ts-ignore
   const CardWrapper = ({item, index}) => {

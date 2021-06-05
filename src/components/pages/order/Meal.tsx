@@ -94,7 +94,7 @@ export const MealOrderView = (props: MealViewProps) => {
             <NutritionDropDown nutrition={meal.nutrition} />
         </FlexBox>
       </Box>
-      <FlexBox pl={'5%'} pr={"5%"} width={wp('100%')} position={'absolute'} bottom={hp('9%')}>
+      <FlexBox pl={'5%'} pr={"5%"} width={wp('100%')} position={'absolute'} bottom={hp('12%')}>
         <Button 
           title="Order" 
           buttonStyle={{

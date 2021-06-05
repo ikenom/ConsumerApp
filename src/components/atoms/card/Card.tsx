@@ -8,7 +8,6 @@ import {
 import {Image, TouchableOpacity} from 'react-native';
 import { MealCardType, Dimension, getMealCardLayoutDimensions } from './util';
 import { Meal } from '../../../models/meal/meal';
-import { MealViewProps } from '../../pages/order/Meal';
 
 export interface MealCardProps {
   meal: Meal
