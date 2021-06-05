@@ -1,5 +1,4 @@
 import {MealCard} from '../../../src/components/atoms/card/Card';
-import {Box} from '../../..//src/components/atoms/layout/Box';
 import { CardCarousel } from '../../../src/components/atoms/card/CardCarousel';
 import {storiesOf} from '@storybook/react-native';
 import React from "react";
@@ -9,32 +8,32 @@ const image = require('../../../assets/testImages/waffles.jpeg');
 
 const BASIC_MEALS = [ 
   {
-    mealName: "Hazelnut Belgian Waffles",
+    name: "Hazelnut Belgian Waffles",
     price: "12.99",
     image: require('../../../assets/testImages/waffles.jpeg')
   },
   {
-    mealName: "Lemon Grilled Chicken",
+    name: "Lemon Grilled Chicken",
     price: "17.02",
     image: require('../../../assets/testImages/chickenMeal.jpeg')
   },
   {
-    mealName: "Spicy Pulled Pork",
+    name: "Spicy Pulled Pork",
     price: "8.53",
     image: require('../../../assets/testImages/pulledPork.jpeg')
   },
   {
-    mealName: "Hazelnut Belgian Waffles",
+    name: "Hazelnut Belgian Waffles",
     price: "12.99",
     image: require('../../../assets/testImages/waffles.jpeg')
   },
   {
-    mealName: "Lemon Grilled Chicken",
+    name: "Lemon Grilled Chicken",
     price: "17.02",
     image: require('../../../assets/testImages/chickenMeal.jpeg')
   },
   {
-    mealName: "Spicy Pulled Pork",
+    name: "Spicy Pulled Pork",
     price: "8.53",
     image: require('../../../assets/testImages/pulledPork.jpeg')
   }
@@ -42,20 +41,16 @@ const BASIC_MEALS = [
 
 
 const HorizontalMealCardStory = () => {
-  const mealName = "Hazelnut Belgian Waffles";
-  const price = "12.99";
 
   return(
-    <MealCard mealName={mealName} price={price} type='horizontal' image={image}/>
+      <MealCard meal={BASIC_MEALS[0]} type='horizontal' image={image}/>
   )
 }
 
 const VerticalMealCardStory = () => {
-  const mealName = "Hazelnut Belgian Waffles with Fruit";
-  const price = "12.99";
 
   return(
-    <MealCard mealName={mealName} price={price} type='vertical' image={image}/>
+      <MealCard meal={BASIC_MEALS[1]} type='vertical' image={image}/>
   )
 }
 
