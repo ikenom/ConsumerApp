@@ -39,7 +39,7 @@ const SmallDivider = styled(Divider)`
 // ${({ selected }) => (selected ? `background-color: ${colors.gray500}` : "")};
 
 
-interface OrderConfirmationCartProps {
+export interface OrderConfirmationCartProps {
   restaurant: Pick<Restaurant, "name" | "location">;
   meal: Meal;
 }
