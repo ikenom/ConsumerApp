@@ -28,7 +28,7 @@ const App = () => {
   const insets = useSafeAreaInsets();
   const iosStyles = parseFloat(platformVersion as unknown as string) > 10 ?
   {
-    paddingTop: insets.top
+    paddingTop: 0
   } :
   {
     paddingTop: 0
@@ -50,7 +50,7 @@ const TestApp = () => {
   const insets = useSafeAreaInsets();
   const iosStyles = parseFloat(platformVersion as unknown as string) > 10 ?
   {
-    paddingTop: insets.top
+    paddingTop: 0
   } :
   {
     paddingTop: 0
@@ -69,7 +69,7 @@ const TestApp = () => {
 const SafeAreaWrapper = () => {
   return (
     <SafeAreaProvider>
-      <TestApp/>
+      <App/>
     </SafeAreaProvider>
   )
 }

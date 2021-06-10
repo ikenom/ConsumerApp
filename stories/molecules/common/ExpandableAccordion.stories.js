@@ -8,6 +8,7 @@ import { Box, FlexBox, FlexItem } from '../../../src/components/atoms/layout/Box
 import { Text } from '../../../src/components/atoms/typography/Text';
 import { ExpandableAccordion } from "../../../src/components/molecules/common/BottomExpandableAccordion"
 import { defaultTheme } from '../../../src/defaultTheme';
+import { PickUpInstructionsSheet, PickUpInstructionsBottomSheet } from "../../../src/components/pages/order/sheets/OrderConfirmationSheets"
 
 
 const TestChild = () => {
@@ -56,4 +57,40 @@ const ExpandableAccordionStory = () => {
   )
 }
 
-storiesOf('Expandable Accordions', module).add('Example', () => ExpandableAccordionStory());
+const PickUpInstructionsStory = () => {
+  return(
+    <Box height={hp('100%')} bg={defaultTheme.colors.blue}>
+      <FlexBox
+      bg="#4785FE"
+      m={wp('4%')}
+      mt={hp('20%')}
+      p={wp('4%')}
+      flexDirection={'column'}>
+      <FlexItem
+        backgroundColor={'#F8F078'}
+        height={hp('8%')}
+        flexGrow={1}
+        flexShrink={0}
+      />
+      <FlexItem
+        backgroundColor={'#FF2727'}
+        height={hp('8%')}
+        flexGrow={1}
+        flexShrink={0}
+      />
+      <FlexItem
+        backgroundColor={'#1C953E'}
+        height={hp('8%')}
+        flexGrow={1}
+        flexShrink={0}
+      />
+    </FlexBox>
+      <PickUpInstructionsBottomSheet customerFullName={"Travis Davidson"} order={{orderNumber: "12345", lineItems: [{price: "13.50", name: "Blackened Salmon Fillet"}]}}/>
+    </Box>
+  )
+}
+
+storiesOf('Expandable Accordions', module)
+  .add('ExampleBase', () => ExpandableAccordionStory())
+  .add('PickUp Instructions', () => PickUpInstructionsStory())
+  ;

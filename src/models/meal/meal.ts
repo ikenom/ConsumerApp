@@ -24,7 +24,29 @@ interface MicroNutrition {
   transFatInGrams: number;
   cholesterolInGrams: number;
   sodiumInGrams: number;
+  fatBreakdown?: FatBreakdown;
+  carbBreakdown?: CarbBreakdown;
+  extraMicros?: ExtraMicros;
 }
+
+interface FatBreakdown {
+  saturatedFatInGrams?: number;
+  transFatInGrams?: number;
+}
+
+interface CarbBreakdown {
+  fiberInGrams?: number;
+  totalSugarInGrams?: number;
+  addedSugarInGrams?: number;
+}
+
+interface ExtraMicros {
+  vitaminD?: string;
+  calcium?: string;
+  iron?: string;
+  potassium?: string;
+}
+
 
 export const PROTEIN_CALORIES_PER_GRAM = 4;
 export const CARBS_CALORIES_PER_GRAM = 4;

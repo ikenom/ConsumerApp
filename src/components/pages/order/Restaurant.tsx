@@ -51,8 +51,8 @@ export const RestaurantView = (props: RestaurantViewProps) => {
         <Box width={wp('99%')}  height={hp('23%')} overflow={'hidden'} borderRadius={'5px'}>
           <Image style={{flex: 1, height: undefined, width: undefined}} source={restaurant.image} />
         </Box>
-        <FlexBox bottom={hp('23%')} right={wp('45%')}>
-          <Button icon={<Ionicon name="chevron-back-circle-sharp" size={30} color={defaultTheme.colors.greyOne} style={{borderColor: defaultTheme.colors.black}}/>}/>
+        <FlexBox bottom={hp('19%')} right={wp('45%')}>
+          <Button icon={<Ionicon name="chevron-back-circle-sharp" size={32} color={defaultTheme.colors.greyOne} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </FlexBox>
       </Box>
       <Box pl={'16px'} bottom={hp('5px')}>
