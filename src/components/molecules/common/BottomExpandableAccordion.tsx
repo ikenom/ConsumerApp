@@ -52,6 +52,7 @@ export const ExpandableAccordion = (props: ExpandableAccordionProps) => {
 
   return(
     <>
+        {showContent ? <Shadow onPress={onBackgroundTouch} childHeight={childHeight}/> : <></>}
         <TouchableSheetHeader label={label} backgroundColor={backgroundColor} onPress={onHeaderPress}/>
         <BottomSheet
           ref={sheetRef}
@@ -63,7 +64,6 @@ export const ExpandableAccordion = (props: ExpandableAccordionProps) => {
           contentPosition={value}
           renderContent={ showContent ? () => children : () => <></>}
         />
-        {showContent ? <Shadow onPress={onBackgroundTouch}/> : <></>}
     </>
   )
 }
@@ -92,12 +92,13 @@ export const SheetHeader = (props: Omit<HeaderProps, "onPress">) => (
 
 interface ShadowProps {
   onPress: () => void;
+  childHeight: number;
 }
 
 const Shadow = (props: ShadowProps) => {
   return (
     <TouchableWithoutFeedback  onPress={props.onPress}>
-      <Box height={hp("100%")} width={wp("100%")} opacity={.5} bg={"#000"} position={'absolute'}/>
+      <Box height={hp("100%")} width={wp("100%")} opacity={.5} bg={"#000"} position={"absolute"} top={-hp('100%')}/>
     </TouchableWithoutFeedback>
   )
 }

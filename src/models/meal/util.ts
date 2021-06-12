@@ -6,6 +6,25 @@ export const MOCK_NUTRITION: Nutrition = {
     proteinInGrams: 30,
     carbsInGrams: 15,
     fatsInGrams: 17
+  },
+  micros: {
+    cholesterolInGrams: 3,
+    sodiumInMGrams: 15,
+    fatBreakdown: {
+      saturatedFatInGrams: 10,
+      transFatInGrams: 7
+    },
+    carbBreakdown: {
+      fiberInGrams: 4,
+      totalSugarInGrams: 11,
+      addedSugarInGrams: 1
+    },
+    extraMicros: {
+      vitaminD: 10,
+      calcium: 13,
+      iron: 10,
+      potassium: 5
+    }
   }
 }
 

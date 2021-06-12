@@ -19,11 +19,9 @@ interface MacroNutrition {
   fatsInGrams: number;
 }
 
-interface MicroNutrition {
-  saturatedFatInGrams: number;
-  transFatInGrams: number;
-  cholesterolInGrams: number;
-  sodiumInGrams: number;
+export interface MicroNutrition {
+  cholesterolInGrams?: number;
+  sodiumInMGrams?: number;
   fatBreakdown?: FatBreakdown;
   carbBreakdown?: CarbBreakdown;
   extraMicros?: ExtraMicros;
@@ -41,11 +39,13 @@ interface CarbBreakdown {
 }
 
 interface ExtraMicros {
-  vitaminD?: string;
-  calcium?: string;
-  iron?: string;
-  potassium?: string;
+  vitaminD?: number;
+  calcium?: number;
+  iron?: number;
+  potassium?: number;
 }
+
+export type WeightUnit = 'g' | 'mg' | 'mcg' | '' | 'mg';
 
 
 export const PROTEIN_CALORIES_PER_GRAM = 4;

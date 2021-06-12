@@ -8,7 +8,7 @@ import { Box, FlexBox, FlexItem } from '../../../src/components/atoms/layout/Box
 import { Text } from '../../../src/components/atoms/typography/Text';
 import { ExpandableAccordion } from "../../../src/components/molecules/common/BottomExpandableAccordion"
 import { defaultTheme } from '../../../src/defaultTheme';
-import { PickUpInstructionsSheet, PickUpInstructionsBottomSheet } from "../../../src/components/pages/order/sheets/OrderConfirmationSheets"
+import { PickUpInstructionsSheetContent, PickUpInstructionsBottomSheet } from "../../../src/components/pages/order/sheets/OrderConfirmationSheets"
 
 
 const TestChild = () => {

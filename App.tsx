@@ -7,12 +7,12 @@ import { MOCK_RESTAURANT } from './src/models/restaurant/util';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform } from 'react-native';
 
 import StorybookUIRoot from './storybook';
 import { RestaurantNavigatorContainer, RestaurantViewProps } from './src/components/pages/order/Restaurant';
 import { OrderConfirmationCart, OrderConfirmationCartProps } from './src/components/pages/order/Cart';
-
+import { Confirmation } from './src/components/pages/order/Confirmation';
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
   MealView: MealViewProps
@@ -56,11 +56,12 @@ const TestApp = () => {
     paddingTop: 0
   }
   return (
-    <View style={{ ...iosStyles, flex: 1, paddingRight: insets.right ,paddingLeft: insets.left, backgroundColor: defaultTheme.colors.black}} >
+    <View style={{ ...iosStyles, flex: 1, paddingRight: insets.right ,paddingLeft: insets.left,paddingBottom: insets.bottom ,backgroundColor: defaultTheme.colors.black}} >
       <StatusBar barStyle={'light-content'}/>
       <SafeAreaView style={{flex: 0, backgroundColor: defaultTheme.colors.black}}/>
       <SafeAreaView style={{flex: 1, backgroundColor: defaultTheme.colors.black}}>
-        <OrderConfirmationCart restaurant={MOCK_RESTAURANT} meal={MOCK_MEALS[0]}/>
+        {/* <OrderConfirmationCart restaurant={MOCK_RESTAURANT} meal={MOCK_MEALS[0]}/> */}
+        <Confirmation />
       </SafeAreaView>
     </View>
   )
@@ -69,7 +70,7 @@ const TestApp = () => {
 const SafeAreaWrapper = () => {
   return (
     <SafeAreaProvider>
-      <App/>
+      <TestApp/>
     </SafeAreaProvider>
   )
 }
@@ -79,4 +80,4 @@ const Storybook = () => {
   return <StorybookUIRoot />;
 };
 
-export default Storybook;
+export default SafeAreaWrapper;
