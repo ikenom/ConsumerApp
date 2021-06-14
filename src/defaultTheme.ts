@@ -5,6 +5,7 @@ export const defaultTheme = {
     blackGreyOne: "#555555",
     white: "#FFFFFF",
     whiteTwo: "#D3D3D3",
+    whiteThree: "#313131",
     blue: '#4785FE',
     blueOne: '#6B9DFE',
     greyOne: "#F9F9F9",

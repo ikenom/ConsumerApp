@@ -59,7 +59,7 @@ export const ExpandableAccordion = (props: ExpandableAccordionProps) => {
           enabledGestureInteraction={true}
           snapPoints={[childHeight, 0]}
           initialSnap={1} 
-          borderRadius={7}
+          borderRadius={25}
           enabledBottomInitialAnimation={true}
           contentPosition={value}
           renderContent={ showContent ? () => children : () => <></>}

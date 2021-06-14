@@ -16,15 +16,10 @@ import { Restaurant } from "../../../models/restaurant/restaurant";
 import { Meal } from "../../../models/meal/meal";
 import { LocationDisplay } from "../../molecules/common/LocationDisplay"
 import { TouchableOpacity } from "react-native-gesture-handler";
-
-const StyledDivider = styled(Divider)`
-  backgroundColor: ${defaultTheme.colors.whiteTwo};
-  height: 2px;
-  width: ${wp("14%")};
-  marginLeft: auto;
-  marginRight: auto;
-  marginTop: 6px;
-`;
+import { OrderConfirmationHeader } from "./common/OrderConfirmationHeader";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { RestaurantParamList } from "../../../../App";
+import { createMockOrderWithItems } from "../../../models/order/util";
 
 const FulfillmentDivider = styled(Divider)<{isSelected: boolean}>`
   backgroundColor: ${({isSelected}) => (isSelected ? defaultTheme.colors.blueOne : defaultTheme.colors.greySix)};
@@ -36,12 +31,17 @@ const SmallDivider = styled(Divider)`
   height: 1px;
 `;
 
-// ${({ selected }) => (selected ? `background-color: ${colors.gray500}` : "")};
-
+export const OrderConfirmationCartContainer = (props: StackScreenProps<RestaurantParamList, 'CartView'>) => {
+  const { navigation, route} = props;
+  return(
+    <OrderConfirmationCart {...route.params} navigation={navigation}/>
+  )
+}
 
 export interface OrderConfirmationCartProps {
-  restaurant: Pick<Restaurant, "name" | "location">;
+  restaurant: Restaurant;
   meal: Meal;
+  navigation?: StackNavigationProp<RestaurantParamList, 'CartView'>
 }
 
 const fulfillment = ["Pickup", "Delivery"] as const;
@@ -49,7 +49,7 @@ type Fulfillment = typeof fulfillment[number]
 
 export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
 
-  const { restaurant, meal } = props;
+  const { restaurant, meal, navigation } = props;
   const fees = (Number.parseFloat(meal.price) * .07);
   const total = fees + Number.parseFloat(meal.price)
 
@@ -62,10 +62,16 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
     }
   }
 
+  const onConfirmOrder = () => {
+    const mockOrder = createMockOrderWithItems([meal]);
+    console.log(mockOrder)
+    navigation?.push('ConfirmationView', {restaurant, order: mockOrder})
+  }
+
   return(
     <FlexBox flexDirection={'column'}>
       <Box pl={'16px'} pr={'16px'} mb={hp("3%")}>
-        <OrderConfirmationHeader label={"Your Cart"}/>
+        <OrderConfirmationHeader label={"Your Cart"} icon={"chevron-left"} onPress={() => {}} iconPosition={'left'}/>
       </Box>
       <Box width= {wp('100%')} height={hp('17%')} borderRadius={'5px'} mb={hp("3.2%")}>
           <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
@@ -122,6 +128,7 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
           iconContainerStyle={{marginRight: wp('10%'), paddingLeft: wp('5%')}}
           iconRight={true}
           icon={<Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'}>{`$${meal.price}`}</Text>}
+          onPress={onConfirmOrder}
         />
       </FlexBox>
     </FlexBox>
@@ -184,29 +191,5 @@ const PaymentMethod = () => {
         <Button onPress={() => {}} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
       </FlexBox>
     </FlexBox>
-  )
-}
-
-type IconPosition = "left" | "right"
-
-interface OrderConfirmationHeaderProps {
-  label: string;
-  icon?: string;
-  iconPosition?: IconPosition;
-}
-
-const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => {
-  const { label, icon, iconPosition } = props;
-
-  return(
-    <Box>
-      <FlexBox flexDirection={'column'} height={hp('2.9%')} ml={"auto"} mr={"auto"}>
-        <Text fontSize={'24px'} color={'#FFFFFF'} weight={600}>{label}</Text>
-        <StyledDivider />
-      </FlexBox>
-      <Box position={"absolute"} bottom={-20} left={-19}>
-        <Button onPress={() =>{}} icon={<MaterialCommunityIcon name={"chevron-left"} size={40} color={"#FFFFFF"}/>} />
-      </Box> 
-    </Box>
   )
 }

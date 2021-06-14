@@ -9,11 +9,11 @@ import { NutritionFactsSheetProps, NutritionFactsSheetContent } from "./Nutritio
 import { PickUpInstructionsSheetProps, PickUpInstructionsSheetContent} from "./PickUpInstructionsSheetContent"
 
 export const PickUpInstructionsBottomSheet = (props: PickUpInstructionsSheetProps) => {
-    const { order, customerFullName } = props;
-    const { orderNumber, lineItems } = order
-  return(
-    <ExpandableAccordion label={"Pick up Instructions"} backgroundColor={defaultTheme.colors.blackTwo} childHeight={hp('32%')}>
-      <PickUpInstructionsSheetContent customerFullName={customerFullName} order={{orderNumber, lineItems}}/>
+    const { order } = props;
+
+    return(
+    <ExpandableAccordion label={"Pick up Instructions"} backgroundColor={defaultTheme.colors.blackTwo} childHeight={hp('34%')}>
+      <PickUpInstructionsSheetContent order={order}/>
     </ExpandableAccordion> 
   )
 }

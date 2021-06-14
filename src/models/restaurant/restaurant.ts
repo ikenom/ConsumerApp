@@ -6,6 +6,7 @@ export interface Restaurant {
   image: any;
   businessHours: BusinessHours;
   location: Location;
+  phoneNumber: string;
 }
 
 

@@ -14,7 +14,8 @@ export const MOCK_RESTAURANT: Restaurant = {
     zip: "10026",
     street: "2153 Fredrick Douglass Blvd",
     city: "New York"
-  }
+  },
+  phoneNumber: '7702394828',
 }
 
 // Need to be smarter about timezones
