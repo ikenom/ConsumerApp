@@ -59,6 +59,10 @@ export const MealOrderView = (props: MealViewProps) => {
     navigation?.pop();
   }
 
+  const onOrderButtonPressed = () => {
+    navigation?.push('CartView', {restaurant, meal})
+  }
+
   const onNavigateToRestaurant = () => {
     // Get meals of restaurant from store
     // navigate
@@ -107,6 +111,7 @@ export const MealOrderView = (props: MealViewProps) => {
           iconContainerStyle={{marginRight: wp('10%'), paddingLeft: wp('5%')}}
           iconRight={true}
           icon={<Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'}>{`$${meal.price}`}</Text>}
+          onPress={onOrderButtonPressed}
         />
       </FlexBox>
       {isModalOpen ? <RestaurantInfoModal restaurant={restaurant} isVisible={isModalOpen} onClose={toggleModal}/> : <Box></Box>}
