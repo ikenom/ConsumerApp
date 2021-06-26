@@ -65,6 +65,10 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
     }
   }
 
+  const onBackPressed = () => {
+    navigation?.pop();
+  }
+
   const onConfirmOrder = () => {
     const mockOrder = createMockOrderWithItems([meal]);
     console.log(mockOrder)
@@ -74,7 +78,7 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
   return(
     <FlexBox flexDirection={'column'} pt={insets.top}>
       <Box pl={'16px'} pr={'16px'} mb={getHeightInPixels("3%")}>
-        <OrderConfirmationHeader label={"Your Cart"} icon={"chevron-left"} onPress={() => {}} iconPosition={'left'}/>
+        <OrderConfirmationHeader label={"Your Cart"} icon={"chevron-left"} onPress={onBackPressed} iconPosition={'left'}/>
       </Box>
       <Box width= {wp('100%')} height={getHeightInPixels('17%')} borderRadius={'5px'} mb={getHeightInPixels("3.2%")}>
           <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
@@ -90,7 +94,7 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
       </Box>
       <FlexBox pl={'16px'} pr={'16px'} flexDirection={'column'}>
         <Text fontWeight={'400'} fontSize={'18px'} color={defaultTheme.colors.white} mb={getHeightInPixels('1.1%')}> Items </Text>
-        <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={getHeightInPixels("2.5%")}>
+        <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={getHeightInPixels("2%")}>
           <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{`1. ${meal.name}`}</Text>
           <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{`$${meal.price}`}</Text>
         </FlexBox>
