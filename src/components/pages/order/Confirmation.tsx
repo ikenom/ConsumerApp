@@ -18,6 +18,7 @@ import { OrderConfirmationHeader } from './common/OrderConfirmationHeader';
 import { LocationDisplay } from '../../molecules/common/LocationDisplay';
 import { Ionicon } from "../../atoms/icons/Ionicons";
 import { RestaurantParamList } from "../../../../App";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 const StyledDivider = styled(Divider)<{height: number, mt: number, mb?: number}>`
@@ -43,25 +44,25 @@ export const ConfirmationNavigatorContainer = (props: StackScreenProps<Restauran
 }
 
 export const Confirmation = (props: OrderConfirmationProps) => {
-
+  const insets = useSafeAreaInsets();
   const { order, restaurant, serializedOrder } = props;
 
   const unSerializedOrder = serializedOrder ? JSON.parse(serializedOrder) as Order : order;
   return (
-    <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('92%')} justifyContent={'space-between'}>
+    <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('92%')} justifyContent={'space-between'} pt={insets.top}>
       <FlexBox flexDirection={'column'} pl={wp('4%')} pr={wp('4%')}>
         <OrderConfirmationHeader label={'Order Complete'} icon={'cross'} iconPosition={'right'} onPress={() => {}}/>
         <TimeDisplay dateTime={unSerializedOrder.fulfillmentDetails.fulfillmentTime}/>
-        <StyledDivider height={1} mt={hp('1%')} mb={hp('2%')}/>
+        <StyledDivider height={1} mt={hp('1.1%')} mb={hp('2%')}/>
         <RestaurantDisplay restaurant={restaurant}/>
-        <StyledDivider height={1} mt={hp('1%')} mb={hp('2%')}/>
+        <StyledDivider height={1} mt={hp('1.1%')} mb={hp('2%')}/>
         <OrderSummary order={unSerializedOrder}/>
         <StyledDivider height={1} mt={0} mb={hp('1.5%')}/>
         <FlexBox flexDirection={'column'}>
           <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white}>Additional Note</Text>
           <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{unSerializedOrder.additionalNote}</Text>
         </FlexBox>
-        <StyledDivider height={1} mt={hp('1%')} mb={hp('1.5%')}/>
+        <StyledDivider height={1} mt={hp('1.1%')} mb={hp('1.5%')}/>
         <OrderTotal order={unSerializedOrder}/>
       </FlexBox>
       <FlexBox flexDirection={'column'} width={wp('100%')}>
@@ -119,7 +120,7 @@ const OrderSummary = (props: OrderSummaryProps) => {
           <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white}>{`#${order.orderNumber}`}</Text>
         </FlexBox>
       <FlexBox flexDirection={'column'}>
-        <Text fontWeight={'400'} fontSize={'18px'} color={defaultTheme.colors.white} mb={hp('1%')}> Items </Text>
+        <Text fontWeight={'400'} fontSize={'18px'} color={defaultTheme.colors.white} mb={hp('1.1%')}> Items </Text>
         <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={hp("2.5%")}>
           <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{`1. ${meal.name}`}</Text>
           <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{`$${meal.price}`}</Text>

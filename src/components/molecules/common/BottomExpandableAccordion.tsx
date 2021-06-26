@@ -56,7 +56,7 @@ export const ExpandableAccordion = (props: ExpandableAccordionProps) => {
         <TouchableSheetHeader label={label} backgroundColor={backgroundColor} onPress={onHeaderPress}/>
         <BottomSheet
           ref={sheetRef}
-          enabledGestureInteraction={true}
+          enabledHeaderGestureInteraction={false}
           snapPoints={[childHeight, 0]}
           initialSnap={1} 
           borderRadius={25}
@@ -76,7 +76,7 @@ interface HeaderProps {
 
 const TouchableSheetHeader = (props: HeaderProps) => (
   <TouchableOpacity activeOpacity={.8} onPress={props.onPress}>
-    <FlexBox bg={props.backgroundColor} width={wp("100%")} height={hp("7.5%")} alignItems={'center'} justifyContent={"space-between"} pt={hp("1%")} borderRadius={"7px"} pb={hp("2.2%")}>
+    <FlexBox bg={props.backgroundColor} width={wp("100%")} height={hp("7.5%")} alignItems={'center'} justifyContent={"space-between"} pt={hp("1.1%")} borderRadius={"7px"} pb={hp("2.2%")}>
       <StyledDivider />
       <Text fontWeight='600' fontSize={'18px'} color={defaultTheme.colors.white}>{props.label}</Text>
     </FlexBox>
@@ -84,7 +84,7 @@ const TouchableSheetHeader = (props: HeaderProps) => (
 )
 
 export const SheetHeader = (props: Omit<HeaderProps, "onPress">) => (
-  <FlexBox bg={props.backgroundColor} width={wp("100%")} height={hp("7.5%")} alignItems={'center'} justifyContent={"space-between"} pt={hp("1%")} borderRadius={"7px"} pb={hp("2.2%")} pl={wp('5.5%')} pr={wp('5.5%')}>
+  <FlexBox bg={props.backgroundColor} width={wp("100%")} height={hp("7.5%")} alignItems={'center'} justifyContent={"space-between"} pt={hp("1.1%")} borderRadius={"7px"} pb={hp("2.2%")} pl={wp('5.5%')} pr={wp('5.5%')}>
     <StyledDivider />
     <Text fontWeight='600' fontSize={'18px'} color={defaultTheme.colors.white}>{props.label}</Text>
   </FlexBox>

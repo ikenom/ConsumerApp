@@ -31,7 +31,7 @@ LogBox.ignoreLogs(['Easing', 'expected']);
 const StyledDivider = styled(Divider)`
   backgroundColor: ${defaultTheme.colors.greyFive};
   height: 2px;
-  margin-bottom: ${hp("2%")}
+  margin-bottom: ${hp("2%")}px
 `;
 
 export const MealNavigatorContainer = (props: StackScreenProps<RestaurantParamList, 'MealView'>) => {
@@ -70,7 +70,7 @@ export const MealOrderView = (props: MealViewProps) => {
 
   return (
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
-      <Box width= {wp('99%')} height={hp('26%')} mb={"6%"}>
+      <Box width= {wp('99%')} height={hp('26%')} mb={hp("3%")}>
         <Box width= {wp('99%')} height={hp('26%')} borderRadius={'5px'}>
           <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
         </Box>
@@ -78,15 +78,15 @@ export const MealOrderView = (props: MealViewProps) => {
           <Button onPress={onBackPressed} icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </Box>
         <FlexBox top={-hp('12.9%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
-          <Box mt={hp('1%')}>
+          <Box mt={hp('1.1%')}>
             <Text fontWeight={'500'} fontSize={'28px'} color={'#FFFFFF'} >
             {meal.name}
             </Text>
           </Box>
         </FlexBox>
       </Box>
-      <Box pl={'5%'} pr={"5%"} height={hp('43%')}>
-        <Box overflow={'scroll'} maxHeight={hp('9%')} mb={"5%"}>
+      <Box pl={wp('5%')} pr={wp("5%")} height={hp('43%')}>
+        <Box overflow={'scroll'} maxHeight={hp('9%')} mb={hp("5%")}>
           <Text fontWeight={'400'} fontSize={'16px'} color={'#FFFFFF'}>
           {meal.description}
           </Text>
@@ -98,7 +98,7 @@ export const MealOrderView = (props: MealViewProps) => {
             <NutritionDropDown nutrition={meal.nutrition} />
         </FlexBox>
       </Box>
-      <FlexBox pl={'5%'} pr={"5%"} width={wp('100%')} position={'absolute'} bottom={hp('12%')}>
+      <FlexBox pl={wp('5%')} pr={wp("5%")} width={wp('100%')} position={'absolute'} bottom={hp('4%')}>
         <Button 
           title="Order" 
           buttonStyle={{
@@ -130,8 +130,8 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
 
   return(
     <TouchableOpacity activeOpacity={.5} onPress={toggleModal}>
-      <FlexBox flexDirection={'row'} mb={"4%"} justifyContent={"space-between"}>
-        <FlexBox flexDirection={'column'} mb={"1%"}>
+      <FlexBox flexDirection={'row'} mb={hp("2%")} justifyContent={"space-between"}>
+        <FlexBox flexDirection={'column'} mb={hp("1.1%")}>
           <Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'} mb={hp('1.3%')}>
           {restaurant.name}
           </Text>
@@ -169,7 +169,7 @@ const NutritionDropDown = (props: NutritionDropdownProps) => {
       onLayout={onLayout}
       state={collapseState}>
         <FlexBox  pr={'10px'} pt={hp('.3%')} flexDirection={'column'}>
-          <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={"2%"}>
+          <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={hp("2%")}>
             <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>Calories</Text>
             <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{calories}</Text>
           </FlexBox>
@@ -195,7 +195,7 @@ interface NutritionItemProps {
 const NutritionItem = (props: NutritionItemProps) => {
   const { label, percentage, grams } = props;
   return(
-    <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={"2%"}>
+    <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={hp("2%")}>
       <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${label}   ${percentage}%`}</Text>
       <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${grams}g`}</Text>
     </FlexBox>

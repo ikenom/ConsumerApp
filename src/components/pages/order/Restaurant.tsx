@@ -56,7 +56,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
         </FlexBox>
       </Box>
       <Box pl={'16px'} bottom={hp('5px')}>
-          <Box mb={hp('1%')} width={wp('72%')}>
+          <Box mb={`${hp('1.1%')}px`} width={wp('72%')}>
             <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.xlg} color={defaultTheme.colors.white}>
               {restaurant.name}
             </Text>
