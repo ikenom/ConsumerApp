@@ -35,7 +35,7 @@ export const RestaurantInfoModal = (props: RestaurantInfoProps) => {
             <Image style={{flex: 1, height: undefined, width: undefined}} source={image} />
           </Box>
           <Box pl={wp('2.5%')} pr={wp('2.5%')}>
-            <Text mt={hp('1.3%')} mb={hp('1%')} fontWeight={'600'} fontSize={"24px"} color={defaultTheme.colors.white}>
+            <Text mt={hp('1.3%')} mb={hp('1.1%')} fontWeight={'600'} fontSize={"24px"} color={defaultTheme.colors.white}>
               {name}
             </Text>
             <Text color={defaultTheme.colors.white} width={wp('55%')}>

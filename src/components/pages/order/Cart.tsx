@@ -4,7 +4,7 @@ import { Image } from "react-native";
 import { Divider, Input } from 'react-native-elements';
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
+  heightPercentageToDP as getHeightInPixels,
 } from 'react-native-responsive-screen';
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { defaultTheme } from "../../../defaultTheme";
@@ -20,6 +20,7 @@ import { OrderConfirmationHeader } from "./common/OrderConfirmationHeader";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { RestaurantParamList } from "../../../../App";
 import { createMockOrderWithItems } from "../../../models/order/util";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const FulfillmentDivider = styled(Divider)<{isSelected: boolean}>`
   backgroundColor: ${({isSelected}) => (isSelected ? defaultTheme.colors.blueOne : defaultTheme.colors.greySix)};
@@ -49,6 +50,8 @@ type Fulfillment = typeof fulfillment[number]
 
 export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
 
+  const insets = useSafeAreaInsets();
+  
   const { restaurant, meal, navigation } = props;
   const fees = (Number.parseFloat(meal.price) * .07);
   const total = fees + Number.parseFloat(meal.price)
@@ -69,30 +72,30 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
   }
 
   return(
-    <FlexBox flexDirection={'column'}>
-      <Box pl={'16px'} pr={'16px'} mb={hp("3%")}>
+    <FlexBox flexDirection={'column'} pt={insets.top}>
+      <Box pl={'16px'} pr={'16px'} mb={getHeightInPixels("3%")}>
         <OrderConfirmationHeader label={"Your Cart"} icon={"chevron-left"} onPress={() => {}} iconPosition={'left'}/>
       </Box>
-      <Box width= {wp('100%')} height={hp('17%')} borderRadius={'5px'} mb={hp("3.2%")}>
+      <Box width= {wp('100%')} height={getHeightInPixels('17%')} borderRadius={'5px'} mb={getHeightInPixels("3.2%")}>
           <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
       </Box>
-      <FlexBox pl={'16px'} pr={'16px'} flexDirection={'column'} mb={hp("3%")}>
-        <Text fontWeight={'700'} fontSize={'18px'} color={defaultTheme.colors.white} mb={hp('1.3%')}>
+      <FlexBox pl={'16px'} pr={'16px'} flexDirection={'column'} mb={getHeightInPixels("3%")}>
+        <Text fontWeight={'700'} fontSize={'18px'} color={defaultTheme.colors.white} mb={getHeightInPixels('1.3%')}>
           {restaurant.name}
         </Text>
         <LocationDisplay location={restaurant.location} highlighted={false}/>
       </FlexBox>
-      <Box width= {wp('100%')} mb={hp("3.1%")}>
+      <Box width= {wp('100%')} mb={`${getHeightInPixels("3.0%")}`}> 
         <FulfillmentSelection selectedFulfillment={fulfillmentType} onPress={onPressFulfillment}/>
       </Box>
       <FlexBox pl={'16px'} pr={'16px'} flexDirection={'column'}>
-        <Text fontWeight={'400'} fontSize={'18px'} color={defaultTheme.colors.white} mb={hp('1%')}> Items </Text>
-        <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={hp("2.5%")}>
+        <Text fontWeight={'400'} fontSize={'18px'} color={defaultTheme.colors.white} mb={getHeightInPixels('1.1%')}> Items </Text>
+        <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={getHeightInPixels("2.5%")}>
           <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{`1. ${meal.name}`}</Text>
           <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{`$${meal.price}`}</Text>
         </FlexBox>
       </FlexBox>
-      <Box pl={'5px'} pr={'5px'} mb={hp("1%")}>
+      <Box pl={'5px'} pr={'5px'} mb={getHeightInPixels("1.1%")}>
         <Input
           placeholder="Additional Note"
           style={{color: defaultTheme.colors.greySix, fontSize: 14, fontWeight: '400'}}
@@ -102,26 +105,26 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
       <FlexBox pl={'16px'} pr={'16px'} flexDirection={'column'}>
         <PaymentMethod />
         <FlexBox flexDirection={'row'} justifyContent={"space-between"}>
-          <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white} mb={hp('1%')}>SubTotal </Text>
-          <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white} mb={hp('1%')}>{`$${meal.price}`}</Text>
+          <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white} mb={getHeightInPixels('1.1%')}>SubTotal </Text>
+          <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white} mb={getHeightInPixels('1.1%')}>{`$${meal.price}`}</Text>
         </FlexBox>
-        <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={hp("1%")}>
+        <FlexBox flexDirection={'row'} justifyContent={"space-between"} mb={getHeightInPixels("1.1%")}>
           <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{"Fees & Taxes"}</Text>
           <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.greySix}>{`$${fees.toFixed(2)}`}</Text>
         </FlexBox>
         <SmallDivider />
-        <FlexBox flexDirection={'row'} justifyContent={"space-between"} mt={hp('1.5%')} mb={hp("1.5%")}>
+        <FlexBox flexDirection={'row'} justifyContent={"space-between"} mt={getHeightInPixels('1.5%')} mb={getHeightInPixels("1.5%")}>
           <Text fontWeight={'600'} fontSize={'18px'} color={defaultTheme.colors.white}>{"Total"}</Text>
           <Text fontWeight={'600'} fontSize={'18px'} color={defaultTheme.colors.white}>{`$${total.toFixed(2)}`}</Text>
         </FlexBox>
         <SmallDivider />
       </FlexBox>
-      <FlexBox pl={'5%'} pr={"5%"} width={wp('100%')} position={'absolute'} bottom={-hp('8%')}>
+      <FlexBox pl={'5%'} pr={"5%"} width={wp('100%')} position={'absolute'} bottom={-getHeightInPixels('8%')}>
         <Button 
           title="Confirm Order" 
           buttonStyle={{
             backgroundColor: defaultTheme.colors.blue, 
-            height: hp('5.9%'), 
+            height: getHeightInPixels('5.9%'), 
             borderRadius: 10
           }}
           titleStyle={{marginRight: wp('37%'), fontSize: 18, fontWeight: '700'}}
@@ -147,13 +150,13 @@ const FulfillmentSelection = (props: FulfillmentSelectionProps) => {
   return(
     <FlexBox flexDirection={'row'}>
       {
-        fulfillment.map(f => {
+        fulfillment.map((f, index) => {
           const isSelected = f === selectedFulfillment;
           return (
-            <FlexItem flexGrow={1}>
+            <FlexItem flexGrow={1} key={index}>
               <TouchableOpacity onPress={() => {onPress(f)}}>
                 <FlexBox flexDirection={'column'}>
-                  <Text ml={"auto"} mr={"auto"} fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={isSelected ? defaultTheme.colors.white  : defaultTheme.colors.greySix } mb={hp('1%')}>
+                  <Text ml={"auto"} mr={"auto"} fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={isSelected ? defaultTheme.colors.white  : defaultTheme.colors.greySix } mb={getHeightInPixels('1.1%')}>
                     {f}
                   </Text>
                   <FulfillmentDivider isSelected={isSelected}/>
@@ -174,15 +177,15 @@ const FulfillmentSelection = (props: FulfillmentSelectionProps) => {
 
 const PaymentMethod = () => {
   return(
-    <FlexBox flexDirection={'column'} height={hp('7%')} mb={hp("3.4%")}>
+    <FlexBox flexDirection={'column'} height={getHeightInPixels('7%')} mb={getHeightInPixels("3.4%")}>
       <Text color={defaultTheme.colors.white} fontSize={defaultTheme.fontSize.m} fontWeight='600'>
         Payment Method
       </Text>
-      <FlexBox flexDirection={'row'} height={hp('5%')} mt={hp('1.3%')} justifyContent={"space-between"}>
+      <FlexBox flexDirection={'row'} height={getHeightInPixels('5%')} mt={getHeightInPixels('1.3%')} justifyContent={"space-between"}>
         <FlexBox flexDirection={'row'}>
           <Visa />
           <FlexItem alignItems={'center'}>
-            <FlexBox flexDirection={'column'} ml={wp('2.8%')} pt={hp('.5%')}>
+            <FlexBox flexDirection={'column'} ml={wp('3.5%')} pt={getHeightInPixels('1.1%')}>
               <Text color={defaultTheme.colors.white} fontSize={defaultTheme.fontSize.sm} fontWeight='400'>Visa...5834</Text>
               <Text color={defaultTheme.colors.greySix} fontSize={defaultTheme.fontSize.sm} fontWeight='400'>05/2024</Text>
             </FlexBox>

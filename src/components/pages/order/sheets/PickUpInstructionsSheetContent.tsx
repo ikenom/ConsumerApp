@@ -24,7 +24,7 @@ export const PickUpInstructionsSheetContent = (props: PickUpInstructionsSheetPro
   return (
     <FlexBox flexDirection={'column'} justifyContent={'space-between'} backgroundColor={defaultTheme.colors.blackTwo}>
         <SheetHeader label={"Pick up Instructions"} backgroundColor={defaultTheme.colors.blackTwo}/>
-        <FlexBox flexDirection={'column'} justifyContent={'space-between'} backgroundColor={defaultTheme.colors.blackTwo} pl={wp('5.5%')} pr={wp('5.5%')} mt={hp('1%')}>
+        <FlexBox flexDirection={'column'} justifyContent={'space-between'} backgroundColor={defaultTheme.colors.blackTwo} pl={wp('5.5%')} pr={wp('5.5%')} mt={hp('1.1%')}>
           <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white}>Please display to claim your order</Text>
           <FlexBox flexDirection={'row'} justifyContent={'space-between'} mt={hp("2.8%")}>
             <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white}>Consumer Name</Text>
@@ -36,7 +36,7 @@ export const PickUpInstructionsSheetContent = (props: PickUpInstructionsSheetPro
           </FlexBox>
           <FlexBox flexDirection={'column'} justifyContent={'space-between'} mt={hp("2%")}>
             <Text fontWeight={'600'} fontSize={defaultTheme.fontSize.m} color={defaultTheme.colors.white}>Items</Text>
-            <FlexBox flexDirection={'row'} justifyContent={'space-between'} mt={hp("1%")} mb={hp("10%")}>
+            <FlexBox flexDirection={'row'} justifyContent={'space-between'} mt={hp("1.1%")} mb={hp("10%")}>
               <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.white}>{firstItem.name}</Text>
               <Text fontWeight={'400'} fontSize={defaultTheme.fontSize.sm} color={defaultTheme.colors.white}>{`$${firstItem.price}`}</Text>
             </FlexBox>
