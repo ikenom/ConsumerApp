@@ -66,6 +66,12 @@ export const HomeView = (props: HomeViewProps) => {
     // navigation?.push('MealView', {meal: meal, restaurant: restaurant});
   }
 
+  const TileWrapper = ({item, index}) => {
+    return(
+      <Image style={{ flex: 1, height: '100%', width: '100%', borderRadius: 8 }} source={item} />
+    )
+  }
+
   return (
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <FlexBox flexDirection={'row'} width={wp('99%')} height={hp('14%')} pl={'14px'}>
@@ -84,10 +90,18 @@ export const HomeView = (props: HomeViewProps) => {
         <ScrollView>
           <Box>
             <Box width={wp('95%')} height={hp('23%')} alignSelf='center' pr={'14px'}>
-              <Image style={{ flex: 1, height: '100%', width: '100%', borderRadius: 5 }} source={newsTiles[0]} />
-              {// TODO WTF HOW TYPESCRIPT
-              /*<Carousel layout={'stack'} />
-              <Pagination dotsLength=4 activeDotsIndex=1 />*/}
+              <Carousel 
+                layout={'stack'} 
+                firstItem={1} 
+                vertical={false} 
+                data={newsTiles} 
+                renderItem={TileWrapper} 
+                sliderWidth={wp('94%')} 
+                itemWidth={wp('94%')} 
+                enableMomentum={true} 
+                activeSlideOffset={0} 
+                windowSize={10} />
+              {/* <Pagination dotsLength=4 activeDotsIndex=1 /> */}
             </Box>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"New on FYTR"}/>

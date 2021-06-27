@@ -18,6 +18,8 @@ import { RestaurantParamList } from "../../../../App";
 // TEMP, REMOVE LATER, FOR TEST HOME ONLY
 import { MOCK_MEALS } from '../../../models/meal/util';
 import { MOCK_RESTAURANT } from '../../../models/restaurant/util';
+import ListItemSwipeable from "react-native-elements/dist/list/ListItemSwipeable";
+import { MealCard } from "../../atoms/card/Card";
 
 
 export interface RestaurantViewProps {
@@ -46,16 +48,21 @@ export const RestaurantView = (props: RestaurantViewProps) => {
 
 
   const onPressMeal = (meal: Meal) => {
-    navigation?.push('MealView', {meal: meal, restaurant: restaurant});
+    navigation?.push('MealView', { meal: meal, restaurant: restaurant });
   }
+
+  // TEMP Get meals images as array
+  const newsTilesImages = MOCK_MEALS.map(
+    (meal) => meal.image
+  );
 
   // TEMP For way to get to Home
   const onPressBack = () => {
     navigation?.push('HomeView', {
-      locationName: "Loser", 
-      newsTiles: [MOCK_RESTAURANT.image], 
-      meals: {new: MOCK_MEALS, popular: MOCK_MEALS, orderAgain: MOCK_MEALS}
-      });
+      locationName: "Loser",
+      newsTiles: newsTilesImages,
+      meals: { new: MOCK_MEALS, popular: MOCK_MEALS, orderAgain: MOCK_MEALS }
+    });
   }
 
   return(
