@@ -15,6 +15,9 @@ import { CardCarousel } from "../../atoms/card/CardCarousel";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { RestaurantParamList } from "../../../../App";
+// TEMP, REMOVE LATER, FOR TEST HOME ONLY
+import { MOCK_MEALS } from '../../../models/meal/util';
+import { MOCK_RESTAURANT } from '../../../models/restaurant/util';
 
 
 export interface RestaurantViewProps {
@@ -45,6 +48,16 @@ export const RestaurantView = (props: RestaurantViewProps) => {
   const onPressMeal = (meal: Meal) => {
     navigation?.push('MealView', {meal: meal, restaurant: restaurant});
   }
+
+  // TEMP For way to get to Home
+  const onPressBack = () => {
+    navigation?.push('HomeView', {
+      locationName: "Loser", 
+      newsTiles: [MOCK_RESTAURANT.image], 
+      meals: {new: MOCK_MEALS, popular: MOCK_MEALS, orderAgain: MOCK_MEALS}
+      });
+  }
+
   return(
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <Box>
@@ -52,7 +65,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
           <Image style={{flex: 1, height: undefined, width: undefined}} source={restaurant.image} />
         </Box>
         <FlexBox bottom={hp('19%')} right={wp('45%')}>
-          <Button icon={<Ionicon name="chevron-back-circle-sharp" size={32} color={defaultTheme.colors.greyOne} style={{borderColor: defaultTheme.colors.black}}/>}/>
+          <Button onPress={onPressBack} icon={<Ionicon name="chevron-back-circle-sharp" size={32} color={defaultTheme.colors.greyOne} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </FlexBox>
       </Box>
       <Box pl={'16px'} bottom={hp('5px')}>

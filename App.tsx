@@ -14,6 +14,7 @@ import { ConfirmationNavigatorContainer } from './src/components/pages/order/Con
 import { RestaurantNavigatorContainer, RestaurantViewProps } from './src/components/pages/order/Restaurant';
 import { OrderConfirmationCartContainer, OrderConfirmationCartProps } from './src/components/pages/order/Cart';
 import { OrderConfirmationProps } from './src/components/pages/order/Confirmation';
+import { HomeViewProps, HomeNavigatorContainer } from './src/components/pages/navigation/Home';
 import { Confirmation } from './src/components/pages/order/Confirmation';
 import { MOCK_ORDER } from './src/models/order/util';
 export type RestaurantParamList = {
@@ -21,6 +22,7 @@ export type RestaurantParamList = {
   MealView: MealViewProps
   CartView: OrderConfirmationCartProps
   ConfirmationView: OrderConfirmationProps
+  HomeView: HomeViewProps
 }
 
 const RestaurantStack = createStackNavigator<RestaurantParamList>();
@@ -35,7 +37,7 @@ const MyTheme = {
   },
 };
 
-
+// TEMP Using RestaurantStack to get to Home, should be separate
 const App = () => {
   const insets = useSafeAreaInsets();
   return (
@@ -47,6 +49,7 @@ const App = () => {
           <RestaurantStack.Screen name="MealView" component={MealNavigatorContainer}/>
           <RestaurantStack.Screen name="CartView" component={OrderConfirmationCartContainer}/>
           <RestaurantStack.Screen name='ConfirmationView' component={ConfirmationNavigatorContainer}/>
+          <RestaurantStack.Screen name='HomeView' component={HomeNavigatorContainer} />
         </RestaurantStack.Navigator>
       </NavigationContainer>
     </View>

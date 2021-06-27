@@ -17,35 +17,54 @@ import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { RestaurantParamList } from "../../../../App";
 import { ScrollView } from "react-native-gesture-handler";
 
-
-export interface RestaurantViewProps {
-  restaurant: Restaurant;
-  meals: RestaurantViewMeals;
-  navigation?: StackNavigationProp<RestaurantParamList, 'RestaurantView'>
+// TODO Create Home version
+export interface HomeViewProps {
+  locationName: String;
+  newsTiles: Array<any>;
+  meals: HomeViewMeals;
+  navigation?: StackNavigationProp<RestaurantParamList, 'HomeView'>
 }
 
-export interface RestaurantViewMeals {
-  all: Meal[];
-  recommendations: Meal[];
+// TODO Create Home version
+export interface HomeViewMeals {
+  new: Meal[];
+  popular: Meal[];
+  orderAgain: Meal[];
 }
 
-export const RestaurantNavigatorContainer = (props: StackScreenProps<RestaurantParamList, 'RestaurantView'>) => {
+// TODO Create HomeNavigatorContainer
+export const HomeNavigatorContainer = (props: StackScreenProps<RestaurantParamList, 'HomeView'>) => {
 const { navigation, route } = props;
   return (
-    <RestaurantView {...route.params} navigation={navigation} />
+    <HomeView {...route.params} navigation={navigation} />
   )
 }
 
-export const RestaurantView = (props: RestaurantViewProps) => {
+/* What inputs needed?
+Whatever Harlem represents (Name? Place?)
+Photos and text for top carousel "Where to eat in NYC"
+New on FYTR Meals
+Popular Meals
+Order Again Meals
 
-  const { restaurant, meals, navigation } = props;
+Links to:
+Notifications
+Discover
+Profile
+Whatever those dot thingies do
 
-  const { businessHours } = restaurant;
+Link to Home via back button on Restaurant view
+*/
 
+export const HomeView = (props: HomeViewProps) => {
+
+  const { locationName, newsTiles, meals, navigation } = props;
 
   const onPressMeal = (meal: Meal) => {
-    navigation?.push('MealView', {meal: meal, restaurant: restaurant});
+    // TODO Figure out where to get restaurant for this to work
+    // navigation?.push('MealView', {meal: meal, restaurant: restaurant});
   }
+
   return (
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <FlexBox flexDirection={'row'} width={wp('99%')} height={hp('14%')} pl={'14px'}>
@@ -64,7 +83,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
         <ScrollView>
           <Box>
             <Box width={wp('95%')} height={hp('23%')} alignSelf='center' pr={'14px'}>
-              <Image style={{ flex: 1, height: '100%', width: '100%', borderRadius: 5 }} source={restaurant.image} />
+              <Image style={{ flex: 1, height: '100%', width: '100%', borderRadius: 5 }} source={newsTiles[0]} />
             </Box>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <FlexBox flexDirection={'row'} pr='14px' alignItems='center'>
@@ -78,7 +97,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
                 </Box>
               </FlexBox>
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.all} />
+                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.new} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
@@ -86,7 +105,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
                 Popular
             </Text>
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.all} />
+                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.popular} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
@@ -94,7 +113,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
                 Order Again
             </Text>
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.all} />
+                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.orderAgain} />
               </Box>
             </FlexBox>
           </Box>
