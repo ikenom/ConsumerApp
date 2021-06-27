@@ -1,4 +1,3 @@
-import { Restaurant } from "../../../models/restaurant/restaurant";
 import { FlexBox, Box } from "../../atoms/layout/Box";
 import {
   widthPercentageToDP as wp,
@@ -11,11 +10,13 @@ import { Meal } from "../../../models/meal/meal";
 import { Text } from "../../atoms/typography/Text";
 import { Ionicon } from "../../atoms/icons/Ionicons";
 import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
+import Carousel from 'react-native-snap-carousel';
+import Pagination from 'react-native-snap-carousel';
 import { CardCarousel } from "../../atoms/card/CardCarousel";
-import { Button } from "react-native-elements/dist/buttons/Button";
-import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 import { RestaurantParamList } from "../../../../App";
 import { ScrollView } from "react-native-gesture-handler";
+import { CarouselHeader } from "../../atoms/card/CarouselHeader";
 
 // TODO Create Home version
 export interface HomeViewProps {
@@ -84,34 +85,24 @@ export const HomeView = (props: HomeViewProps) => {
           <Box>
             <Box width={wp('95%')} height={hp('23%')} alignSelf='center' pr={'14px'}>
               <Image style={{ flex: 1, height: '100%', width: '100%', borderRadius: 5 }} source={newsTiles[0]} />
+              {// TODO WTF HOW TYPESCRIPT
+              /*<Carousel layout={'stack'} />
+              <Pagination dotsLength=4 activeDotsIndex=1 />*/}
             </Box>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <FlexBox flexDirection={'row'} pr='14px' alignItems='center'>
-                <Box flexGrow={1}>
-                  <Text color={defaultTheme.colors.white} fontWeight={'400'} fontSize={defaultTheme.fontSize.lg}>
-                    New on FYTR
-                  </Text>
-                </Box>
-                <Box>
-                  <MaterialCommunityIcon name={'dots-horizontal'} size={27} color={defaultTheme.colors.blue} />
-                </Box>
-              </FlexBox>
+              <CarouselHeader title={"New on FYTR"}/>
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.new} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <Text color={defaultTheme.colors.white} fontWeight={'400'} fontSize={defaultTheme.fontSize.lg}>
-                Popular
-            </Text>
+              <CarouselHeader title={"Popular"}/>
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.popular} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <Text color={defaultTheme.colors.white} fontWeight={'400'} fontSize={defaultTheme.fontSize.lg}>
-                Order Again
-            </Text>
+              <CarouselHeader title={"Order Again"}/>
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.orderAgain} />
               </Box>
