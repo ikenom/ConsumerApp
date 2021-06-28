@@ -11,7 +11,6 @@ import { Text } from "../../atoms/typography/Text";
 import { Ionicon } from "../../atoms/icons/Ionicons";
 import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
 import Carousel from 'react-native-snap-carousel';
-import Pagination from 'react-native-snap-carousel';
 import { CardCarousel } from "../../atoms/card/CardCarousel";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 import { RestaurantParamList } from "../../../../App";
@@ -86,22 +85,21 @@ export const HomeView = (props: HomeViewProps) => {
           {/* Use bell-badge for notification pending*/}
         </Box>
       </FlexBox>
-      <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('76%')} pl={'14px'}>
+      <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>
         <ScrollView>
           <Box>
-            <Box width={wp('95%')} height={hp('23%')} alignSelf='center' pr={'14px'}>
+            <Box height={hp('20%')} justifyContent='center'>
               <Carousel 
                 layout={'stack'} 
                 firstItem={1} 
                 vertical={false} 
                 data={newsTiles} 
                 renderItem={TileWrapper} 
-                sliderWidth={wp('94%')} 
-                itemWidth={wp('94%')} 
+                sliderWidth={wp('93%')} 
+                itemWidth={wp('93%')} 
                 enableMomentum={true} 
                 activeSlideOffset={0} 
                 windowSize={10} />
-              {/* <Pagination dotsLength=4 activeDotsIndex=1 /> */}
             </Box>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"New on FYTR"}/>
