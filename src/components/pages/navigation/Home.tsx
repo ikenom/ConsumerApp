@@ -16,6 +16,7 @@ import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
 import { RestaurantParamList } from "../../../../App";
 import { ScrollView } from "react-native-gesture-handler";
 import { CarouselHeader } from "../../atoms/card/CarouselHeader";
+import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 
 // TODO Create Home version
 export interface HomeViewProps {
@@ -89,7 +90,8 @@ export const HomeView = (props: HomeViewProps) => {
         <ScrollView>
           <Box>
             <Box height={hp('20%')} justifyContent='center'>
-              <Carousel 
+              {/* <SlideshowCarousel slides={newsTiles} /> */}
+               <Carousel 
                 layout={'stack'} 
                 firstItem={1} 
                 vertical={false} 
