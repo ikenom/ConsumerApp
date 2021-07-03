@@ -89,9 +89,9 @@ export const HomeView = (props: HomeViewProps) => {
       <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>
         <ScrollView>
           <Box>
-            <Box height={hp('20%')} justifyContent='center'>
-              {/* <SlideshowCarousel slides={newsTiles} /> */}
-               <Carousel 
+            {/* <Box height={hp('20%')} justifyContent='center'> */}
+              <SlideshowCarousel slides={newsTiles} />
+               {/* <Carousel 
                 layout={'stack'} 
                 firstItem={1} 
                 vertical={false} 
@@ -101,8 +101,8 @@ export const HomeView = (props: HomeViewProps) => {
                 itemWidth={wp('93%')} 
                 enableMomentum={true} 
                 activeSlideOffset={0} 
-                windowSize={10} />
-            </Box>
+                windowSize={10} /> */}
+            {/* </Box> */}
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"New on FYTR"}/>
               <Box mt={hp('1.5%')}>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Image } from 'react-native';
-import { FlexBox } from '../../atoms/layout/Box'
+import { Box, FlexBox } from '../../atoms/layout/Box'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import { defaultTheme } from "../../../defaultTheme";
 
 /* export interface SlideProps {
     slideImage: any; // TODO Make more specific to image
@@ -23,7 +25,7 @@ interface SlideshowCarouselProps {
 export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
 
     const { slides } = props;
-    const [activeIndex, setActiveIndex] = useState(1);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const renderSlide = ({ item, index }) => {
         return (
@@ -34,38 +36,37 @@ export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
     }
 
     return (
-        <FlexBox>
-             <Carousel
+        <Box height={hp('30%')} width={wp('93%')} justifyContent='center'>
+            <Carousel
                 data={slides}
                 renderItem={renderSlide}
-                onSnapToItem={(index) => setActiveIndex(index)} 
-                layout={'stack'} 
-                firstItem={1} 
-                vertical={false} 
-                sliderWidth={wp('93%')} 
-                itemWidth={wp('93%')} 
-                enableMomentum={true} 
-                activeSlideOffset={0} 
+                onSnapToItem={(index) => setActiveIndex(index)}
+                layout={'stack'}
+                firstItem={0}
+                vertical={false}
+                sliderWidth={wp('93%')}
+                itemWidth={wp('93%')}
+                enableMomentum={true}
+                activeSlideOffset={0}
                 windowSize={10}
             />
-{/*             <Pagination
+            <Pagination
                 dotsLength={slides.length}
                 activeDotIndex={activeIndex}
-                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
                 dotStyle={{
                     width: 10,
                     height: 10,
                     borderRadius: 5,
-                    marginHorizontal: 8,
-                    backgroundColor: 'rgba(255, 255, 255, 0.92)'
+                    marginHorizontal: 1,
+                    backgroundColor: defaultTheme.colors.blue,
                 }}
                 inactiveDotStyle={{
                     // Define styles for inactive dots here
                 }}
                 inactiveDotOpacity={0.4}
-                inactiveDotScale={0.6}
-            /> */}
-        </FlexBox>
+                inactiveDotScale={0.8}
+            />
+        </Box>
     );
 }
 
