@@ -117,11 +117,11 @@ export const callTest = async () => {
 
 export const getMoviesFromApiAsync = async () => {
   try {
-    console.log("bleh")
+    console.log("bleh getting test data")
     let response = await fetch(
       'https://reactnative.dev/movies.json'
     );
-    console.log(response)
+    console.log("Got test data")
     let json = await response.json();
     Alert.alert(`Resolved data is: ${json}`)
     return json.movies;

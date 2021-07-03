@@ -6788,10 +6788,10 @@ electron-to-chromium@^1.3.247, electron-to-chromium@^1.3.564, electron-to-chromi
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.766.tgz#2fd14a4e54f77665872f4e23fcf4968e83638220"
   integrity sha512-u2quJ862q9reRKh/je3GXis3w38+RoXH1J9N3XjtsS6NzmUAosNsyZgUVFZPN/ZlJ3v6T0rTyZR3q/J5c6Sy5w==
 
-electron@^11.1.0:
-  version "11.4.9"
-  resolved "https://registry.npmjs.org/electron/-/electron-11.4.9.tgz#87a4ab8a355853738e17e89832c57c4cbf9d55c0"
-  integrity sha512-3TJG1vAnuR8p47mzorCW5l7uWCjdNUufIbZ+gKjm010dtHmhrO1zchP1a76vuT4BllK8q1iygFSkNnDlZ0i2pA==
+electron@^9.1.0:
+  version "9.4.4"
+  resolved "https://registry.npmjs.org/electron/-/electron-9.4.4.tgz#2a74a0655a74bd326216672c5ae6ed3a44451446"
+  integrity sha512-dcPlTrMWQu5xuSm6sYV42KK/BRIqh3erM8v/WtZqaDmG7pkCeJpvw26Dgbqhdt78XmqqGiN96giEe6A3S9vpAQ==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
@@ -13025,10 +13025,10 @@ react-dev-utils@^9.0.0:
     strip-ansi "5.2.0"
     text-table "0.2.0"
 
-react-devtools-core@4.11.0:
-  version "4.11.0"
-  resolved "https://registry.npmjs.org/react-devtools-core/-/react-devtools-core-4.11.0.tgz#38e92bcfebd7fa6f89f9a29439e30688ef4781b4"
-  integrity sha512-QBbyZv3rodvWvhh2NjXuEk5AehCDNh/3elTi1vL03/Bo8UbeX3bmR3NDlx1YIcZ7hsDjxhT6a1GSuO5PVOR8Ag==
+react-devtools-core@4.10.4:
+  version "4.10.4"
+  resolved "https://registry.npmjs.org/react-devtools-core/-/react-devtools-core-4.10.4.tgz#6d6e8cb87b281ab0267c4bbe396c0ee348213d78"
+  integrity sha512-N3RjSX9aumqxOhwExUkIqExMeizyxvbddkmkZ6pIVLaF6spV0aMmZfdqXFTpdSUUG5k71Q2EVlDtXO8a5y6Gtg==
   dependencies:
     shell-quote "^1.6.1"
     ws "^7"
@@ -13042,15 +13042,15 @@ react-devtools-core@^4.6.0:
     ws "^7"
 
 react-devtools@^<4.11.0:
-  version "4.11.0"
-  resolved "https://registry.npmjs.org/react-devtools/-/react-devtools-4.11.0.tgz#6f6f294a2f8a6d8e9a759c801e0438a1691e53cd"
-  integrity sha512-8A/jrbD5F92F9X+QhR7QPVRX5rXU2npbN6fS+Duy7HbOpCajBIx6pd2jIrVZ0WLdjMu43s7MTOEZtqBuM6TNng==
+  version "4.10.4"
+  resolved "https://registry.npmjs.org/react-devtools/-/react-devtools-4.10.4.tgz#62ecf9fe205f6bb31ed00462848554e5f464e6e8"
+  integrity sha512-Hr/yzBrFI1zbCtViNNiE5z0+PpTyNYXfDOcsTcAKbDmJ/oTuih4WcbU1NRymaLE8bju77qlIWToklNxRpapRZw==
   dependencies:
     cross-spawn "^5.0.1"
-    electron "^11.1.0"
+    electron "^9.1.0"
     ip "^1.1.4"
     minimist "^1.2.3"
-    react-devtools-core "4.11.0"
+    react-devtools-core "4.10.4"
     update-notifier "^2.1.0"
 
 react-docgen-typescript@^2.0.0:

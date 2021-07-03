@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { MealNavigatorContainer, MealOrderView, MealViewProps } from './src/components/pages/order/Meal';
 import { defaultTheme } from './src/defaultTheme';
@@ -16,6 +16,7 @@ import { OrderConfirmationCartContainer, OrderConfirmationCartProps } from './sr
 import { OrderConfirmationProps } from './src/components/pages/order/Confirmation';
 import { Confirmation } from './src/components/pages/order/Confirmation';
 import { MOCK_ORDER } from './src/models/order/util';
+import { getMoviesFromApiAsync } from './src/api/client';
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
   MealView: MealViewProps
@@ -35,9 +36,19 @@ const MyTheme = {
   },
 };
 
+const test = async () => {
+  await getMoviesFromApiAsync()
+  console.log(`Done waiting`)
+}
 
 const App = () => {
   const insets = useSafeAreaInsets();
+
+
+  useEffect(() => {
+    test()
+  },[])
+
   return (
     <View style={{paddingTop: 0, flex: 1, paddingRight: insets.right ,paddingLeft: insets.left, backgroundColor: defaultTheme.colors.black}} >
       <StatusBar barStyle={'light-content'}/>
