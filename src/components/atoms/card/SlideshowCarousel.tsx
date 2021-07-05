@@ -36,7 +36,7 @@ export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
     }
 
     return (
-        <Box height={hp('30%')} width={wp('93%')} justifyContent='center'>
+        <Box height={hp('25%')} width={wp('93%')} justifyContent='center'>
             <Carousel
                 data={slides}
                 renderItem={renderSlide}
@@ -57,13 +57,20 @@ export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
                     width: 10,
                     height: 10,
                     borderRadius: 5,
-                    marginHorizontal: 1,
+                    marginHorizontal: 0,
                     backgroundColor: defaultTheme.colors.blue,
                 }}
-                inactiveDotStyle={{
-                    // Define styles for inactive dots here
+                containerStyle={{
+                    paddingTop: wp('2.5%'),
+                    paddingBottom: wp('2%'),
+                    width: '100%',
                 }}
-                inactiveDotOpacity={0.4}
+                inactiveDotStyle={{
+                    borderColor: defaultTheme.colors.greyNine,
+                    borderWidth: 2,
+                    backgroundColor: 'rgba(255,255,255,0)',
+                }}
+                inactiveDotOpacity={1}
                 inactiveDotScale={0.8}
             />
         </Box>
