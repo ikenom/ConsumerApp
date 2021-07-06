@@ -58,10 +58,18 @@ export const RestaurantView = (props: RestaurantViewProps) => {
 
   // TEMP For way to get to Home
   const onPressBack = () => {
+
+    const mockMealsPlus = MOCK_MEALS.map(
+      // Add in restaurant and distance
+      (meal) => {
+        return { ...meal, restaurant: "Smash Burger", distance: "2.1" }
+      }
+    );
+
     navigation?.push('HomeView', {
-      locationName: "Loser",
+      locationName: "Harlem",
       newsTiles: newsTilesImages,
-      meals: { new: MOCK_MEALS, popular: MOCK_MEALS, orderAgain: MOCK_MEALS }
+      meals: { new: mockMealsPlus, popular: MOCK_MEALS, orderAgain: MOCK_MEALS }
     });
   }
 

@@ -3,6 +3,9 @@ export interface Meal {
   image: any;
   name: string;
   price: string;
+  distance?: string;
+  restaurant?: string;
+  flagged?: boolean;
   description: string;
   nutrition: Nutrition;
 }

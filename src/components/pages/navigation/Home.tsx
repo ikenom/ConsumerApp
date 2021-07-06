@@ -18,7 +18,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import { CarouselHeader } from "../../atoms/card/CarouselHeader";
 import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 
-// TODO Create Home version
 export interface HomeViewProps {
   locationName: String;
   newsTiles: Array<any>;
@@ -26,14 +25,12 @@ export interface HomeViewProps {
   navigation?: StackNavigationProp<RestaurantParamList, 'HomeView'>
 }
 
-// TODO Create Home version
 export interface HomeViewMeals {
   new: Meal[];
   popular: Meal[];
   orderAgain: Meal[];
 }
 
-// TODO Create HomeNavigatorContainer
 export const HomeNavigatorContainer = (props: StackScreenProps<RestaurantParamList, 'HomeView'>) => {
 const { navigation, route } = props;
   return (
@@ -66,19 +63,13 @@ export const HomeView = (props: HomeViewProps) => {
     // navigation?.push('MealView', {meal: meal, restaurant: restaurant});
   }
 
-  const TileWrapper = ({item, index}) => {
-    return(
-      <Image style={{ flex: 1, height: '100%', width: '100%', borderRadius: 8 }} source={item} />
-    )
-  }
-
   return (
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <FlexBox flexDirection={'row'} width={wp('99%')} height={hp('14%')} pl={'14px'}>
         <Box flexGrow={1} mt={'70px'} pb={'15px'}>
           <Text>
             <Text color={defaultTheme.colors.white} fontWeight={'400'} fontSize={defaultTheme.fontSize.lg}>Hello </Text>
-            <Text color={defaultTheme.colors.blue} fontWeight={'400'} fontSize={defaultTheme.fontSize.lg}>Harlem</Text>
+            <Text color={defaultTheme.colors.blue} fontWeight={'400'} fontSize={defaultTheme.fontSize.lg}>{locationName}</Text>
           </Text>
         </Box>
         <Box mt={'70px'} align='center' pr={'10px'} pt={'2px'}>
@@ -89,20 +80,7 @@ export const HomeView = (props: HomeViewProps) => {
       <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>
         <ScrollView>
           <Box>
-            {/* <Box height={hp('20%')} justifyContent='center'> */}
               <SlideshowCarousel slides={newsTiles} />
-               {/* <Carousel 
-                layout={'stack'} 
-                firstItem={1} 
-                vertical={false} 
-                data={newsTiles} 
-                renderItem={TileWrapper} 
-                sliderWidth={wp('93%')} 
-                itemWidth={wp('93%')} 
-                enableMomentum={true} 
-                activeSlideOffset={0} 
-                windowSize={10} /> */}
-            {/* </Box> */}
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"New on FYTR"}/>
               <Box mt={hp('1.5%')}>
