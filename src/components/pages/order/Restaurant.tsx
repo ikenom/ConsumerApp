@@ -16,7 +16,7 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { RestaurantParamList } from "../../../../App";
 // TEMP, REMOVE LATER, FOR TEST HOME ONLY
-import { MOCK_MEALS } from '../../../models/meal/util';
+import { MOCK_MEALS_ALL_INFO } from '../../../models/meal/util';
 import { MOCK_RESTAURANT } from '../../../models/restaurant/util';
 import ListItemSwipeable from "react-native-elements/dist/list/ListItemSwipeable";
 import { MealCard } from "../../atoms/card/Card";
@@ -52,24 +52,16 @@ export const RestaurantView = (props: RestaurantViewProps) => {
   }
 
   // TEMP Get meals images as array
-  const newsTilesImages = MOCK_MEALS.map(
+  const newsTilesImages = MOCK_MEALS_ALL_INFO.map(
     (meal) => meal.image
   );
 
   // TEMP For way to get to Home
   const onPressBack = () => {
-
-    const mockMealsPlus = MOCK_MEALS.map(
-      // Add in restaurant and distance
-      (meal) => {
-        return { ...meal, restaurant: "Smash Burger", distance: "2.1" }
-      }
-    );
-
     navigation?.push('HomeView', {
       locationName: "Harlem",
       newsTiles: newsTilesImages,
-      meals: { new: mockMealsPlus, popular: MOCK_MEALS, orderAgain: MOCK_MEALS }
+      meals: { new: MOCK_MEALS_ALL_INFO, popular: MOCK_MEALS_ALL_INFO, orderAgain: MOCK_MEALS_ALL_INFO }
     });
   }
 

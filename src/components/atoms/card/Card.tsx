@@ -21,7 +21,7 @@ export const MealCard = (props: MealCardProps) => {
 
   const { meal , layoutType, onPress } = props;
 
-  const { name, restaurant, price, distance, image } = meal
+  const { name, restaurant, price, distance, image, flagged } = meal
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -31,9 +31,9 @@ export const MealCard = (props: MealCardProps) => {
   };
 
   const truncateString = (str: string, limit: number): string => {
-    // Shorten string to specified length and add "..."
+    // Shorten string with "..." so that it is under the specified length
     if (str.length > limit) {
-      return str.substring(0, limit) + "..."
+      return str.substring(0, (limit-3)) + "..."
     }
     else {
       return str
@@ -65,7 +65,7 @@ export const MealCard = (props: MealCardProps) => {
       left={0}
       bottom={0}
       top={0}
-      borderRadius={'15px'}>
+      borderRadius={'10px'}>
       <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
         <Box height={dimensions.height} width={dimensions.width}>
           <Image style={{ flex: 1, height: undefined, width: undefined }} source={image} />
@@ -79,9 +79,10 @@ export const MealCard = (props: MealCardProps) => {
           flexDirection={'column'} 
           justifyContent={'space-evenly'}>
           <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
-            {truncateString(name, 20)}
+            {truncateString(name, 19)}
           </Text>
-            {(restaurant !== undefined) && (<Text
+            {(restaurant !== undefined) && 
+            (<Text
               height={hp('2%')}
               fontWeight={'500'}
               fontSize={'14px'}
@@ -93,6 +94,10 @@ export const MealCard = (props: MealCardProps) => {
             {(distance !== undefined) && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
+        {(flagged !== undefined) && (flagged) &&
+        (<Box position={'absolute'} right={10} top={145}>
+          <MaterialCommunityIcon name={'flag-variant'} color={'#EDCD27'} size={28} />
+        </Box>)}
       </TouchableOpacity>
     </Box>
   );
