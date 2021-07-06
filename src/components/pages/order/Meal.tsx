@@ -77,7 +77,7 @@ export const MealOrderView = (props: MealViewProps) => {
         <Box bottom={hp('26%')} right={wp('43%')} pt={hp("2.3%")}>
           <Button onPress={onBackPressed} icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </Box>
-        <FlexBox top={-hp('12.9%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+        <FlexBox top={-hp('15.3%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
           <Box mt={hp('1.1%')}>
             <Text fontWeight={'500'} fontSize={'28px'} color={'#FFFFFF'} >
             {meal.name}
