@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { MealNavigatorContainer, MealOrderView, MealViewProps } from './src/components/pages/order/Meal';
 import { defaultTheme } from './src/defaultTheme';
@@ -16,6 +16,8 @@ import { ConfirmationNavigatorContainer, OrderConfirmationProps } from './src/co
 import { Confirmation } from './src/components/pages/order/Confirmation';
 import { MOCK_ORDER } from './src/models/order/util';
 import AuthStore from './src/store/authStore';
+import RestaurantStore from './src/store/restaurantStore';
+import { Restaurant } from './src/models/restaurant/restaurant';
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
   MealView: MealViewProps
@@ -35,28 +37,42 @@ const MyTheme = {
   },
 };
 
-const startup = async () => {
-  await AuthStore.init()
-}
-
 const App = () => {
   const insets = useSafeAreaInsets();
+  const [isLoadingRestaurant, setLoadingRestaurant] = useState(true);
+  const [restaurant, setRestaurant] = useState<Restaurant>();
+
+  const startup = async () => {
+    await AuthStore.init()
+    const store = RestaurantStore.getInstance()
+    await store.getRestaurantsAsync()
+
+    const restaurants = store.getRestaurants().get()
+    setRestaurant(restaurants[0])
+    setLoadingRestaurant(false)
+  }
+
   useEffect(() => {
     startup()
   },[])
+
   return (
     <View style={{paddingTop: 0, flex: 1, paddingRight: insets.right ,paddingLeft: insets.left, backgroundColor: defaultTheme.colors.black}} >
       <StatusBar barStyle={'light-content'}/>
-      <NavigationContainer theme={MyTheme}>
-        <RestaurantStack.Navigator initialRouteName={'RestaurantView'} screenOptions={{headerShown: false}}>
-          <RestaurantStack.Screen name="RestaurantView" component={RestaurantNavigatorContainer} initialParams={{restaurant: MOCK_RESTAURANT, meals: {all: MOCK_MEALS, recommendations: MOCK_MEALS}}}/>
-          <RestaurantStack.Screen name="MealView" component={MealNavigatorContainer}/>
-          <RestaurantStack.Screen name="CartView" component={OrderConfirmationCartContainer}/>
-          <RestaurantStack.Screen name='ConfirmationView' component={ConfirmationNavigatorContainer}/>
-        </RestaurantStack.Navigator>
-      </NavigationContainer>
+      {
+        !isLoadingRestaurant &&
+        <NavigationContainer theme={MyTheme}>
+          <RestaurantStack.Navigator initialRouteName={'RestaurantView'} screenOptions={{headerShown: false}}>
+            <RestaurantStack.Screen name="RestaurantView" component={RestaurantNavigatorContainer} initialParams={{restaurant, meals: {all: restaurant?.meals!!, recommendations: restaurant?.meals!!}}}/>
+            <RestaurantStack.Screen name="MealView" component={MealNavigatorContainer}/>
+            <RestaurantStack.Screen name="CartView" component={OrderConfirmationCartContainer}/>
+            <RestaurantStack.Screen name='ConfirmationView' component={ConfirmationNavigatorContainer}/>
+          </RestaurantStack.Navigator>
+        </NavigationContainer>
+      }
     </View>
   )
+  
 };
 
 const SafeAreaWrapper = () => {

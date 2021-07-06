@@ -1,23 +1,26 @@
 import { DateTime } from "luxon";
+import { Meal } from "../meal/meal";
 
 export interface Restaurant {
+  id: string;
   name: string;
   description: string;
-  image: any;
+  image?: any;
   businessHours: BusinessHours;
   location: Location;
   phoneNumber: string;
+  meals: Meal[]
 }
 
 
 export interface BusinessHours {
   openingTime: string;
-  closingHourTime: string;
+  closingTime: string;
 }
 
 export interface Location {
   street: string;
   city: string;
   state: string;
-  zip: string;
+  zipCode: string;
 }

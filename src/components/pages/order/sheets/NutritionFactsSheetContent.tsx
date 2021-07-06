@@ -56,7 +56,7 @@ export const NutritionFactsSheetContent = (props: NutritionFactsSheetProps) => {
               <NutritionHeader label={'Sodium'} value={micros.sodiumInMGrams} unit={'mg'}/>
               <StyledDivider height={1} mt={hp('1.5%')} mb={hp('1.5%')}/>
             </Box>
-          : <></>
+          : <Box h={hp('0%')} mb={hp('1.5%')}></Box>
         }
         <NutritionSection 
           header={{label: "Total Carbohydrate", value: carbsInGrams, unit: 'g'}}

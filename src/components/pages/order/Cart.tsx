@@ -81,7 +81,7 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
         <OrderConfirmationHeader label={"Your Cart"} icon={"chevron-left"} onPress={onBackPressed} iconPosition={'left'}/>
       </Box>
       <Box width= {wp('100%')} height={getHeightInPixels('17%')} borderRadius={'5px'} mb={getHeightInPixels("3.2%")}>
-          <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
+          <Image style={{flex: 1, height: undefined, width: undefined}} source={{ uri: meal.image}} />
       </Box>
       <FlexBox pl={'16px'} pr={'16px'} flexDirection={'column'} mb={getHeightInPixels("3%")}>
         <Text fontWeight={'700'} fontSize={'18px'} color={defaultTheme.colors.white} mb={getHeightInPixels('1.3%')}>

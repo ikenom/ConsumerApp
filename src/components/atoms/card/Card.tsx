@@ -39,7 +39,7 @@ export const MealCard = (props: MealCardProps) => {
         borderRadius={'15px'}>
         <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
           <Box height={dimensions.height} width={dimensions.width}>
-            <Image style={{flex: 1, height: undefined, width: undefined}} source={image} />
+            <Image style={{flex: 1, height: undefined, width: undefined}} source={{uri: image}} />
           </Box>
           <FlexBox top={-dimensions.contentHeight} bg={'#000000'} height={dimensions.contentHeight} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
             <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>

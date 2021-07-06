@@ -72,12 +72,12 @@ export const MealOrderView = (props: MealViewProps) => {
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <Box width= {wp('99%')} height={hp('26%')} mb={hp("3%")}>
         <Box width= {wp('99%')} height={hp('26%')} borderRadius={'5px'}>
-          <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
+          <Image style={{flex: 1, height: undefined, width: undefined}} source={{uri: meal.image}} />
         </Box>
         <Box bottom={hp('26%')} right={wp('43%')} pt={hp("2.3%")}>
           <Button onPress={onBackPressed} icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </Box>
-        <FlexBox top={-hp('12.9%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+        <FlexBox top={-hp('15.3%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
           <Box mt={hp('1.1%')}>
             <Text fontWeight={'500'} fontSize={'28px'} color={'#FFFFFF'} >
             {meal.name}
