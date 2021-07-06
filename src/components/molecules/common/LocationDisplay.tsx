@@ -25,7 +25,7 @@ export const LocationDisplay = (props: Props) => {
         color={highlighted ? defaultTheme.colors.blue : defaultTheme.colors.white} 
         style={highlighted ? {textDecorationLine: 'underline'}: {}}
       >
-        {`${location.city}, ${location.state} ${location.zip}`}
+        {`${location.city}, ${location.state} ${location.zipCode}`}
       </Text>
     </FlexBox>
   )

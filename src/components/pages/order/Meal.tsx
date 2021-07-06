@@ -72,7 +72,7 @@ export const MealOrderView = (props: MealViewProps) => {
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <Box width= {wp('99%')} height={hp('26%')} mb={hp("3%")}>
         <Box width= {wp('99%')} height={hp('26%')} borderRadius={'5px'}>
-          <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
+          <Image style={{flex: 1, height: undefined, width: undefined}} source={{uri: meal.image}} />
         </Box>
         <Box bottom={hp('26%')} right={wp('43%')} pt={hp("2.3%")}>
           <Button onPress={onBackPressed} icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
