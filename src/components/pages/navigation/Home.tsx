@@ -19,7 +19,7 @@ import { CarouselHeader } from "../../atoms/card/CarouselHeader";
 import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 
 export interface HomeViewProps {
-  locationName: String;
+  locationName: string;
   newsTiles: Array<any>;
   meals: HomeViewMeals;
   navigation?: StackNavigationProp<RestaurantParamList, 'HomeView'>

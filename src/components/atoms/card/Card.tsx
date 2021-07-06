@@ -30,7 +30,7 @@ export const MealCard = (props: MealCardProps) => {
     onPress(meal)
   };
 
-  const truncateString = (str: String, limit: Number): String => {
+  const truncateString = (str: string, limit: number): string => {
     // Shorten string to specified length and add "..."
     if (str.length > limit) {
       return str.substring(0, limit) + "..."
@@ -40,7 +40,7 @@ export const MealCard = (props: MealCardProps) => {
     }
   }
 
-  const StatBox = (str: String) => {
+  const StatBox = (str: string) => {
     // Maybe make this into a component
     return (
       <Box backgroundColor={defaultTheme.colors.greyNine} mr={wp('1.2%')}>
