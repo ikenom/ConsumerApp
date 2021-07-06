@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { MealNavigatorContainer, MealOrderView, MealViewProps } from './src/components/pages/order/Meal';
 import { defaultTheme } from './src/defaultTheme';
@@ -9,13 +9,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native';
-import StorybookUIRoot from './storybook';
-import { ConfirmationNavigatorContainer } from './src/components/pages/order/Confirmation';
+//import StorybookUIRoot from './storybook'; This will break promises so they never resolve so only uncomment when testing
 import { RestaurantNavigatorContainer, RestaurantViewProps } from './src/components/pages/order/Restaurant';
 import { OrderConfirmationCartContainer, OrderConfirmationCartProps } from './src/components/pages/order/Cart';
-import { OrderConfirmationProps } from './src/components/pages/order/Confirmation';
+import { ConfirmationNavigatorContainer, OrderConfirmationProps } from './src/components/pages/order/Confirmation';
 import { Confirmation } from './src/components/pages/order/Confirmation';
 import { MOCK_ORDER } from './src/models/order/util';
+import AuthStore from './src/store/authStore';
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
   MealView: MealViewProps
@@ -35,9 +35,15 @@ const MyTheme = {
   },
 };
 
+const startup = async () => {
+  await AuthStore.init()
+}
 
 const App = () => {
   const insets = useSafeAreaInsets();
+  useEffect(() => {
+    startup()
+  },[])
   return (
     <View style={{paddingTop: 0, flex: 1, paddingRight: insets.right ,paddingLeft: insets.left, backgroundColor: defaultTheme.colors.black}} >
       <StatusBar barStyle={'light-content'}/>
@@ -53,21 +59,8 @@ const App = () => {
   )
 };
 
-const TestApp = () => {
-  const insets = useSafeAreaInsets();
-  return (
-    <View style={{paddingTop: 0, flex: 1, paddingRight: insets.right ,paddingLeft: insets.left,paddingBottom: insets.bottom ,backgroundColor: defaultTheme.colors.black}} >
-      <StatusBar barStyle={'light-content'}/>
-      <SafeAreaView style={{flex: 0, backgroundColor: defaultTheme.colors.black}}/>
-      <SafeAreaView style={{flex: 1, backgroundColor: defaultTheme.colors.black}}>
-        {/* <OrderConfirmationCart restaurant={MOCK_RESTAURANT} meal={MOCK_MEALS[0]}/> */}
-        <Confirmation order={MOCK_ORDER} restaurant={MOCK_RESTAURANT}/>
-      </SafeAreaView>
-    </View>
-  )
-};
-
 const SafeAreaWrapper = () => {
+
   return (
     <SafeAreaProvider>
       <App/>
@@ -76,18 +69,8 @@ const SafeAreaWrapper = () => {
 }
 
 
-const Storybook = () => {
-  return <StorybookUIRoot />;
-};
+// const Storybook = () => {
+//   return <StorybookUIRoot />;
+// };
 
 export default SafeAreaWrapper;
-
-
-/**
- * 1) Finish Order confirmation page
- * 2) Build routes to cart can confirmation
- * 3) Define meal and order store
- * 4) Setup apollo client and connect to backend
- * 5) Write a few test
- * 6) Setup CI/CD pipeline
- */
