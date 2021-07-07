@@ -16,6 +16,7 @@ import RestaurantStore from './src/store/restaurantStore';
 import { Restaurant } from './src/models/restaurant/restaurant';
 import { FlexBox } from './src/components/atoms/layout/Box';
 import { Spinner } from 'native-base'
+import OrderStore from './src/store/orderStore';
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
   MealView: MealViewProps
@@ -42,10 +43,11 @@ const App = () => {
 
   const startup = async () => {
     await AuthStore.init()
-    const store = RestaurantStore.getInstance()
-    await store.getRestaurantsAsync()
+    await OrderStore.init()
+    const restaurantStore = RestaurantStore.getInstance()
+    await restaurantStore.getRestaurantsAsync()
 
-    const restaurants = store.getRestaurants().get()
+    const restaurants = restaurantStore.getRestaurants().get()
     setRestaurant(restaurants[0])
     setLoadingRestaurant(false)
   }
