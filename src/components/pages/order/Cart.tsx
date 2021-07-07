@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Image } from "react-native";
+import { Image, LogBox } from "react-native";
 import { Divider, Input } from 'react-native-elements';
 import {
   widthPercentageToDP as wp,
@@ -21,6 +21,8 @@ import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { RestaurantParamList } from "../../../../App";
 import { createMockOrderWithItems } from "../../../models/order/util";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+LogBox.ignoreLogs(['margin', 'width']);
 
 const FulfillmentDivider = styled(Divider)<{isSelected: boolean}>`
   backgroundColor: ${({isSelected}) => (isSelected ? defaultTheme.colors.blueOne : defaultTheme.colors.greySix)};

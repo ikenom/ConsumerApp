@@ -5,10 +5,12 @@ export default class AuthStore {
 
   private static instance: AuthStore;
 
+  private userId: string | undefined;
+
 
   static init = async () => {
     const authStore = AuthStore.getInstance();
-    await authStore.loginAsync("bong.oconnell@spencer.org", "password")
+    await authStore.loginAsync("russ_okon@mills.org", "password")
   }
 
   static getInstance(): AuthStore {
@@ -20,9 +22,15 @@ export default class AuthStore {
   }
 
   loginAsync = async (email: String, password: String) => {
-    const data = await authClient.login(email, password)
-    await this.saveToken(data.login.token)
-    console.log("Successfully logged in")
+    try {
+      const data = await authClient.login(email, password)
+      await this.saveToken(data.login.token)
+      this.userId = data.login.userId
+      console.log("Successfully logged in")
+    }
+    catch(e){
+      Alert.alert("Failed to login")
+    }
   }
 
   saveToken = async (token: string) => {
@@ -31,5 +39,9 @@ export default class AuthStore {
 
   static getToken = async (): Promise<String | null> => {
     return AsyncStorage.getItem("token")
+  }
+
+  getUserId = () => {
+    return this.userId
   }
 }

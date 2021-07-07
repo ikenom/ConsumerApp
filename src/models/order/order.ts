@@ -10,6 +10,7 @@ interface FulfillmentDetails {
 interface PickUpFulfillment extends FulfillmentDetails {
 }
 export interface Order {
+  id: string;
   orderNumber: string,
   lineItems: Pick<Meal, "name" | "price" | "nutrition">[],
   taxesAndFees: string,
@@ -18,6 +19,11 @@ export interface Order {
   type: OrderType,
   fulfillmentDetails: FulfillmentDetails,
   additionalNote?: string
+}
+
+export interface DraftOrder {
+  id: string;
+  meals: Meal[]
 }
 
 export type LineItem = Pick<Meal, 'name' | 'price' | 'nutrition'>
