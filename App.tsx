@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { MealNavigatorContainer, MealOrderView, MealViewProps } from './src/components/pages/order/Meal';
 import { defaultTheme } from './src/defaultTheme';
-import { MOCK_MEALS } from './src/models/meal/util';
-import { MOCK_RESTAURANT } from './src/models/restaurant/util';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -13,11 +11,11 @@ import { DefaultTheme } from '@react-navigation/native';
 import { RestaurantNavigatorContainer, RestaurantViewProps } from './src/components/pages/order/Restaurant';
 import { OrderConfirmationCartContainer, OrderConfirmationCartProps } from './src/components/pages/order/Cart';
 import { ConfirmationNavigatorContainer, OrderConfirmationProps } from './src/components/pages/order/Confirmation';
-import { Confirmation } from './src/components/pages/order/Confirmation';
-import { MOCK_ORDER } from './src/models/order/util';
 import AuthStore from './src/store/authStore';
 import RestaurantStore from './src/store/restaurantStore';
 import { Restaurant } from './src/models/restaurant/restaurant';
+import { FlexBox } from './src/components/atoms/layout/Box';
+import { Spinner } from 'native-base'
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
   MealView: MealViewProps
@@ -59,6 +57,12 @@ const App = () => {
   return (
     <View style={{paddingTop: 0, flex: 1, paddingRight: insets.right ,paddingLeft: insets.left, backgroundColor: defaultTheme.colors.black}} >
       <StatusBar barStyle={'light-content'}/>
+      {
+        isLoadingRestaurant &&
+        <FlexBox justifyContent={'center'} alignItems={'center'} height={'100%'}>
+          <Spinner color={defaultTheme.colors.greyOne}/>
+        </FlexBox>
+      }
       {
         !isLoadingRestaurant &&
         <NavigationContainer theme={MyTheme}>
