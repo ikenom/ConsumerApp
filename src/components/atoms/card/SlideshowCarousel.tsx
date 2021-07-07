@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native';
-import { Box, FlexBox } from '../../atoms/layout/Box'
+import { ImageBackground } from 'react-native';
+import { Box, FlexBox } from '../../atoms/layout/Box';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { defaultTheme } from "../../../defaultTheme";
 import { Text } from "../../atoms/typography/Text";
+import LinearGradient from 'react-native-linear-gradient';
 
 export interface SlideProps {
     slideImage: any; // TODO Make more specific to image
@@ -21,13 +22,17 @@ const Slide = (props: SlideProps) => {
             bottom={0}
             top={0}
             borderRadius={'8px'}>
-            <Image
+            <ImageBackground
                 style={{
                     flex: 1,
                     height: '100%',
                     width: '100%',
                 }}
-                source={props.slideImage} />
+                source={props.slideImage}>
+                <LinearGradient
+                    colors={['#00000000', '#000000CC']}
+                    style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, }} />
+            </ImageBackground>
             <Box position={'absolute'} left={0} bottom={0} ml={wp('2%')} mb={wp('2.5%')}>
                 <Text
                     font={defaultTheme.fontFamily.dual_lg}
