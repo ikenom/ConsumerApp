@@ -12,5 +12,5 @@ export const OrderMealPageStory = () => {
   )
 }
 
-storiesOf('Card', module)
-.add('Order - Meal Page', () => OrderMealPageStory());
+storiesOf('Pages', module)
+.add('Order - Meal', () => OrderMealPageStory());
