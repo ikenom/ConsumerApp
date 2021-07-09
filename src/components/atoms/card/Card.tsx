@@ -41,7 +41,7 @@ export const MealCard = (props: MealCardProps) => {
   }
 
   const StatBox = (str: string) => {
-    // Maybe make this into a component
+    // Small gray box that contains price or distance
     return (
       <Box backgroundColor={defaultTheme.colors.greyNine} mr={wp('1.2%')}>
         <Text
@@ -60,6 +60,8 @@ export const MealCard = (props: MealCardProps) => {
   return (
     <Box
       position={'absolute'}
+      height={dimensions.height}
+      width={dimensions.width}
       overflow={'hidden'}
       right={0}
       left={0}
@@ -67,27 +69,32 @@ export const MealCard = (props: MealCardProps) => {
       top={0}
       borderRadius={'10px'}>
       <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
-        <Box height={dimensions.height} width={dimensions.width}>
+        <Box
+          height={dimensions.height}
+          width={dimensions.width}
+          overflow={'hidden'} >
           <Image style={{ flex: 1, height: undefined, width: undefined }} source={image} />
         </Box>
         <FlexBox
           top={-dimensions.contentHeight}
           bg={'#000000'}
           height={dimensions.contentHeight}
+          width={dimensions.width}
+          overflow={'hidden'}
           padding={1}
-          style={{ backgroundColor: 'rgba(0,0,0,0.5)' }} 
-          flexDirection={'column'} 
+          style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+          flexDirection={'column'}
           justifyContent={'space-evenly'}>
           <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
-            {truncateString(name, 19)}
+            {truncateString(name, dimensions.truncateMealTo)}
           </Text>
-            {(restaurant !== undefined) && 
+          {(restaurant !== undefined) &&
             (<Text
               height={hp('2%')}
               fontWeight={'500'}
               fontSize={'14px'}
               color={'#B7B7B7'}>
-              {restaurant}
+              {truncateString(restaurant, dimensions.truncateRestaurantTo)}
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {(price !== undefined) && StatBox(`$${price}`)}
@@ -95,9 +102,9 @@ export const MealCard = (props: MealCardProps) => {
           </FlexBox>
         </FlexBox>
         {(flagged !== undefined) && (flagged) &&
-        (<Box position={'absolute'} right={10} top={145}>
-          <MaterialCommunityIcon name={'flag-variant'} color={'#EDCD27'} size={28} />
-        </Box>)}
+          (<Box position={'absolute'} right={10} top={145}>
+            <MaterialCommunityIcon name={'flag-variant'} color={'#EDCD27'} size={28} />
+          </Box>)}
       </TouchableOpacity>
     </Box>
   );
