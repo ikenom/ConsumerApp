@@ -22,7 +22,6 @@ export type RestaurantParamList = {
   MealView: MealViewProps
   CartView: OrderConfirmationCartProps
   ConfirmationView: OrderConfirmationProps
-  HomeView: HomeViewProps
 }
 
 const RestaurantStack = createStackNavigator<RestaurantParamList>();
@@ -37,7 +36,6 @@ const MyTheme = {
   },
 };
 
-// TEMP Using RestaurantStack to get to Home, should be separate
 const App = () => {
   const insets = useSafeAreaInsets();
   return (
@@ -49,7 +47,6 @@ const App = () => {
           <RestaurantStack.Screen name="MealView" component={MealNavigatorContainer}/>
           <RestaurantStack.Screen name="CartView" component={OrderConfirmationCartContainer}/>
           <RestaurantStack.Screen name='ConfirmationView' component={ConfirmationNavigatorContainer}/>
-          <RestaurantStack.Screen name='HomeView' component={HomeNavigatorContainer} />
         </RestaurantStack.Navigator>
       </NavigationContainer>
     </View>
@@ -83,7 +80,7 @@ const Storybook = () => {
   return <StorybookUIRoot />;
 };
 
-export default SafeAreaWrapper;
+export default Storybook;
 
 
 /**

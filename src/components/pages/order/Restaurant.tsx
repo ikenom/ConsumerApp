@@ -15,11 +15,6 @@ import { CardCarousel } from "../../atoms/card/CardCarousel";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { RestaurantParamList } from "../../../../App";
-// TEMP, REMOVE LATER, FOR TEST HOME ONLY
-import { MOCK_MEALS_ALL_INFO } from '../../../models/meal/util';
-import { MOCK_RESTAURANT } from '../../../models/restaurant/util';
-import ListItemSwipeable from "react-native-elements/dist/list/ListItemSwipeable";
-import { MealCard } from "../../atoms/card/Card";
 
 
 export interface RestaurantViewProps {
@@ -51,18 +46,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
     navigation?.push('MealView', { meal: meal, restaurant: restaurant });
   }
 
-  // TEMP Get meals images as array
-  const newsTilesImages = MOCK_MEALS_ALL_INFO.map(
-    (meal) => meal.image
-  );
-
-  // TEMP For way to get to Home
   const onPressBack = () => {
-    navigation?.push('HomeView', {
-      locationName: "Harlem",
-      newsTiles: newsTilesImages,
-      meals: { new: MOCK_MEALS_ALL_INFO, popular: MOCK_MEALS_ALL_INFO, orderAgain: MOCK_MEALS_ALL_INFO }
-    });
   }
 
   return(
