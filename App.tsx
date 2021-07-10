@@ -80,7 +80,7 @@ const Storybook = () => {
   return <StorybookUIRoot />;
 };
 
-export default Storybook;
+export default SafeAreaWrapper;
 
 
 /**
