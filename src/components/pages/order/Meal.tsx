@@ -3,15 +3,17 @@ import { Meal, Nutrition } from "../../../models/meal/meal";
 import { Restaurant } from "../../../models/restaurant/restaurant";
 import { Box, FlexBox } from "../../atoms/layout/Box";
 import { LogBox } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {Text} from '../../atoms/typography/Text';
-import React, { useState } from "react";
+import React from "react";
 import { Image, TouchableOpacity } from 'react-native';
 import { Divider } from 'react-native-elements';
-import { Button } from "react-native-elements/dist/buttons/Button";
+import { Button as IconButton} from "react-native-elements/dist/buttons/Button";
+import { Button } from "react-native-elements";
 import {
   useCollapsible,
   AnimatedSection,
@@ -25,6 +27,8 @@ import { isOpen, MOCK_DISTANCE } from "../../../models/restaurant/util";
 import { RestaurantInfoModal } from "../../atoms/modals/RestaurantInfoModal";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { RestaurantParamList } from "../../../../App";
+import OrderStore from "../../../store/orderStore";
+import { useState } from "@hookstate/core";
 
 LogBox.ignoreLogs(['Easing', 'expected']);
 
@@ -48,8 +52,10 @@ export interface MealViewProps {
 
 export const MealOrderView = (props: MealViewProps) => {
   const { meal, restaurant, navigation } = props;
+  const orderStore = OrderStore.getInstance();
 
-  const [isModalOpen, setModalVisibility] = useState(false);
+  const [isModalOpen, setModalVisibility] = React.useState(false);
+  const isCreatingCart = useState(orderStore.isCreatingCart)
 
   const toggleModal = () => {
     setModalVisibility(!isModalOpen)
@@ -59,7 +65,16 @@ export const MealOrderView = (props: MealViewProps) => {
     navigation?.pop();
   }
 
-  const onOrderButtonPressed = () => {
+  const onOrderButtonPressed = async () => {
+    await orderStore.createCart([meal])
+    const draftOrder = orderStore.cart.get()
+
+    if (draftOrder === undefined) {
+      Toast.show("Failed to load cart. Please try again.")
+      return
+    }
+
+    Toast.showWithGravity("Cart created!", Toast.SHORT, Toast.CENTER)
     navigation?.push('CartView', {restaurant, meal})
   }
 
@@ -72,12 +87,12 @@ export const MealOrderView = (props: MealViewProps) => {
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <Box width= {wp('99%')} height={hp('26%')} mb={hp("3%")}>
         <Box width= {wp('99%')} height={hp('26%')} borderRadius={'5px'}>
-          <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
+          <Image style={{flex: 1, height: undefined, width: undefined}} source={{uri: meal.image}} />
         </Box>
         <Box bottom={hp('26%')} right={wp('43%')} pt={hp("2.3%")}>
-          <Button onPress={onBackPressed} icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
+          <IconButton onPress={onBackPressed} icon={<Ionicon name="chevron-back-circle-sharp" size={33} color={defaultTheme.colors.greyTwo} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </Box>
-        <FlexBox top={-hp('12.9%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+        <FlexBox top={-hp('15.3%')} pl={"20px"} pb={"10px"} bg={'#000000'} height={wp('15%')} padding={1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
           <Box mt={hp('1.1%')}>
             <Text fontWeight={'500'} fontSize={'28px'} color={'#FFFFFF'} >
             {meal.name}
@@ -112,6 +127,10 @@ export const MealOrderView = (props: MealViewProps) => {
           iconRight={true}
           icon={<Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'}>{`$${meal.price}`}</Text>}
           onPress={onOrderButtonPressed}
+          disabled={isCreatingCart.get()}
+          disabledStyle={{backgroundColor: defaultTheme.colors.blue}}
+          loading={isCreatingCart.get()}
+          loadingStyle={{marginLeft: wp('42%')}}
         />
       </FlexBox>
       {isModalOpen ? <RestaurantInfoModal restaurant={restaurant} isVisible={isModalOpen} onClose={toggleModal}/> : <Box></Box>}
@@ -142,7 +161,7 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
             <Text  mt={'1px'} ml={wp('2%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${MOCK_DISTANCE} mi`}</Text>
           </FlexBox>
         </FlexBox>
-        <Button onPress={toggleModal} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
+        <IconButton onPress={toggleModal} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
       </FlexBox>
     </TouchableOpacity>
   )
@@ -162,7 +181,7 @@ const NutritionDropDown = (props: NutritionDropdownProps) => {
         <Box mt={hp("2%")}>
           <Text fontWeight={'700'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>Nutritional Breakdown</Text>
         </Box>
-        <Button onPress={onPress} icon={<MaterialCommunityIcon name={collapseState === 'collapsed' ? "chevron-down-box" : "chevron-up-box"} size={35} color={"#1D2941"} />}/>
+        <IconButton onPress={onPress} icon={<MaterialCommunityIcon name={collapseState === 'collapsed' ? "chevron-down-box" : "chevron-up-box"} size={35} color={"#1D2941"} />}/>
       </FlexBox>
       <AnimatedSection
       animatedHeight={animatedHeight}

@@ -45,7 +45,7 @@ export const RestaurantInfoModal = (props: RestaurantInfoProps) => {
               <MaterialCommunityIcon name={'clock-time-three-outline'} size={23} color={defaultTheme.colors.greyTwo}/>
               <Box ml={wp('2%')} pt={'2px'} fontSize={defaultTheme.fontSize.m}>
                 <Text color={defaultTheme.colors.white}>
-                  {`${businessHours.openingTime} - ${businessHours.closingHourTime}`}
+                  {`${businessHours.openingTime} - ${businessHours.closingTime}`}
                 </Text>
               </Box>
             </FlexBox>
@@ -58,7 +58,7 @@ export const RestaurantInfoModal = (props: RestaurantInfoProps) => {
                   {`${restaurant.location.street}`}
                 </Text>
                 <Text color={defaultTheme.colors.blue} style={{textDecorationLine: 'underline'}}>
-                  {`${restaurant.location.city}, ${restaurant.location.state} ${restaurant.location.zip}`}
+                  {`${restaurant.location.city}, ${restaurant.location.state} ${restaurant.location.zipCode}`}
                 </Text>
               </FlexBox>
             </FlexBox>

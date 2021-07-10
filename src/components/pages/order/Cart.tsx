@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Image } from "react-native";
+import { Image, LogBox } from "react-native";
 import { Divider, Input } from 'react-native-elements';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as getHeightInPixels,
 } from 'react-native-responsive-screen';
-import { Button } from "react-native-elements/dist/buttons/Button";
+import { Button as IconButton} from "react-native-elements/dist/buttons/Button";
+import { Button } from "react-native-elements";
 import { defaultTheme } from "../../../defaultTheme";
 import { Box, FlexBox, FlexItem } from "../../atoms/layout/Box";
 import { Text } from "../../atoms/typography/Text";
@@ -19,8 +20,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { OrderConfirmationHeader } from "./common/OrderConfirmationHeader";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { RestaurantParamList } from "../../../../App";
-import { createMockOrderWithItems } from "../../../models/order/util";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import OrderStore from "../../../store/orderStore";
+import { useState } from "@hookstate/core";
+
+LogBox.ignoreLogs(['margin', 'width']);
 
 const FulfillmentDivider = styled(Divider)<{isSelected: boolean}>`
   backgroundColor: ${({isSelected}) => (isSelected ? defaultTheme.colors.blueOne : defaultTheme.colors.greySix)};
@@ -51,13 +55,16 @@ type Fulfillment = typeof fulfillment[number]
 export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
 
   const insets = useSafeAreaInsets();
+
+  const orderStore = OrderStore.getInstance();
+  const isCheckingOut = useState(orderStore.isCheckingOut)
   
   const { restaurant, meal, navigation } = props;
   const fees = (Number.parseFloat(meal.price) * .07);
   const total = fees + Number.parseFloat(meal.price)
 
-  const [fulfillmentType, setFulfillmentType] = useState<Fulfillment>("Pickup");
-  const [additionalNotes, setAdditionalNotes] = useState("");
+  const [fulfillmentType, setFulfillmentType] = React.useState<Fulfillment>("Pickup");
+  const [additionalNotes, setAdditionalNotes] = React.useState("");
 
   const onPressFulfillment = (selection: Fulfillment) => {
     if(selection !== "Delivery") {
@@ -69,10 +76,14 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
     navigation?.pop();
   }
 
-  const onConfirmOrder = () => {
-    const mockOrder = createMockOrderWithItems([meal]);
-    console.log(mockOrder)
-    navigation?.push('ConfirmationView', {restaurant, order: mockOrder})
+  const onConfirmOrder = async () => {
+
+    const callback = () => {
+      const order = orderStore.order.get()
+      navigation?.push('ConfirmationView', {restaurant, order})
+    }
+    
+    await orderStore.checkout(callback)
   }
 
   return(
@@ -81,7 +92,7 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
         <OrderConfirmationHeader label={"Your Cart"} icon={"chevron-left"} onPress={onBackPressed} iconPosition={'left'}/>
       </Box>
       <Box width= {wp('100%')} height={getHeightInPixels('17%')} borderRadius={'5px'} mb={getHeightInPixels("3.2%")}>
-          <Image style={{flex: 1, height: undefined, width: undefined}} source={meal.image} />
+          <Image style={{flex: 1, height: undefined, width: undefined}} source={{ uri: meal.image}} />
       </Box>
       <FlexBox pl={'16px'} pr={'16px'} flexDirection={'column'} mb={getHeightInPixels("3%")}>
         <Text fontWeight={'700'} fontSize={'18px'} color={defaultTheme.colors.white} mb={getHeightInPixels('1.3%')}>
@@ -136,6 +147,10 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
           iconRight={true}
           icon={<Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'}>{`$${meal.price}`}</Text>}
           onPress={onConfirmOrder}
+          disabled={isCheckingOut.get()}
+          disabledStyle={{backgroundColor: defaultTheme.colors.blue}}
+          loading={isCheckingOut.get()}
+          loadingStyle={{marginLeft: wp('42%')}}
         />
       </FlexBox>
     </FlexBox>
@@ -195,7 +210,7 @@ const PaymentMethod = () => {
             </FlexBox>
           </FlexItem>
         </FlexBox>
-        <Button onPress={() => {}} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
+        <IconButton onPress={() => {}} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
       </FlexBox>
     </FlexBox>
   )
