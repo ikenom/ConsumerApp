@@ -127,9 +127,9 @@ export const MealOrderView = (props: MealViewProps) => {
           iconRight={true}
           icon={<Text fontWeight={'700'} fontSize={'18px'} color={'#FFFFFF'}>{`$${meal.price}`}</Text>}
           onPress={onOrderButtonPressed}
-          disabled={isCreatingCart.get().valueOf()}
+          disabled={isCreatingCart.get()}
           disabledStyle={{backgroundColor: defaultTheme.colors.blue}}
-          loading={isCreatingCart.get().valueOf()}
+          loading={isCreatingCart.get()}
           loadingStyle={{marginLeft: wp('42%')}}
         />
       </FlexBox>

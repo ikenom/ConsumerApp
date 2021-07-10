@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { Meal } from "../meal/meal";
 
-type OrderType = 'Pickup' | 'Delivery';
+export type OrderType = 'Pickup' | 'Delivery';
 
 interface FulfillmentDetails {
   fulfillmentTime: DateTime;

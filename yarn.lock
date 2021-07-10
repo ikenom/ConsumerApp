@@ -1595,6 +1595,13 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@kesha-antonov/react-native-action-cable@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@kesha-antonov/react-native-action-cable/-/react-native-action-cable-1.1.0.tgz#12abe6d2ee66f90a7f869dc1ac05d3ddbf7c71d4"
+  integrity sha512-k+l53sXy06vFTeg9pHmX1SXlv6O+HT+Kv9sM8TZr3Wojx5IXRGtc4jOFCKWnq2dZCNszCQgLEIWwyxOk/Z9pxA==
+  dependencies:
+    eventemitter3 "4.0.4"
+
 "@mdx-js/mdx@^1.6.22":
   version "1.6.22"
   resolved "https://registry.npmjs.org/@mdx-js/mdx/-/mdx-1.6.22.tgz#8a723157bf90e78f17dc0f27995398e6c731f1ba"
@@ -3894,6 +3901,11 @@ acorn@^8.2.4:
   version "8.4.1"
   resolved "https://registry.npmjs.org/acorn/-/acorn-8.4.1.tgz#56c36251fc7cabc7096adc18f05afe814321a28c"
   integrity sha512-asabaBSkEKosYKMITunzX177CXxQ4Q8BSSzMTKD+FefUhipQC70gfW5SiUDhYQ3vk8G+81HqQk7Fv9OXwwn9KA==
+
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.npmjs.org/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
 
 address@1.1.2, address@^1.0.1:
   version "1.1.2"
@@ -7269,6 +7281,11 @@ event-target-shim@^5.0.0, event-target-shim@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
+
+eventemitter3@4.0.4:
+  version "4.0.4"
+  resolved "https://registry.npmjs.org/eventemitter3/-/eventemitter3-4.0.4.tgz#b5463ace635a083d018bdc7c917b4c5f10a85384"
+  integrity sha512-rlaVLnVxtxvoyLsQQFBx53YmXHDxRIzzTLbdfxqi4yocpSjAxXwkU0cScM5JgSKMqEhrZpnvQ2D9gjylR0AimQ==
 
 eventemitter3@^4.0.0:
   version "4.0.7"
@@ -16588,6 +16605,11 @@ yargs@^16.1.1, yargs@^16.2.0:
     string-width "^4.2.0"
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
+
+yarn@^1.22.10:
+  version "1.22.10"
+  resolved "https://registry.npmjs.org/yarn/-/yarn-1.22.10.tgz#c99daa06257c80f8fa2c3f1490724e394c26b18c"
+  integrity sha512-IanQGI9RRPAN87VGTF7zs2uxkSyQSrSPsju0COgbsKQOOXr5LtcVPeyXWgwVa0ywG3d8dg6kSYKGBuYK021qeA==
 
 yauzl@^2.10.0:
   version "2.10.0"
