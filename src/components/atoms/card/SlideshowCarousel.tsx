@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ImageBackground } from 'react-native';
-import { Box, FlexBox } from '../../atoms/layout/Box';
+import { Box } from '../../atoms/layout/Box';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
@@ -9,7 +9,7 @@ import { Text } from "../../atoms/typography/Text";
 import LinearGradient from 'react-native-linear-gradient';
 
 export interface SlideProps {
-    slideImage: any; // TODO Make more specific to image
+    slideImage: any;
 }
 
 const Slide = (props: SlideProps) => {
@@ -54,7 +54,7 @@ const Slide = (props: SlideProps) => {
 }
 
 interface SlideshowCarouselProps {
-    slides: Array<any>; // TODO Should be array of Slide
+    slides: Array<any>;
 }
 
 export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
@@ -105,5 +105,3 @@ export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
         </Box>
     );
 }
-
-// https://github.com/meliorence/react-native-snap-carousel/blob/master/doc/PAGINATION.md
