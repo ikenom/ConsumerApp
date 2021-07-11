@@ -59,14 +59,9 @@ export const MealCard = (props: MealCardProps) => {
 
   return (
     <Box
-      position={'absolute'}
       height={dimensions.height}
       width={dimensions.width}
       overflow={'hidden'}
-      right={0}
-      left={0}
-      bottom={0}
-      top={0}
       borderRadius={'10px'}>
       <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
         <Box
