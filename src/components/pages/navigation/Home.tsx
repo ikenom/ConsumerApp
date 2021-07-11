@@ -9,8 +9,6 @@ import { Meal } from "../../../models/meal/meal";
 import { Text } from "../../atoms/typography/Text";
 import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
 import { CardCarousel } from "../../atoms/card/CardCarousel";
-import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
-import { RestaurantParamList } from "../../../../App";
 import { ScrollView } from "react-native-gesture-handler";
 import { CarouselHeader } from "../../atoms/card/CarouselHeader";
 import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
@@ -20,20 +18,13 @@ export interface HomeViewProps {
   locationName: string;
   newsTiles: Array<any>;
   meals: HomeViewMeals;
-  navigation?: StackNavigationProp<RestaurantParamList, 'HomeView'>
+  navigation?: any; // TODO hook this boi up
 }
 
 export interface HomeViewMeals {
   new: Meal[];
   popular: Meal[];
   orderAgain: Meal[];
-}
-
-export const HomeNavigatorContainer = (props: StackScreenProps<RestaurantParamList, 'HomeView'>) => {
-const { navigation, route } = props;
-  return (
-    <HomeView {...route.params} navigation={navigation} />
-  )
 }
 
 export const HomeView = (props: HomeViewProps) => {
