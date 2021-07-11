@@ -1,6 +1,7 @@
 import {storiesOf} from '@storybook/react-native';
 import React from "react";
 import { HomeView } from '../../src/components/pages/navigation/Home';
+import { SeeAsTilesView } from '../../src/components/pages/navigation/SeeAsTiles';
 import { MOCK_MEALS_ALL_INFO } from '../../src/models/meal/util';
 
 
@@ -21,5 +22,12 @@ export const NavigationHomeStory = () => {
     )
 }
 
+export const NavigationTilesStory = () => {
+    return(
+        <SeeAsTilesView />
+    )
+}
+
 storiesOf('Pages', module)
-    .add('Navigation - Home', () => NavigationHomeStory());
+    .add('Navigation - Home', () => NavigationHomeStory())
+    .add('Navigation - Tiles', () => NavigationTilesStory());

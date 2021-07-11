@@ -9,39 +9,40 @@ import { Meal } from '../../../models/meal/meal';
 
 export interface TileDisplayProps {
     meals: Array<Meal>
-    columns: number;
-    columnWidthPercent: number;
+}
+
+export type Parity = 'even' | 'odd';
+
+export const getItemsByParity = (array: Array<any>, parity: Parity) => {
+    const remainder = (parity === 'even' ? 0 : 1)
+    return array.filter(
+        (element, idx) => ((idx % 2) == remainder)
+    )
 }
 
 export const TileDisplay = (props: TileDisplayProps) => {
     const { meals } = props
+    const mealTiles = meals.map(
+        (meal, idx) => ( // TODO Use meal.id once it is working
+            <Box width={wp('50%')} mb={hp('0.8%')} alignItems='center'>
+                <MealCard
+                    key={idx}
+                    meal={meal}
+                    layoutType='vertical'
+                    onPress={() => { }} />
+            </Box>))
+
     return (
         <FlexBox flexDirection='row'>
-            <FlexBox backgroundColor='turquoise' width={wp('50%')} height={hp('100%')} flexDirection='column'>
-                {meals.map(
-                    (meal, idx) => (
-                        <Box backgroundColor='pink' width={wp('50%')} mb={hp('0.8%')}>
-                            <MealCard
-                                key={idx}
-                                meal={meal}
-                                layoutType='vertical'
-                                onPress={() => { }} />
-                        </Box>))
-                }
+            <FlexBox
+                width={wp('50%')}
+                flexDirection='column'>
+                {getItemsByParity(mealTiles, 'even')}
             </FlexBox>
-            <FlexBox backgroundColor='yellow'
+            <FlexBox 
                 width={hp('50%')}
                 flexDirection='column'>
-                {meals.map(
-                    (meal, idx) => (
-                        <Box mb={hp('0.8%')} width={wp('50%')}>
-                            <MealCard
-                                key={idx}
-                                meal={meal}
-                                layoutType='vertical'
-                                onPress={() => { }} />
-                        </Box>))
-                }
+                {getItemsByParity(mealTiles, 'odd')}
             </FlexBox>
         </FlexBox>
     );
