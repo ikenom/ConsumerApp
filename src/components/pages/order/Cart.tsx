@@ -83,7 +83,7 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
       navigation?.push('ConfirmationView', {restaurant, order})
     }
     
-    await orderStore.checkout(callback)
+    await orderStore.checkout(additionalNotes,callback)
   }
 
   return(

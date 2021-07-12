@@ -35,8 +35,8 @@ query ($draftOrderId: ID!) {
 `
 
 const COMPLETE_DRAFT_ORDER_MUTATION = gql`
-mutation completeDraftOrder($draftOrderId: ID!) {
-  completeDraftOrder(input: {draftOrderId: $draftOrderId}) {
+mutation completeDraftOrder($draftOrderId: ID!, $additionalComments: String!) {
+  completeDraftOrder(input: {draftOrderId: $draftOrderId, additionalComments: $additionalComments}) {
     succeeded
   }
 }
@@ -102,12 +102,13 @@ export const getDraftOrder = async (draftOrderId: string): Promise<any | null> =
   }
 }
 
-export const completeDraftOrder = async (draftOrderId: string): Promise<any |null> => {
+export const completeDraftOrder = async (draftOrderId: string, additionalComments: string): Promise<any |null> => {
   try{
     const result = await client.mutate({
         mutation: COMPLETE_DRAFT_ORDER_MUTATION,
         variables: {
-          draftOrderId
+          draftOrderId,
+          additionalComments
         }, 
       })
 

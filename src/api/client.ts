@@ -13,7 +13,7 @@ import ActionCableLink from 'graphql-ruby-client/subscriptions/ActionCableLink';
 import AuthStore from '../store/authStore';
 
 
-const url = "http://127.0.0.1:53709"
+const url = "http://127.0.0.1:60214"
 
 
 let cable;
