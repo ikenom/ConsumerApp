@@ -3,6 +3,7 @@ import { CardCarousel } from '../../../src/components/atoms/card/CardCarousel';
 import {storiesOf} from '@storybook/react-native';
 import React from "react";
 import { MOCK_MEALS_ALL_INFO } from '../../../src/models/meal/util';
+import { FlexBox } from '../../../src/components/atoms/layout/Box';
 
 const image = require('../../../assets/testImages/waffles.jpeg');
 // Todo: Import images like here https://www.codegrepper.com/code-examples/javascript/react+native+image+file+path+variable
@@ -89,29 +90,39 @@ const VerticalMealCardStory = () => {
   )
 }
 
-const BasicHorizCardCarousel = () => {
-  return(
-    <CardCarousel layoutType='horizontal' meals={BASIC_MEALS} />
+const RandomHeightCardStory = () => {
+  return (
+    <FlexBox flexDimension='row'>
+      <MealCard meal={BASIC_MEALS[2]} type='random-height' image={image} />
+      <MealCard meal={BASIC_MEALS[3]} type='random-height' image={image} />
+    </FlexBox>
   )
 }
 
-const BasicVertCardCarouselPriceOnly = () => {
+const ShortCardCarousel = () => {
   return(
-    <CardCarousel layoutType='vertical' meals={BASIC_MEALS} />
+    <CardCarousel layoutType='short' meals={BASIC_MEALS} />
   )
 }
 
-const BasicVertCardCarouselAllData = () => {
+const TallCardCarouselPriceOnly = () => {
   return(
-    <CardCarousel layoutType='vertical' meals={MORE_DATA_MEALS} />
+    <CardCarousel layoutType='tall' meals={BASIC_MEALS} />
+  )
+}
+
+const TallCardCarouselAllData = () => {
+  return(
+    <CardCarousel layoutType='tall' meals={MORE_DATA_MEALS} />
   )
 }
 
 storiesOf('Card', module)
   .add('HorizontalMealCard', () => HorizontalMealCardStory())
-  .add('VerticalMealCard', () => VerticalMealCardStory());
+  .add('VerticalMealCard', () => VerticalMealCardStory())
+  .add('RandomHeightCard', () => RandomHeightCardStory());
 
 storiesOf('Carousel', module)
-  .add('BasicHorizCardCarousel', () => BasicHorizCardCarousel())
-  .add('BasicVertCardCarouselPriceOnly', () => BasicVertCardCarouselPriceOnly())
-  .add('BasicVertCardCarouselAllData', () => BasicVertCardCarouselAllData());
+  .add('BasicShortCardCarousel', () => ShortCardCarousel())
+  .add('BasicTallCardCarouselPriceOnly', () => TallCardCarouselPriceOnly())
+  .add('BasicTallCardCarouselAllData', () => TallCardCarouselAllData());

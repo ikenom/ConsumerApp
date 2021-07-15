@@ -7,15 +7,18 @@ import React from 'react';
 import { Meal } from "../../../models/meal/meal";
 
 interface CardCarouselProps {
-  layoutType: MealCardType;
+  layoutType: CardCarouselLayout;
   meals: Meal[];
   onPress: (mealViewProps: Meal) => void;
 }
 
+export type CardCarouselLayout = 'short' | 'tall'
+
 export const CardCarousel = (props: CardCarouselProps) => {
 
   const { layoutType, meals, onPress } = props;
-  const dimensions: Dimension = getMealCardLayoutDimensions(layoutType);
+  const mealCardLayout = ((layoutType === 'short') ? 'horizontal' : 'vertical')
+  const dimensions = getMealCardLayoutDimensions(mealCardLayout)
 
   //@ts-ignore
   const CardWrapper = ({item, index}) => {
@@ -23,7 +26,7 @@ export const CardCarousel = (props: CardCarouselProps) => {
     return(
       <MealCard 
         meal={meal}
-        layoutType={layoutType}
+        layoutType={mealCardLayout}
         onPress={onPress}
       />
     )

@@ -28,7 +28,7 @@ export const TileDisplay = (props: TileDisplayProps) => {
                 <MealCard
                     key={idx}
                     meal={meal}
-                    layoutType='vertical'
+                    layoutType='random-height'
                     onPress={() => { }} />
             </Box>))
 
@@ -40,7 +40,7 @@ export const TileDisplay = (props: TileDisplayProps) => {
                 {getItemsByParity(mealTiles, 'even')}
             </FlexBox>
             <FlexBox 
-                width={hp('50%')}
+                width={wp('50%')}
                 flexDirection='column'>
                 {getItemsByParity(mealTiles, 'odd')}
             </FlexBox>

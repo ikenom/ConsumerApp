@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 export const TileDisplayStory = () => {
     return (
         <ScrollView>
-            <TileDisplay meals={MOCK_MEALS_ALL_INFO} />
+            <TileDisplay meals={MOCK_MEALS_ALL_INFO.concat(MOCK_MEALS_ALL_INFO)} />
         </ScrollView>
     )
 }

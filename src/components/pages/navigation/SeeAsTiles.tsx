@@ -16,12 +16,13 @@ import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 export const SeeAsTilesView = () => {
   return (
     <FlexBox flexDirection='column' bg={defaultTheme.colors.black}>
-      <Box mt={hp('6.5%')} mb={hp('3%')}>
+      <Box mt={hp('6.5%')} mb={hp('3%')} pl={'14px'} pr={'14px'}>
         <OrderConfirmationHeader
           label="Popular"
           icon="chevron-left"
           iconPosition="left"
-          onPress={() => { }} /></Box>
+          onPress={() => { }} />
+      </Box>
       <ScrollView>
         <Box>
           <TileDisplay meals={MOCK_MEALS_ALL_INFO} />
