@@ -73,7 +73,7 @@ export const MealCard = (props: MealCardProps) => {
           <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
             {truncateString(name, dimensions.truncateMealTo)}
           </Text>
-          {(restaurant !== undefined) &&
+          {restaurant  &&
             (<Text
               height={hp('2%')}
               fontWeight={'500'}
@@ -83,7 +83,7 @@ export const MealCard = (props: MealCardProps) => {
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {(price !== undefined) && StatBox(`$${price}`)}
-            {(distance !== undefined) && StatBox(`${distance} mi`)}
+            {distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
         {(flagged !== undefined) && (flagged) &&
