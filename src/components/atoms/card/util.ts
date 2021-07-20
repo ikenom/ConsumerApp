@@ -21,6 +21,16 @@ const HORIZONTAL_DIM: Dimension = {
   truncateRestaurantTo: 25,
 }
 
+export const truncateString = (str: string, limit: number): string => {
+  // Shorten string with "..." so that it is under the specified length
+  if (str.length > limit) {
+    return str.substring(0, (limit-3)) + "..."
+  }
+  else {
+    return str
+  }
+}
+
 const generateRandomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) + min);
 }

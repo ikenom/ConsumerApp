@@ -6,7 +6,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {Image, TouchableOpacity} from 'react-native';
-import { MealCardType, Dimension, getMealCardLayoutDimensions } from './util';
+import { MealCardType, Dimension, getMealCardLayoutDimensions, truncateString } from './util';
 import { Meal } from '../../../models/meal/meal';
 import { defaultTheme } from '../../../defaultTheme';
 import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
@@ -29,16 +29,6 @@ export const MealCard = (props: MealCardProps) => {
   const onNavigate = () => {
     onPress(meal)
   };
-
-  const truncateString = (str: string, limit: number): string => {
-    // Shorten string with "..." so that it is under the specified length
-    if (str.length > limit) {
-      return str.substring(0, (limit-3)) + "..."
-    }
-    else {
-      return str
-    }
-  }
 
   const StatBox = (str: string) => {
     // Small gray box that contains price or distance

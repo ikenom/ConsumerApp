@@ -12,6 +12,7 @@ import { TileDisplay } from "../../molecules/common/TileDisplay";
 import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader";
 import { MOCK_MEALS_ALL_INFO } from '../../../models/meal/util';
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
+import { HttpLink } from "@apollo/client";
 
 export const SeeAsTilesView = () => {
   return (
@@ -24,7 +25,7 @@ export const SeeAsTilesView = () => {
           onPress={() => { }} />
       </Box>
       <ScrollView>
-        <Box>
+        <Box height={hp('78%')}>
           <TileDisplay meals={MOCK_MEALS_ALL_INFO} />
         </Box>
       </ScrollView>
