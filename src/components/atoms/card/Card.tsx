@@ -93,7 +93,7 @@ export const MealCard = (props: MealCardProps) => {
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {(price !== undefined) && StatBox(`$${price}`)}
-            {(distance !== undefined) && StatBox(`${distance} mi`)}
+            {distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
         {(flagged !== undefined) && (flagged) &&
