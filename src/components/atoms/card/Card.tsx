@@ -83,7 +83,7 @@ export const MealCard = (props: MealCardProps) => {
           <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
             {truncateString(name, dimensions.truncateMealTo)}
           </Text>
-          {(restaurant !== undefined) &&
+          {restaurant  &&
             (<Text
               height={hp('2%')}
               fontWeight={'500'}
