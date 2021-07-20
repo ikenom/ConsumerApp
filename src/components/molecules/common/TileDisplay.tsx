@@ -23,10 +23,10 @@ export const getItemsByParity = (array: Array<any>, parity: Parity) => {
 export const TileDisplay = (props: TileDisplayProps) => {
     const { meals } = props
     const mealTiles = meals.map(
-        (meal, idx) => ( // TODO Use meal.id once it is working
+        (meal) => (
             <Box width={wp('50%')} mb={hp('0.8%')} alignItems='center'>
                 <MealCard
-                    key={idx}
+                    key={meal.id}
                     meal={meal}
                     layoutType='random-height'
                     onPress={() => { }} />
