@@ -82,11 +82,11 @@ export const MealCard = (props: MealCardProps) => {
               {truncateString(restaurant, dimensions.truncateRestaurantTo)}
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
-            {(price !== undefined) && StatBox(`$${price}`)}
+            {StatBox(`$${price}`)}
             {distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
-        {(flagged !== undefined) && (flagged) &&
+        {flagged &&
           (<Box position={'absolute'} right={10} top={145}>
             <MaterialCommunityIcon name={'flag-variant'} color={'#EDCD27'} size={28} />
           </Box>)}
