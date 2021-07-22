@@ -55,7 +55,7 @@ export default class OrderStore {
     this._isCreatingCart.set(false)
   }
 
-  checkout = async (callback: () => any) => {
+  checkout = async (additionalComments:string, callback: () => any) => {
     const draftOrder = this._cart.get()
 
     if(draftOrder === undefined) {
@@ -69,7 +69,7 @@ export default class OrderStore {
     // that should take a couple of hours to figure out: https://github.com/kesha-antonov/react-native-action-cable/issues/5
     // await this.subscribeToDraftOrderCompletion(onComplete) 
 
-    await completeDraftOrder(draftOrder.id)
+    await completeDraftOrder(draftOrder.id, additionalComments)
 
 
     const pollForOrder = async (attempts: number, maxAttempts: number, intervalInMs: number): Promise<Order | null> => {

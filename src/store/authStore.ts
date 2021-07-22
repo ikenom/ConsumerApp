@@ -10,7 +10,7 @@ export default class AuthStore {
 
   static init = async () => {
     const authStore = AuthStore.getInstance();
-    await authStore.loginAsync("davis_medhurst@tromp.co", "password")
+    await authStore.loginAsync("domingo@wolf.name", "password")
   }
 
   static getInstance(): AuthStore {
