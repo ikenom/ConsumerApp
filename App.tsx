@@ -4,6 +4,7 @@ import { MealNavigatorContainer, MealOrderView, MealViewProps } from './src/comp
 import { defaultTheme } from './src/defaultTheme';
 import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
 import { DefaultTheme } from '@react-navigation/native';
@@ -13,15 +14,24 @@ import { ConfirmationNavigatorContainer, OrderConfirmationProps } from './src/co
 import AuthStore from './src/store/authStore';
 import RestaurantStore from './src/store/restaurantStore';
 import { Restaurant } from './src/models/restaurant/restaurant';
-import { FlexBox } from './src/components/atoms/layout/Box';
 import { LoadingView } from './src/components/pages/Loading';
-import { Spinner } from 'native-base'
 import OrderStore from './src/store/orderStore';
+import { HomeNavigatorContainer, HomeViewProps } from './src/components/pages/navigation/Home';
+import { MOCK_MEALS_ALL_INFO } from './src/models/meal/util'; // TEMP To test HomeStack only
 
 type RootStackParamList = {
   Loading: undefined;
+  RootTab: undefined;
+}
+
+type RootTabParamList = {
   HomeStack: undefined;
   RestaurantStack: NavigatorScreenParams<RestaurantParamList>;
+}
+
+export type HomeStackParamList = {
+  HomeView: HomeViewProps;
+  TilesView: undefined;
 }
 
 export type RestaurantParamList = {
@@ -47,6 +57,8 @@ const App = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>();
 
   const RootStack = createStackNavigator<RootStackParamList>();
+  const RootTab = createBottomTabNavigator<RootTabParamList>();
+  const HomeStack = createStackNavigator<HomeStackParamList>();
   const RestaurantStack = createStackNavigator<RestaurantParamList>();
 
   const startup = async () => {
@@ -63,6 +75,35 @@ const App = () => {
   useEffect(() => {
     startup()
   },[])
+
+  const RootTabScreens = () => (
+    <RootTab.Navigator>
+      <RootTab.Screen name="RestaurantStack" component={RestaurantStackScreens} />
+      <RootTab.Screen name="HomeStack" component={HomeStackScreens} />
+    </RootTab.Navigator>
+  );
+
+  const slideshowImages = MOCK_MEALS_ALL_INFO.map(
+    (meal) => meal.image
+  );
+
+  const HomeStackScreens = () => (
+    <HomeStack.Navigator screenOptions= {{ headerShown: false }}>
+      <HomeStack.Screen
+        name="HomeView"
+        component={HomeNavigatorContainer}
+        initialParams={{
+          locationName: "Harlem",
+          newsTiles: slideshowImages,
+          meals: {
+            new: MOCK_MEALS_ALL_INFO,
+            popular: MOCK_MEALS_ALL_INFO,
+            orderAgain: MOCK_MEALS_ALL_INFO
+          }
+        }}
+      />
+    </HomeStack.Navigator>
+  )
 
   const RestaurantStackScreens = () => (
     <RestaurantStack.Navigator initialRouteName={'RestaurantView'} screenOptions={{ headerShown: false }}>
@@ -88,9 +129,8 @@ const App = () => {
             <RootStack.Screen name="Loading" component={LoadingView} />
           ) : (
             <RootStack.Screen
-              name="RestaurantStack"
-              component={RestaurantStackScreens}
-              options={{ headerShown: false }}
+              name="RootTab"
+              component={RootTabScreens}
             />
           )}
         </RootStack.Navigator>
