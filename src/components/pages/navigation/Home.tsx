@@ -20,7 +20,7 @@ export interface HomeViewProps {
   locationName: string;
   newsTiles: Array<any>;
   meals: HomeViewMeals;
-  navigation?: any; // TODO hook this boi up
+  navigation?: StackNavigationProp<HomeStackParamList>;
 }
 
 export interface HomeViewMeals {
@@ -41,8 +41,11 @@ export const HomeView = (props: HomeViewProps) => {
   const { locationName, newsTiles, meals, navigation } = props;
 
   const onPressMeal = (meal: Meal) => {
-    // TODO Figure out where to get restaurant for this to work
-    // navigation?.push('MealView', {meal: meal, restaurant: restaurant});
+    //navigation?.push('MealView', { meal: meal, restaurant: restaurant })
+  }
+
+  const onPressSeeMore = () => {
+    navigation?.push('TilesView')
   }
 
   return (
@@ -64,21 +67,21 @@ export const HomeView = (props: HomeViewProps) => {
           <Box>
             <SlideshowCarousel slides={newsTiles} />
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"New on FYTR"} />
+              <CarouselHeader title={"New on FYTR"} onPressSeeMore={onPressSeeMore} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.new} />
+                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.new} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Popular"} />
+              <CarouselHeader title={"Popular"} onPressSeeMore={onPressSeeMore} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.popular} />
+                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.popular} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Order Again"} />
+              <CarouselHeader title={"Order Again"} onPressSeeMore={onPressSeeMore} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.orderAgain} />
+                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.orderAgain} />
               </Box>
             </FlexBox>
           </Box>

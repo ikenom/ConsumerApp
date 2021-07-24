@@ -5,14 +5,11 @@ import {
 } from 'react-native-responsive-screen';
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
-import { Meal } from "../../../models/meal/meal";
-import { Text } from "../../atoms/typography/Text";
 import { ScrollView } from "react-native-gesture-handler";
 import { TileDisplay } from "../../molecules/common/TileDisplay";
 import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader";
 import { MOCK_MEALS_ALL_INFO } from '../../../models/meal/util';
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
-import { HttpLink } from "@apollo/client";
 
 export const SeeAsTilesView = () => {
   return (

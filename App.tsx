@@ -18,6 +18,7 @@ import { LoadingView } from './src/components/pages/Loading';
 import OrderStore from './src/store/orderStore';
 import { HomeNavigatorContainer, HomeViewProps } from './src/components/pages/navigation/Home';
 import { MOCK_MEALS_ALL_INFO } from './src/models/meal/util'; // TEMP To test HomeStack only
+import { SeeAsTilesView } from './src/components/pages/navigation/SeeAsTiles';
 
 type RootStackParamList = {
   Loading: undefined;
@@ -28,6 +29,11 @@ type RootTabParamList = {
   HomeStack: undefined;
   RestaurantStack: NavigatorScreenParams<RestaurantParamList>;
 }
+
+// TEMP Dummy images for Home slideshow carousel
+const slideshowImages = MOCK_MEALS_ALL_INFO.map(
+  (meal) => meal.image
+);
 
 export type HomeStackParamList = {
   HomeView: HomeViewProps;
@@ -83,12 +89,8 @@ const App = () => {
     </RootTab.Navigator>
   );
 
-  const slideshowImages = MOCK_MEALS_ALL_INFO.map(
-    (meal) => meal.image
-  );
-
   const HomeStackScreens = () => (
-    <HomeStack.Navigator screenOptions= {{ headerShown: false }}>
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen
         name="HomeView"
         component={HomeNavigatorContainer}
@@ -102,12 +104,21 @@ const App = () => {
           }
         }}
       />
+      <HomeStack.Screen name="TilesView" component={SeeAsTilesView} />
     </HomeStack.Navigator>
   )
 
   const RestaurantStackScreens = () => (
     <RestaurantStack.Navigator initialRouteName={'RestaurantView'} screenOptions={{ headerShown: false }}>
-      <RestaurantStack.Screen name="RestaurantView" component={RestaurantNavigatorContainer} initialParams={{ restaurant, meals: { all: restaurant?.meals!!, recommendations: restaurant?.meals!! } }} />
+      <RestaurantStack.Screen name="RestaurantView"
+        component={RestaurantNavigatorContainer}
+        initialParams={{
+          restaurant,
+          meals: {
+            all: restaurant?.meals!!,
+            recommendations: restaurant?.meals!!
+          }
+        }} />
       <RestaurantStack.Screen name="MealView" component={MealNavigatorContainer} />
       <RestaurantStack.Screen name="CartView" component={OrderConfirmationCartContainer} />
       <RestaurantStack.Screen name='ConfirmationView' component={ConfirmationNavigatorContainer} />
