@@ -24,7 +24,7 @@ export const NavigationHomeStory = () => {
 
 export const NavigationTilesStory = () => {
     return(
-        <SeeAsTilesView />
+        <SeeAsTilesView title="Order Again" />
     )
 }
 

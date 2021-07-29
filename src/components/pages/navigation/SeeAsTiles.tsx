@@ -14,12 +14,17 @@ import { MOCK_MEALS_ALL_INFO } from '../../../models/meal/util';
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { HttpLink } from "@apollo/client";
 
-export const SeeAsTilesView = () => {
+export interface SeeAsTilesProps{
+  title: string;
+}
+
+export const SeeAsTilesView = (props: SeeAsTilesProps) => {
+  const { title } = props;
   return (
     <FlexBox flexDirection='column' bg={defaultTheme.colors.black}>
       <Box mt={hp('6.5%')} mb={hp('3%')} pl={'14px'} pr={'14px'}>
         <OrderConfirmationHeader
-          label="Popular"
+          label={title}
           icon="chevron-left"
           iconPosition="left"
           onPress={() => { }} />
