@@ -100,6 +100,7 @@ const App = () => {
     (meal) => meal.image
   );
 
+  // TEMP Initial params for HomeNavigatorContainer are temp
   const HomeStackScreens = () => (
     <HomeStack.Navigator screenOptions= {{ headerShown: false }}>
       <HomeStack.Screen
@@ -117,6 +118,23 @@ const App = () => {
       <HomeStack.Screen name="SeeAsTiles" component={SeeAsTilesView} />
     </HomeStack.Navigator>
   )
+
+  const RestaurantStackScreens = () => (
+    <RestaurantStack.Navigator initialRouteName={'RestaurantView'} screenOptions={{ headerShown: false }}>
+      <RestaurantStack.Screen name="RestaurantView"
+        component={RestaurantNavigatorContainer}
+        initialParams={{
+          restaurant,
+          meals: {
+            all: restaurant?.meals!!,
+            recommendations: restaurant?.meals!!
+          }
+        }} />
+      <RestaurantStack.Screen name="MealView" component={MealNavigatorContainer} />
+      <RestaurantStack.Screen name="CartView" component={OrderConfirmationCartContainer} />
+      <RestaurantStack.Screen name='ConfirmationView' component={ConfirmationNavigatorContainer} />
+    </RestaurantStack.Navigator>
+  );
 
   return (
     <View style={{

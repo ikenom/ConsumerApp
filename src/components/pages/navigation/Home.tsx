@@ -44,7 +44,10 @@ export const HomeView = (props: HomeViewProps) => {
     //navigation?.push('MealView', { meal: meal, restaurant: restaurant })
   }
 
-  const onPressSeeMore = () => {
+  const onPressSeeMore = (title: string) => {
+    navigation?.navigate('SeeAsTiles', {
+      title: title
+    })
   }
 
   return (
@@ -66,19 +69,23 @@ export const HomeView = (props: HomeViewProps) => {
           <Box>
             <SlideshowCarousel slides={newsTiles} />
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"New on FYTR"} />
+              <CarouselHeader title={"New on FYTR"} onPressSeeMore={(title: string) => {
+                navigation?.navigate('SeeAsTiles', {
+                  title: title
+                })
+              }} />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.new} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Popular"} />
+              <CarouselHeader title={"Popular"} onPressSeeMore={() => onPressSeeMore("????")}  />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.popular} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Order Again"} />
+              <CarouselHeader title={"Order Again"} onPressSeeMore={() => onPressSeeMore("?")} />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.orderAgain} />
               </Box>

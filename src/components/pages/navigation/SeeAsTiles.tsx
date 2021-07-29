@@ -12,7 +12,6 @@ import { TileDisplay } from "../../molecules/common/TileDisplay";
 import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader";
 import { MOCK_MEALS_ALL_INFO } from '../../../models/meal/util';
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
-import { HttpLink } from "@apollo/client";
 
 export interface SeeAsTilesProps{
   title: string;
