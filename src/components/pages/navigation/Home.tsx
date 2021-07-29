@@ -13,12 +13,21 @@ import { ScrollView } from "react-native-gesture-handler";
 import { CarouselHeader } from "../../atoms/card/CarouselHeader";
 import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
+import { HomeStackParamList } from "../../../../App";
+
+export const HomeNavigatorContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
+  const { navigation, route } = props;
+    return (
+      <HomeView {...route.params} navigation={navigation} />
+    )
+  }
 
 export interface HomeViewProps {
   locationName: string;
   newsTiles: Array<any>;
   meals: HomeViewMeals;
-  navigation?: any; // TODO hook this boi up
+  navigation?: StackNavigationProp<HomeStackParamList>;
 }
 
 export interface HomeViewMeals {
@@ -32,8 +41,10 @@ export const HomeView = (props: HomeViewProps) => {
   const { locationName, newsTiles, meals, navigation } = props;
 
   const onPressMeal = (meal: Meal) => {
-    // TODO Figure out where to get restaurant for this to work
-    // navigation?.push('MealView', {meal: meal, restaurant: restaurant});
+    //navigation?.push('MealView', { meal: meal, restaurant: restaurant })
+  }
+
+  const onPressSeeMore = () => {
   }
 
   return (
