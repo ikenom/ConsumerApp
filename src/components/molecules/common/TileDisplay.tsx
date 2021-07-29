@@ -35,13 +35,11 @@ export const TileDisplay = (props: TileDisplayProps) => {
     return (
         <FlexBox flexDirection='row'>
             <FlexBox
-                key={'evenTiles'} 
                 width={wp('50%')}
                 flexDirection='column'>
                 {getItemsByParity(mealTiles, 'even')}
             </FlexBox>
             <FlexBox 
-                key={'oddTiles'} 
                 width={wp('50%')}
                 flexDirection='column'>
                 {getItemsByParity(mealTiles, 'odd')}

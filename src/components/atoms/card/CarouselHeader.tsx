@@ -5,28 +5,22 @@ import { Text } from "../../atoms/typography/Text";
 import { defaultTheme } from "../../../defaultTheme";
 
 interface CarouselHeaderProps {
-  title: string;
-  onPressSeeMore: () => void;
+  title: String
 }
 
 export const CarouselHeader = (props: CarouselHeaderProps) => {
 
-    const { title, onPressSeeMore } = props;
+    const { title } = props;
 
     return (
         <FlexBox flexDirection={'row'} pr='14px' alignItems='center'>
             <Box flexGrow={1}>
-                <Text color={defaultTheme.colors.white}
-                    fontWeight={'400'}
-                    fontSize={defaultTheme.fontSize.lg}>
+                <Text color={defaultTheme.colors.white} fontWeight={'400'} fontSize={defaultTheme.fontSize.lg}>
                     {title}
-                </Text>
+                  </Text>
             </Box>
             <Box>
-                <MaterialCommunityIcon
-                    name={'dots-horizontal'}
-                    size={27} color={defaultTheme.colors.blue}
-                    onPress={onPressSeeMore} />
+                <MaterialCommunityIcon name={'dots-horizontal'} size={27} color={defaultTheme.colors.blue} />
             </Box>
         </FlexBox>
     )
