@@ -96,7 +96,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               For You
             </Text>
             <Box mt={hp('1.5%')}>
-              <CardCarousel onPress={onPressMeal} layoutType='horizontal' meals={meals.recommendations} />
+              <CardCarousel onPress={onPressMeal} layoutType='short' meals={meals.recommendations} />
             </Box>
           </FlexBox>
           <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
@@ -104,7 +104,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               All
             </Text>
             <Box mt={hp('1.5%')}>
-              <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.all} />
+              <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.all} />
             </Box>
           </FlexBox>
         </Box>

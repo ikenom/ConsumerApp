@@ -57,19 +57,19 @@ export const HomeView = (props: HomeViewProps) => {
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"New on FYTR"} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.new} />
+                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.new} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"Popular"} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.popular} />
+                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.popular} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"Order Again"} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.orderAgain} />
+                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.orderAgain} />
               </Box>
             </FlexBox>
           </Box>
