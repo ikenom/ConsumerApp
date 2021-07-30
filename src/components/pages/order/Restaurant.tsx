@@ -43,8 +43,12 @@ export const RestaurantView = (props: RestaurantViewProps) => {
 
 
   const onPressMeal = (meal: Meal) => {
-    navigation?.push('MealView', {meal: meal, restaurant: restaurant});
+    navigation?.push('MealView', { meal: meal, restaurant: restaurant });
   }
+
+  const onPressBack = () => {
+  }
+
   return(
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('100%')}>
       <Box>
@@ -52,7 +56,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
           <Image style={{flex: 1, height: undefined, width: undefined}} source={restaurant.image} />
         </Box>
         <FlexBox bottom={hp('19%')} right={wp('45%')}>
-          <Button icon={<Ionicon name="chevron-back-circle-sharp" size={32} color={defaultTheme.colors.greyOne} style={{borderColor: defaultTheme.colors.black}}/>}/>
+          <Button onPress={onPressBack} icon={<Ionicon name="chevron-back-circle-sharp" size={32} color={defaultTheme.colors.greyOne} style={{borderColor: defaultTheme.colors.black}}/>}/>
         </FlexBox>
       </Box>
       <Box pl={'16px'} bottom={hp('5px')}>
@@ -92,7 +96,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               For You
             </Text>
             <Box mt={hp('1.5%')}>
-              <CardCarousel onPress={onPressMeal} layoutType='horizontal' meals={meals.recommendations} />
+              <CardCarousel onPress={onPressMeal} layoutType='short' meals={meals.recommendations} />
             </Box>
           </FlexBox>
           <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
@@ -100,7 +104,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               All
             </Text>
             <Box mt={hp('1.5%')}>
-              <CardCarousel onPress={onPressMeal} layoutType='vertical' meals={meals.all} />
+              <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.all} />
             </Box>
           </FlexBox>
         </Box>
