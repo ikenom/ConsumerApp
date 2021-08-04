@@ -42,8 +42,17 @@ export type HomeStackParamList = {
   Home: HomeViewProps;
   SeeAsTiles: SeeAsTilesProps;
   Notifications: undefined;
+  MealStack: NavigatorScreenParams<MealStackParamList>;
 }
 
+export type MealStackParamList = {
+  Meal: MealViewProps
+  Restaurant: RestaurantViewProps
+  Cart: OrderConfirmationCartProps
+  Confirmation: OrderConfirmationProps
+}
+
+// DELETE
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
   MealView: MealViewProps
@@ -69,7 +78,8 @@ const App = () => {
   const RootStack = createStackNavigator<RootStackParamList>();
   const RootTab = createBottomTabNavigator<RootTabParamList>();
   const HomeStack = createStackNavigator<HomeStackParamList>();
-  const RestaurantStack = createStackNavigator<RestaurantParamList>();
+  const MealStack = createStackNavigator<MealStackParamList>();
+  const RestaurantStack = createStackNavigator<RestaurantParamList>(); // DELETE
 
   const startup = async () => {
     await AuthStore.init()
@@ -86,7 +96,6 @@ const App = () => {
     startup()
   },[])
 
-  // TODO Replace HomeView with HomeStack, fill in Discover and Profile
   const RootTabScreens = () => (
     <RootTab.Navigator>
       <RootTab.Screen name="Home" component={HomeStackScreens} options={{title: 'Home'}} />
@@ -116,9 +125,18 @@ const App = () => {
           }
         }} />
       <HomeStack.Screen name="SeeAsTiles" component={SeeAsTilesNavContainer} />
+      <HomeStack.Screen name="MealStack" component={MealStackScreens} />
     </HomeStack.Navigator>
   )
 
+  const MealStackScreens = () => (
+    <MealStack.Navigator initialRouteName={'Meal'} screenOptions={{ headerShown: false }}>
+      <MealStack.Screen name="Meal" component={MealNavigatorContainer} />
+      <MealStack.Screen name="Restaurant" component={RestaurantNavigatorContainer} />
+    </MealStack.Navigator>
+  )
+
+// DELETE
   const RestaurantStackScreens = () => (
     <RestaurantStack.Navigator initialRouteName={'RestaurantView'} screenOptions={{ headerShown: false }}>
       <RestaurantStack.Screen name="RestaurantView"
@@ -148,7 +166,6 @@ const App = () => {
     }} >
       <StatusBar barStyle={'light-content'} />
       <NavigationContainer>
-
         {
           isLoadingRestaurant ? (
             <LoadingView />
@@ -161,7 +178,6 @@ const App = () => {
             </RootStack.Navigator>
           )
         }
-
       </NavigationContainer>
     </View>
   )
@@ -176,7 +192,6 @@ const SafeAreaWrapper = () => {
     </SafeAreaProvider>
   )
 }
-
 
 /* const Storybook = () => {
   return <StorybookUIRoot />;

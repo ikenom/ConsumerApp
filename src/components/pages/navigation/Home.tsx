@@ -5,6 +5,7 @@ import {
 } from 'react-native-responsive-screen';
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
+import { useState } from 'react';
 import { Meal } from "../../../models/meal/meal";
 import { Text } from "../../atoms/typography/Text";
 import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
@@ -15,6 +16,8 @@ import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { HomeStackParamList } from "../../../../App";
+import { MOCK_MEALS_ALL_INFO } from "../../../models/meal/util";
+import { Restaurant } from "../../../models/restaurant/restaurant";
 
 export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
   const { navigation, route } = props;
@@ -39,15 +42,26 @@ export interface HomeViewMeals {
 export const HomeView = (props: HomeViewProps) => {
 
   const { locationName, newsTiles, meals, navigation } = props;
+  const [hasNotifications, setHasNotifications] = useState(true);
 
-  const onPressMeal = (meal: Meal) => {
-    //navigation?.push('MealView', { meal: meal, restaurant: restaurant })
+  const onPressMeal = (meal: Meal, restaurant: Restaurant) => {
+    navigation?.push("MealStack", {
+      screen: "Meal",
+      params: { meal: meal, restaurant: restaurant }
+    })
   }
 
   const onPressSeeMore = (title: string) => {
-    navigation?.navigate('SeeAsTiles', {
-      title: title
+    navigation?.push('SeeAsTiles', {
+      title: title, 
+      tiles: MOCK_MEALS_ALL_INFO
     })
+  }
+
+  const getNoticationIconName = (hasNotifications: boolean) => hasNotifications ? 'bell-alert' : 'bell'
+
+  const onPressNotifications = () => {
+    setHasNotifications(!hasNotifications)
   }
 
   return (
@@ -60,8 +74,11 @@ export const HomeView = (props: HomeViewProps) => {
           </Text>
         </Box>
         <Box mt={wp('18%')} pr={wp('3%')}>
-          <MaterialCommunityIcon name={'bell'} size={29} color={defaultTheme.colors.greySeven} />
-          {/* Use bell-badge for notification pending*/}
+          <MaterialCommunityIcon 
+          name={getNoticationIconName(hasNotifications)} 
+          onPress={onPressNotifications} 
+          size={29} 
+          color={defaultTheme.colors.greySeven} />
         </Box>
       </FlexBox>
       <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>

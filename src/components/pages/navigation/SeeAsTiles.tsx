@@ -6,17 +6,16 @@ import {
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
 import { Meal } from "../../../models/meal/meal";
-import { Text } from "../../atoms/typography/Text";
 import { ScrollView } from "react-native-gesture-handler";
 import { TileDisplay } from "../../molecules/common/TileDisplay";
 import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader";
-import { MOCK_MEALS_ALL_INFO } from '../../../models/meal/util';
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { HomeStackParamList } from "../../../../App";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 
 export interface SeeAsTilesProps{
   title: string;
+  tiles: Meal[];
   navigation?: StackNavigationProp<HomeStackParamList, 'SeeAsTiles'>
 }
 
@@ -29,7 +28,7 @@ export const SeeAsTilesNavContainer = (props: StackScreenProps<HomeStackParamLis
 
 export const SeeAsTilesView = (props: SeeAsTilesProps) => {
 
-  const { title, navigation } = props;
+  const { title, tiles, navigation } = props;
 
   const onPressBack = () => {
     navigation?.goBack()
@@ -46,7 +45,7 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
       </Box>
       <ScrollView>
         <Box height={hp('78%')}>
-          <TileDisplay meals={MOCK_MEALS_ALL_INFO} />
+          <TileDisplay meals={tiles} />
         </Box>
       </ScrollView>
       <NavigationFooter />
