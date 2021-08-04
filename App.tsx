@@ -21,10 +21,10 @@ import AuthStore from './src/store/authStore';
 import RestaurantStore from './src/store/restaurantStore';
 import { Restaurant } from './src/models/restaurant/restaurant';
 import OrderStore from './src/store/orderStore';
-import { HomeNavigatorContainer, HomeViewProps } from './src/components/pages/navigation/Home';
+import { HomeNavContainer, HomeViewProps } from './src/components/pages/navigation/Home';
 import { LoadingView } from './src/components/pages/Loading';
 import { MOCK_MEALS_ALL_INFO } from './src/models/meal/util';
-import { SeeAsTilesProps, SeeAsTilesView } from './src/components/pages/navigation/SeeAsTiles';
+import { SeeAsTilesNavContainer, SeeAsTilesProps, SeeAsTilesView } from './src/components/pages/navigation/SeeAsTiles';
 
 type RootStackParamList = {
   Loading: undefined;
@@ -105,7 +105,7 @@ const App = () => {
     <HomeStack.Navigator screenOptions= {{ headerShown: false }}>
       <HomeStack.Screen
         name="Home"
-        component={HomeNavigatorContainer}
+        component={HomeNavContainer}
         initialParams={{
           locationName: "Harlem",
           newsTiles: homeSlideshowImages,
@@ -115,7 +115,7 @@ const App = () => {
             orderAgain: MOCK_MEALS_ALL_INFO
           }
         }} />
-      <HomeStack.Screen name="SeeAsTiles" component={SeeAsTilesView} />
+      <HomeStack.Screen name="SeeAsTiles" component={SeeAsTilesNavContainer} />
     </HomeStack.Navigator>
   )
 
