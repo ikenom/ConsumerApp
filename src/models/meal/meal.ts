@@ -5,7 +5,8 @@ export interface Meal {
   name: string;
   price: string;
   distance?: string;
-  restaurant?: string;
+  restaurantName?: string;
+  restaurantId: string;
   flagged?: boolean;
   description: string;
   nutrition: Nutrition;

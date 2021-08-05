@@ -21,7 +21,7 @@ export const MealCard = (props: MealCardProps) => {
 
   const { meal , layoutType, onPress } = props;
 
-  const { name, restaurant, price, distance, image, flagged } = meal
+  const { name, restaurantName, price, distance, image, flagged } = meal
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -73,13 +73,13 @@ export const MealCard = (props: MealCardProps) => {
           <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
             {truncateString(name, dimensions.truncateMealTo)}
           </Text>
-          {restaurant  &&
+          {restaurantName  &&
             (<Text
               height={hp('2%')}
               fontWeight={'500'}
               fontSize={'14px'}
               color={'#B7B7B7'}>
-              {truncateString(restaurant, dimensions.truncateRestaurantTo)}
+              {truncateString(restaurantName, dimensions.truncateRestaurantTo)}
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {StatBox(`$${price}`)}

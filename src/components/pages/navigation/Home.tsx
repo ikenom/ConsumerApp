@@ -16,8 +16,9 @@ import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { HomeStackParamList } from "../../../../App";
-import { MOCK_MEALS_ALL_INFO } from "../../../models/meal/util";
 import { Restaurant } from "../../../models/restaurant/restaurant";
+// TEMP
+import { MOCK_RESTAURANT } from "../../../models/restaurant/util";
 
 export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
   const { navigation, route } = props;
@@ -44,17 +45,22 @@ export const HomeView = (props: HomeViewProps) => {
   const { locationName, newsTiles, meals, navigation } = props;
   const [hasNotifications, setHasNotifications] = useState(true);
 
-  const onPressMeal = (meal: Meal, restaurant: Restaurant) => {
-    navigation?.push("MealStack", {
-      screen: "Meal",
+  // TODO Replace with real backend call
+  // Don't want to look up restaurant by name in case there are duplicate names
+  const getRestaurantById = (id: string): Restaurant => MOCK_RESTAURANT
+
+  const onPressMeal = (meal: Meal) => {
+    const restaurant = getRestaurantById(meal.restaurantId)
+    navigation?.push("RestaurantStack", {
+      screen: "MealView",
       params: { meal: meal, restaurant: restaurant }
     })
   }
 
-  const onPressSeeMore = (title: string) => {
+  const onPressSeeMore = (title: string, tiles: Meal[]) => {
     navigation?.push('SeeAsTiles', {
       title: title, 
-      tiles: MOCK_MEALS_ALL_INFO
+      tiles: tiles
     })
   }
 
@@ -86,19 +92,19 @@ export const HomeView = (props: HomeViewProps) => {
           <Box>
             <SlideshowCarousel slides={newsTiles} />
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"New on FYTR"} onPressSeeMore={() => onPressSeeMore("New on FYTR")} />
+              <CarouselHeader title={"New on FYTR"} onPressSeeMore={() => onPressSeeMore("New on FYTR", meals.new)} />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.new} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Popular"} onPressSeeMore={() => onPressSeeMore("Popular")}  />
+              <CarouselHeader title={"Popular"} onPressSeeMore={() => onPressSeeMore("Popular", meals.popular)}  />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.popular} />
               </Box>
             </FlexBox>
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Order Again"} onPressSeeMore={() => onPressSeeMore("Order Again")} />
+              <CarouselHeader title={"Order Again"} onPressSeeMore={() => onPressSeeMore("Order Again", meals.orderAgain)} />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.orderAgain} />
               </Box>

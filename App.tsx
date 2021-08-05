@@ -28,7 +28,8 @@ import { SeeAsTilesNavContainer, SeeAsTilesProps, SeeAsTilesView } from './src/c
 
 type RootStackParamList = {
   Loading: undefined;
-  RootTab: NavigatorScreenParams<RootTabParamList>;
+  HomeStack: NavigatorScreenParams<HomeStackParamList>;
+  //RootTab: NavigatorScreenParams<RootTabParamList>;
 }
 
 type RootTabParamList = {
@@ -42,17 +43,9 @@ export type HomeStackParamList = {
   Home: HomeViewProps;
   SeeAsTiles: SeeAsTilesProps;
   Notifications: undefined;
-  MealStack: NavigatorScreenParams<MealStackParamList>;
+  RestaurantStack: NavigatorScreenParams<RestaurantParamList>;
 }
 
-export type MealStackParamList = {
-  Meal: MealViewProps
-  Restaurant: RestaurantViewProps
-  Cart: OrderConfirmationCartProps
-  Confirmation: OrderConfirmationProps
-}
-
-// DELETE
 export type RestaurantParamList = {
   RestaurantView: RestaurantViewProps
   MealView: MealViewProps
@@ -78,7 +71,6 @@ const App = () => {
   const RootStack = createStackNavigator<RootStackParamList>();
   const RootTab = createBottomTabNavigator<RootTabParamList>();
   const HomeStack = createStackNavigator<HomeStackParamList>();
-  const MealStack = createStackNavigator<MealStackParamList>();
   const RestaurantStack = createStackNavigator<RestaurantParamList>(); // DELETE
 
   const startup = async () => {
@@ -125,18 +117,11 @@ const App = () => {
           }
         }} />
       <HomeStack.Screen name="SeeAsTiles" component={SeeAsTilesNavContainer} />
-      <HomeStack.Screen name="MealStack" component={MealStackScreens} />
+      <HomeStack.Screen name="RestaurantStack" component={RestaurantStackScreens} />
     </HomeStack.Navigator>
   )
 
-  const MealStackScreens = () => (
-    <MealStack.Navigator initialRouteName={'Meal'} screenOptions={{ headerShown: false }}>
-      <MealStack.Screen name="Meal" component={MealNavigatorContainer} />
-      <MealStack.Screen name="Restaurant" component={RestaurantNavigatorContainer} />
-    </MealStack.Navigator>
-  )
-
-// DELETE
+  // TODO May make more sense to call this MealStack
   const RestaurantStackScreens = () => (
     <RestaurantStack.Navigator initialRouteName={'RestaurantView'} screenOptions={{ headerShown: false }}>
       <RestaurantStack.Screen name="RestaurantView"
@@ -172,8 +157,8 @@ const App = () => {
           ) : (
             <RootStack.Navigator>
               <RootStack.Screen
-                name="RootTab"
-                component={RootTabScreens}
+                name="HomeStack" 
+                component={HomeStackScreens}
                 options={{ headerShown: false }} />
             </RootStack.Navigator>
           )

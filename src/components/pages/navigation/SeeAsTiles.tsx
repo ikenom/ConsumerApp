@@ -35,7 +35,7 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
   }
 
   return (
-    <FlexBox flexDirection='column' bg={defaultTheme.colors.black}>
+    <FlexBox flexDirection='column' bg={defaultTheme.colors.black} height={hp('100%')}>
       <Box mt={hp('6.5%')} mb={hp('3%')} pl={'14px'} pr={'14px'}>
         <OrderConfirmationHeader
           label={title}
@@ -44,11 +44,13 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
           onPress={onPressBack} />
       </Box>
       <ScrollView>
-        <Box height={hp('78%')}>
+        <Box>
           <TileDisplay meals={tiles} />
         </Box>
       </ScrollView>
+      <Box mb={hp('2.5%')}>
       <NavigationFooter />
+      </Box>
     </FlexBox>
   )
 }

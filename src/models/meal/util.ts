@@ -30,6 +30,8 @@ export const MOCK_NUTRITION: Nutrition = {
 
 export const MOCK_MEALS: Meal[] = [
   {
+    id: "1",
+    restaurantId: "10",
     name: "Hazelnut Belgian Waffles",
     price: "12.99",
     image: require('../../../assets/testImages/waffles.jpeg'),
@@ -37,6 +39,8 @@ export const MOCK_MEALS: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "2",
+    restaurantId: "20",
     name: "Lemon Grilled Chicken",
     price: "17.02",
     image: require('../../../assets/testImages/chickenMeal.jpeg'),
@@ -44,6 +48,8 @@ export const MOCK_MEALS: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "3",
+    restaurantId: "30",
     name: "Spicy Pulled Pork",
     price: "8.53",
     image: require('../../../assets/testImages/pulledPork.jpeg'),
@@ -51,6 +57,8 @@ export const MOCK_MEALS: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "4",
+    restaurantId: "40",
     name: "Hazelnut Belgian Waffles",
     price: "12.99",
     image: require('../../../assets/testImages/waffles.jpeg'),
@@ -58,6 +66,8 @@ export const MOCK_MEALS: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "5",
+    restaurantId: "50",
     name: "Lemon Grilled Chicken",
     price: "17.02",
     image: require('../../../assets/testImages/chickenMeal.jpeg'),
@@ -65,6 +75,8 @@ export const MOCK_MEALS: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "6",
+    restaurantId: "60",
     name: "Spicy Pulled Pork",
     price: "8.53",
     image: require('../../../assets/testImages/pulledPork.jpeg'),
@@ -75,8 +87,10 @@ export const MOCK_MEALS: Meal[] = [
 
 export const MOCK_MEALS_ALL_INFO: Meal[] = [
   {
+    id: "1",
     name: "Hazelnut Belgian Waffles",
-    restaurant: "Awful Waffle",
+    restaurantId: "10",
+    restaurantName: "Awful Waffle",
     price: "12.99",
     distance: "0.8",
     flagged: false,
@@ -85,8 +99,10 @@ export const MOCK_MEALS_ALL_INFO: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "2",
     name: "Lemon Grilled Chicken",
-    restaurant: "Wild Chix",
+    restaurantName: "Wild Chix",
+    restaurantId: "20",
     price: "17.02",
     distance: "2.4",
     flagged: false,
@@ -95,8 +111,10 @@ export const MOCK_MEALS_ALL_INFO: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "3",
     name: "Spicy Pulled Pork",
-    restaurant: "Curly Tail",
+    restaurantName: "Curly Tail",
+    restaurantId: "30",
     price: "8.53",
     distance:  "3.1",
     flagged: true,
@@ -105,8 +123,10 @@ export const MOCK_MEALS_ALL_INFO: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "4",
     name: "Hazelnut Belgian Waffles",
-    restaurant: "Awful Waffle",
+    restaurantName: "Awful Waffle",
+    restaurantId: "40",
     price: "12.99",
     distance: "0.8",
     flagged: false,
@@ -115,8 +135,10 @@ export const MOCK_MEALS_ALL_INFO: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "5",
     name: "Lemon Grilled Chicken",
-    restaurant: "Wild Chix",
+    restaurantName: "Wild Chix",
+    restaurantId: "50",
     price: "17.02",
     distance: "2.4",
     flagged: false,
@@ -125,8 +147,10 @@ export const MOCK_MEALS_ALL_INFO: Meal[] = [
     nutrition: MOCK_NUTRITION
   },
   {
+    id: "6",
     name: "Spicy Pulled Pork",
-    restaurant: "Curly Tail",
+    restaurantName: "Curly Tail",
+    restaurantId: "60",
     price: "8.53",
     distance:  "3.1",
     flagged: true,
