@@ -29,7 +29,7 @@ export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Ho
 
 export interface HomeViewProps {
   locationName: string;
-  newsTiles: Array<any>;
+  slideshowImages: Array<any>;
   meals: HomeViewMeals;
   navigation?: StackNavigationProp<HomeStackParamList>;
 }
@@ -42,7 +42,7 @@ export interface HomeViewMeals {
 
 export const HomeView = (props: HomeViewProps) => {
 
-  const { locationName, newsTiles, meals, navigation } = props;
+  const { locationName, slideshowImages, meals, navigation } = props;
   const [hasNotifications, setHasNotifications] = useState(true);
 
   // TODO Replace with real backend call
@@ -90,7 +90,7 @@ export const HomeView = (props: HomeViewProps) => {
       <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>
         <ScrollView>
           <Box>
-            <SlideshowCarousel slides={newsTiles} />
+            <SlideshowCarousel slides={slideshowImages} />
             <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"New on FYTR"} onPressSeeMore={() => onPressSeeMore("New on FYTR", meals.new)} />
               <Box mt={hp('1.5%')}>

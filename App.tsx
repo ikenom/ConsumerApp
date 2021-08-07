@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
-import { MealNavigatorContainer, MealOrderView, MealViewProps } from './src/components/pages/order/Meal';
+import { MealNavigatorContainer, MealViewProps } from './src/components/pages/order/Meal';
 import { defaultTheme } from './src/defaultTheme';
 import {
   DefaultTheme,
   NavigationContainer,
   NavigatorScreenParams,
-  Route,
-  RouteProp
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -38,7 +36,6 @@ type RootTabParamList = {
   Profile: undefined;
 }
 
-// TODO Change back to NavigatorScreenParams
 export type HomeStackParamList = {
   Home: HomeViewProps;
   SeeAsTiles: SeeAsTilesProps;
@@ -66,12 +63,16 @@ const MyTheme = {
 const App = () => {
   const insets = useSafeAreaInsets();
   const [isLoadingRestaurant, setLoadingRestaurant] = useState(true);
+  const [location, setLocation] = useState("Harlem Prime");
+  const [hasNotifications, setHasNotifications]  = useState(true);
+  const [homeSlideshowImages, setHomeSlideshowImages] = useState(undefined);
+  const [newMeals, setNewMeals] = useState([]);
   const [restaurant, setRestaurant] = useState<Restaurant>();
 
   const RootStack = createStackNavigator<RootStackParamList>();
   const RootTab = createBottomTabNavigator<RootTabParamList>();
   const HomeStack = createStackNavigator<HomeStackParamList>();
-  const RestaurantStack = createStackNavigator<RestaurantParamList>(); // DELETE
+  const RestaurantStack = createStackNavigator<RestaurantParamList>();
 
   const startup = async () => {
     await AuthStore.init()
@@ -79,7 +80,22 @@ const App = () => {
     const restaurantStore = RestaurantStore.getInstance()
     await restaurantStore.getRestaurantsAsync()
 
-    const restaurants = restaurantStore.getRestaurants().get()
+    const restaurants = restaurantStore.getRestaurants().get() // This should be .value if want to handle null or undefined
+    // Load Location
+    setLocation("Harlem");
+    // TODO Load Profile Picture
+    // TODO Load Notifications Present
+    setHasNotifications(false);
+    // Load Slideshow Images
+    // TODO Replace with actual slideshow content
+    const tempSlideshowImages = MOCK_MEALS_ALL_INFO.map((meal) => meal.image);
+    setHomeSlideshowImages(tempSlideshowImages);
+    // Load New on FYTR
+    const extractedNewMeals = restaurants[0].meals; // TEMP
+    console.log(extractedNewMeals)
+    setNewMeals(extractedNewMeals)
+    // TODO Load Popular
+    // TODO Load Order Again
     setRestaurant(restaurants[0])
     setLoadingRestaurant(false)
   }
@@ -96,11 +112,6 @@ const App = () => {
     </RootTab.Navigator>
   )
 
-  // TEMP Create test images for slideshow carousel on Home
-  const homeSlideshowImages = MOCK_MEALS_ALL_INFO.map(
-    (meal) => meal.image
-  );
-
   // TEMP Initial params for HomeNavigatorContainer are temp
   const HomeStackScreens = () => (
     <HomeStack.Navigator screenOptions= {{ headerShown: false }}>
@@ -108,10 +119,10 @@ const App = () => {
         name="Home"
         component={HomeNavContainer}
         initialParams={{
-          locationName: "Harlem",
-          newsTiles: homeSlideshowImages,
+          locationName: location,
+          slideshowImages: homeSlideshowImages,
           meals: {
-            new: MOCK_MEALS_ALL_INFO,
+            new: newMeals,
             popular: MOCK_MEALS_ALL_INFO,
             orderAgain: MOCK_MEALS_ALL_INFO
           }
