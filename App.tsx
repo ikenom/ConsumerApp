@@ -67,7 +67,9 @@ const App = () => {
   const [hasNotifications, setHasNotifications]  = useState(true);
   const [homeSlideshowImages, setHomeSlideshowImages] = useState(undefined);
   const [newMeals, setNewMeals] = useState([]);
-  const [restaurant, setRestaurant] = useState<Restaurant>();
+  const [popularMeals, setPopularMeals] = useState([]);
+  const [orderAgainMeals, setOrderAgainMeals] = useState([]);
+  const [restaurant, setRestaurant] = useState<Restaurant>(); // DELETE
 
   const RootStack = createStackNavigator<RootStackParamList>();
   const RootTab = createBottomTabNavigator<RootTabParamList>();
@@ -81,21 +83,31 @@ const App = () => {
     await restaurantStore.getRestaurantsAsync()
 
     const restaurants = restaurantStore.getRestaurants().get() // This should be .value if want to handle null or undefined
+
+    // TEMP Fake fns to be replaced with getting real data
+    const getDummySlideshowImages = () => MOCK_MEALS_ALL_INFO.map((meal) => meal.image);
+    const getDummyCarouselMeals = () => restaurants[0].meals.concat(MOCK_MEALS_ALL_INFO); // Combo of backend and mock data
+    
     // Load Location
     setLocation("Harlem");
+    
     // TODO Load Profile Picture
+    
     // TODO Load Notifications Present
     setHasNotifications(false);
+    
     // Load Slideshow Images
-    // TODO Replace with actual slideshow content
-    const tempSlideshowImages = MOCK_MEALS_ALL_INFO.map((meal) => meal.image);
-    setHomeSlideshowImages(tempSlideshowImages);
+    setHomeSlideshowImages(getDummySlideshowImages);
+    
     // Load New on FYTR
-    const extractedNewMeals = restaurants[0].meals; // TEMP
-    console.log(extractedNewMeals)
-    setNewMeals(extractedNewMeals)
+    setNewMeals(getDummyCarouselMeals);
+    
     // TODO Load Popular
+    setPopularMeals(getDummyCarouselMeals);
+    
     // TODO Load Order Again
+    setOrderAgainMeals(getDummyCarouselMeals);
+    
     setRestaurant(restaurants[0])
     setLoadingRestaurant(false)
   }
@@ -123,8 +135,8 @@ const App = () => {
           slideshowImages: homeSlideshowImages,
           meals: {
             new: newMeals,
-            popular: MOCK_MEALS_ALL_INFO,
-            orderAgain: MOCK_MEALS_ALL_INFO
+            popular: popularMeals,
+            orderAgain: orderAgainMeals
           }
         }} />
       <HomeStack.Screen name="SeeAsTiles" component={SeeAsTilesNavContainer} />
