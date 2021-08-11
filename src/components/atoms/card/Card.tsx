@@ -58,7 +58,7 @@ export const MealCard = (props: MealCardProps) => {
           height={dimensions.height}
           width={dimensions.width}
           overflow={'hidden'} >
-          <Image style={{ flex: 1, height: undefined, width: undefined }} source={image} />
+          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: meal.image}} />
         </Box>
         <FlexBox
           top={-dimensions.contentHeight}
