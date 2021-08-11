@@ -8,7 +8,6 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
 //import StorybookUIRoot from './storybook'; // This will break promises so they never resolve so only uncomment when testing
@@ -22,18 +21,11 @@ import OrderStore from './src/store/orderStore';
 import { HomeNavContainer, HomeViewProps } from './src/components/pages/navigation/Home';
 import { LoadingView } from './src/components/pages/Loading';
 import { MOCK_MEALS_ALL_INFO } from './src/models/meal/util';
-import { SeeAsTilesNavContainer, SeeAsTilesProps, SeeAsTilesView } from './src/components/pages/navigation/SeeAsTiles';
+import { SeeAsTilesNavContainer, SeeAsTilesProps } from './src/components/pages/navigation/SeeAsTiles';
 
 type RootStackParamList = {
   Loading: undefined;
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
-  //RootTab: NavigatorScreenParams<RootTabParamList>;
-}
-
-type RootTabParamList = {
-  Home: NavigatorScreenParams<HomeStackParamList>;
-  Discover: undefined;
-  Profile: undefined;
 }
 
 export type HomeStackParamList = {
@@ -72,7 +64,6 @@ const App = () => {
   const [restaurant, setRestaurant] = useState<Restaurant>(); // DELETE
 
   const RootStack = createStackNavigator<RootStackParamList>();
-  const RootTab = createBottomTabNavigator<RootTabParamList>();
   const HomeStack = createStackNavigator<HomeStackParamList>();
   const RestaurantStack = createStackNavigator<RestaurantParamList>();
 
@@ -84,7 +75,7 @@ const App = () => {
 
     const restaurants = restaurantStore.getRestaurants().get() // This should be .value if want to handle null or undefined
 
-    // TEMP Fake fns to be replaced with getting real data
+    // PLACEHOLDER Fake fns to be replaced with getting real data
     const getDummySlideshowImages = () => MOCK_MEALS_ALL_INFO.map((meal) => meal.image);
     const getDummyCarouselMeals = () => restaurants[0].meals.concat(MOCK_MEALS_ALL_INFO); // Combo of backend and mock data
     
@@ -115,14 +106,6 @@ const App = () => {
   useEffect(() => {
     startup()
   },[])
-
-  const RootTabScreens = () => (
-    <RootTab.Navigator>
-      <RootTab.Screen name="Home" component={HomeStackScreens} options={{title: 'Home'}} />
-      <RootTab.Screen name="Discover" component={SeeAsTilesView} options={{title: 'Discover'}} />
-      <RootTab.Screen name="Profile" component={SeeAsTilesView} options={{title: 'Profile'}} />
-    </RootTab.Navigator>
-  )
 
   // TEMP Initial params for HomeNavigatorContainer are temp
   const HomeStackScreens = () => (

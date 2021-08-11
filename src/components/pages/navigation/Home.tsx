@@ -45,7 +45,7 @@ export const HomeView = (props: HomeViewProps) => {
   const { locationName, slideshowImages, meals, navigation } = props;
   const [hasNotifications, setHasNotifications] = useState(true);
 
-  // TODO Replace with real backend call
+  // PLACEHOLDER Replace with real backend call
   // Don't want to look up restaurant by name in case there are duplicate names
   const getRestaurantById = (id: string): Restaurant => MOCK_RESTAURANT
 
