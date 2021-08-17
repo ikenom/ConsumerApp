@@ -13,7 +13,7 @@ import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
 
 export interface MealCardProps {
   meal: Meal;
-  distance?: string;
+  displayDistance?: boolean;
   flagged?: boolean;
   restaurantName?: string;
   layoutType: MealCardType;
@@ -22,9 +22,8 @@ export interface MealCardProps {
 
 export const MealCard = (props: MealCardProps) => {
 
-  const { meal , layoutType, onPress } = props;
-
-  const { name, restaurantName, price, distance, image, flagged } = meal
+  const { meal, displayDistance, flagged, restaurantName, layoutType, onPress } = props;
+  const { name, price, distance, image } = meal
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -61,7 +60,7 @@ export const MealCard = (props: MealCardProps) => {
           height={dimensions.height}
           width={dimensions.width}
           overflow={'hidden'} >
-          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: meal.image}} />
+          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: image}} />
         </Box>
         <FlexBox
           top={-dimensions.contentHeight}
@@ -86,7 +85,7 @@ export const MealCard = (props: MealCardProps) => {
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {StatBox(`$${price}`)}
-            {distance && StatBox(`${distance} mi`)}
+            {displayDistance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
         {flagged &&

@@ -67,19 +67,27 @@ export default class RestaurantStore {
       openingTime: DateTime.fromISO(node.businessHours.openTime).toFormat('hh:mm a'),
       closingTime: DateTime.fromISO(node.businessHours.closeTime).toFormat('hh:mm a')
     },
-    meals: this.getMealsFromPayload(node.meals, node.id)
+    meals: this.getMealsFromPayload(node.meals, node.id, this.getDummyDistance())
   })
+
+  // TEMP Delete once distance is added to restaurant
+  getDummyDistance = () => {
+    const dist = Math.random() * 10
+    return dist.toFixed(1)
+  }
 
   getRestaurantsFromPayload = (payload: any): Restaurant[] => {
     return payload.edges.map(edge => this.getRestaurantFromPayload(edge.node));
   }
 
-  getMealsFromPayload = (payload: any[], restaurantId: string): Meal[] => {
+  getMealsFromPayload = (payload: any[], restaurantId: string, distance: string): Meal[] => {
+    // Extract Meal data from payload, add info restaurantId and distance in
     return payload.map(meal => ({
       id: meal.id,
       image: `https:${meal.imageUrl}`,
       name: meal.name,
       restaurantId,
+      distance, 
       price: meal.price,
       description: meal.description,
       nutrition: {
@@ -95,10 +103,11 @@ export default class RestaurantStore {
 
   getRestaurantById = (restaurantId: string): (Restaurant | undefined) => {
     const restaurants = this.restaurants.get()
-    return restaurants.find(r => r.id === restaurantId)
+    const foundRestaurant = restaurants.find(r => r.id === restaurantId)
+    console.log("Found " + foundRestaurant.name + "with ID " + restaurantId)
   }
 
-  // PLACEHOLDER
+  // TEMP
   getDummyCarouselMeals = (): Meal[] => {
     const restaurants = this.restaurants.get()
     return restaurants[0].meals.concat(MOCK_MEALS_ALL_INFO); // Combo of backend and mock data
