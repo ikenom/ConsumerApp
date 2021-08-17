@@ -2,6 +2,7 @@ import { State, createState } from '@hookstate/core';
 import { DateTime } from 'luxon';
 import { getRestaurantsAsync } from '../api/restaurant_client';
 import { Meal } from '../models/meal/meal';
+import { MOCK_MEALS_ALL_INFO } from '../models/meal/util'; // TEMP
 import { Restaurant } from '../models/restaurant/restaurant';
 
 export default class RestaurantStore {
@@ -66,18 +67,19 @@ export default class RestaurantStore {
       openingTime: DateTime.fromISO(node.businessHours.openTime).toFormat('hh:mm a'),
       closingTime: DateTime.fromISO(node.businessHours.closeTime).toFormat('hh:mm a')
     },
-    meals: this.getMealsFromPayload(node.meals)
+    meals: this.getMealsFromPayload(node.meals, node.id)
   })
 
   getRestaurantsFromPayload = (payload: any): Restaurant[] => {
     return payload.edges.map(edge => this.getRestaurantFromPayload(edge.node));
   }
 
-  getMealsFromPayload = (payload: any[]): Meal[] => {
+  getMealsFromPayload = (payload: any[], restaurantId: string): Meal[] => {
     return payload.map(meal => ({
       id: meal.id,
       image: `https:${meal.imageUrl}`,
       name: meal.name,
+      restaurantId,
       price: meal.price,
       description: meal.description,
       nutrition: {
@@ -89,5 +91,24 @@ export default class RestaurantStore {
         }
       }
     }))
+  }
+
+  getRestaurantById = (restaurantId: string): (Restaurant | undefined) => {
+    const restaurants = this.restaurants.get()
+    return restaurants.find(r => r.id === restaurantId)
+  }
+
+  // PLACEHOLDER
+  getDummyCarouselMeals = (): Meal[] => {
+    const restaurants = this.restaurants.get()
+    return restaurants[0].meals.concat(MOCK_MEALS_ALL_INFO); // Combo of backend and mock data
+  }
+
+  getNewMeals = () => {
+    return this.getDummyCarouselMeals() // PLACEHOLDER
+  }
+
+  getPopularMeals = () => {
+    return this.getDummyCarouselMeals() // PLACEHOLDER
   }
 }

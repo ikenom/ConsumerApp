@@ -5,6 +5,7 @@ import { DraftOrder, Order, OrderType } from "../models/order/order";
 import AuthStore from "./authStore";
 import Toast from 'react-native-simple-toast';
 import { DateTime } from "luxon";
+import { MOCK_MEALS_ALL_INFO } from "../models/meal/util";
 
 
 export default class OrderStore {
@@ -140,5 +141,9 @@ export default class OrderStore {
 
   get order() {
     return this._orders[0]
+  }
+
+  getOrderAgainMeals = () => {
+    return MOCK_MEALS_ALL_INFO
   }
 }

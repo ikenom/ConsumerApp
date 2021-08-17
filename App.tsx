@@ -69,7 +69,7 @@ const App = () => {
 
   const startup = async () => {
     await AuthStore.init()
-    await OrderStore.init()
+    const orderStore = OrderStore.getInstance()
     const restaurantStore = RestaurantStore.getInstance()
     await restaurantStore.getRestaurantsAsync()
 
@@ -77,7 +77,7 @@ const App = () => {
 
     // PLACEHOLDER Fake fns to be replaced with getting real data
     const getDummySlideshowImages = () => MOCK_MEALS_ALL_INFO.map((meal) => meal.image);
-    const getDummyCarouselMeals = () => restaurants[0].meals.concat(MOCK_MEALS_ALL_INFO); // Combo of backend and mock data
+    const getDummyCarouselMealsLocal = () => restaurants[0].meals.concat(MOCK_MEALS_ALL_INFO)
     
     // Load Location
     setLocation("Harlem");
@@ -88,16 +88,16 @@ const App = () => {
     setHasNotifications(false);
     
     // Load Slideshow Images
-    setHomeSlideshowImages(getDummySlideshowImages);
+    setHomeSlideshowImages(getDummySlideshowImages); // PLACEHOLDER
     
     // Load New on FYTR
-    setNewMeals(getDummyCarouselMeals);
+    setNewMeals(restaurantStore.getNewMeals());
     
     // TODO Load Popular
-    setPopularMeals(getDummyCarouselMeals);
+    setPopularMeals(restaurantStore.getPopularMeals());
     
     // TODO Load Order Again
-    setOrderAgainMeals(getDummyCarouselMeals);
+    setOrderAgainMeals(orderStore.getOrderAgainMeals());
     
     setRestaurant(restaurants[0])
     setLoadingRestaurant(false)

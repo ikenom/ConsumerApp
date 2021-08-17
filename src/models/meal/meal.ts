@@ -4,10 +4,7 @@ export interface Meal {
   image: string; // Ought to rename to imageUri but this breaks backend-frontend data send
   name: string;
   price: string;
-  distance?: string;
-  restaurantName?: string;
   restaurantId: string;
-  flagged?: boolean;
   description: string;
   nutrition: Nutrition;
 }

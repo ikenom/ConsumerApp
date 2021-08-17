@@ -12,7 +12,10 @@ import { defaultTheme } from '../../../defaultTheme';
 import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
 
 export interface MealCardProps {
-  meal: Meal
+  meal: Meal;
+  distance?: string;
+  flagged?: boolean;
+  restaurantName?: string;
   layoutType: MealCardType;
   onPress: (meal: Meal) => void;
 }
