@@ -20,14 +20,13 @@ export interface MealCardProps {
 export interface MealCardData {
   meal: Meal;
   restaurantName?: string;
-  distance?: string;
-  flagged?: string;
+  flagged?: boolean;
 }
 
 export const MealCard = (props: MealCardProps) => {
 
   const { mealCardData, layoutType, onPress } = props;
-  const { meal, restaurantName, distance, flagged } = mealCardData;
+  const { meal, restaurantName, flagged } = mealCardData;
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -89,7 +88,7 @@ export const MealCard = (props: MealCardProps) => {
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {StatBox(`$${meal.price}`)}
-            {distance && StatBox(`${distance} mi`)}
+            {meal.distance && StatBox(`${meal.distance} mi`)}
           </FlexBox>
         </FlexBox>
         {flagged &&

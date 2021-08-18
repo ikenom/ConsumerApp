@@ -101,10 +101,16 @@ export default class RestaurantStore {
     }))
   }
 
-  getRestaurantById = (restaurantId: string): (Restaurant | undefined) => {
+  getRestaurantById = (restaurantId: string): (Restaurant | null) => {
     const restaurants = this.restaurants.get()
     const foundRestaurant = restaurants.find(r => r.id === restaurantId)
-    console.log("Found " + foundRestaurant.name + "with ID " + restaurantId)
+    if (foundRestaurant) {
+      console.log("Found " + foundRestaurant.name + "with ID " + restaurantId)
+      return foundRestaurant
+    }
+    else {
+      return null
+    }
   }
 
   // TEMP
@@ -113,11 +119,11 @@ export default class RestaurantStore {
     return restaurants[0].meals.concat(MOCK_MEALS_ALL_INFO); // Combo of backend and mock data
   }
 
-  getNewMeals = () => {
+  getNewMeals = (): Meal[] => {
     return this.getDummyCarouselMeals() // PLACEHOLDER
   }
 
-  getPopularMeals = () => {
+  getPopularMeals = (): Meal[] => {
     return this.getDummyCarouselMeals() // PLACEHOLDER
   }
 }

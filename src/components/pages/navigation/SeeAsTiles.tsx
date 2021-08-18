@@ -12,10 +12,11 @@ import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { HomeStackParamList } from "../../../../App";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
+import { MealCardData } from "../../atoms/card/Card";
 
 export interface SeeAsTilesProps{
   title: string;
-  tiles: Meal[];
+  tiles: MealCardData[];
   navigation?: StackNavigationProp<HomeStackParamList, 'SeeAsTiles'>
 }
 
@@ -45,7 +46,7 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
       </Box>
       <ScrollView>
         <Box>
-          <TileDisplay meals={tiles} />
+          <TileDisplay mealCards={tiles} />
         </Box>
       </ScrollView>
       <Box mb={hp('2.5%')}>

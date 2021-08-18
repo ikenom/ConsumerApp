@@ -143,7 +143,7 @@ export default class OrderStore {
     return this._orders[0]
   }
 
-  getOrderAgainMeals = () => {
+  getOrderAgainMeals = (): Meal[] => {
     return MOCK_MEALS_ALL_INFO
   }
 }
