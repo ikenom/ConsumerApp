@@ -6,58 +6,63 @@ import { MOCK_MEALS_ALL_INFO } from '../../../src/models/meal/util';
 import { FlexBox } from '../../../src/components/atoms/layout/Box';
 
 const HorizontalMealCardStory = () => {
-
+  const mealCardData = { meal: MOCK_MEALS_ALL_INFO[0] }
   return(
-      <MealCard meal={MOCK_MEALS_ALL_INFO[0]} type='horizontal' onPress={() => {}}/>
+      <MealCard mealCardData={mealCardData} type='horizontal' onPress={() => {}} />
   )
 }
 
 const VerticalMealCardStory = () => {
-
+  const mealCardData = {
+    meal: MOCK_MEALS_ALL_INFO[1], 
+    restaurantName: "Oo Kwispy", 
+    flagged: true, 
+    distance: "4.2"
+  }
   return(
-      <MealCard meal={MOCK_MEALS_ALL_INFO[1]} type='vertical' onPress={() => {}}/>
+      <MealCard mealCardData={mealCardData} type='vertical' onPress={() => {}} />
   )
 }
 
 const RandomHeightCardStory = () => {
   return (
     <FlexBox flexDimension='row'>
-      <MealCard meal={MOCK_MEALS_ALL_INFO[2]} type='random-height' onPress={() => {}} />
-      <MealCard meal={MOCK_MEALS_ALL_INFO[3]} type='random-height' onPress={() => {}} />
+      <MealCard mealCardData={{ meal: MOCK_MEALS_ALL_INFO[2] }} type='random-height' onPress={() => {}} />
+      <MealCard mealCardData={{ meal: MOCK_MEALS_ALL_INFO[3]} } type='random-height' onPress={() => {}} />
     </FlexBox>
   )
 }
 
 const ShortCardCarousel = () => {
-  const mealCardProps = MOCK_MEALS_ALL_INFO.map(
+  const mealCards = MOCK_MEALS_ALL_INFO.map(
     (meal) => {
       return { meal: meal }
     }
   )
   return (
-    <CardCarousel layoutType='short' mealCardData={mealCardProps} />
+    <CardCarousel layoutType='short' mealCards={mealCards} />
   )
 }
 
 const TallCardCarouselPriceOnly = () => {
-  const mealCardProps = MOCK_MEALS_ALL_INFO.map(
+  const mealCards = MOCK_MEALS_ALL_INFO.map(
     (meal) => {
       return { meal: meal }
     }
   )
   return (
-    <CardCarousel layoutType='tall' mealCardData={mealCardProps} />
+    <CardCarousel layoutType='tall' mealCards={mealCards} />
   )
 }
 
 const TallCardCarouselAllData = () => {
-  const mealCardProps = MOCK_MEALS_ALL_INFO.map(
+  const mealCards = MOCK_MEALS_ALL_INFO.map(
     (meal) => {
-      return { meal: meal, displayDistance: true, flagged: true, restaurantName: "Name Here" }
+      return { meal: meal, distance: "4.2", flagged: true, restaurantName: "Restaurant Name Here" }
     }
   )
   return (
-    <CardCarousel layoutType='tall' mealCardData={mealCardProps} />
+    <CardCarousel layoutType='tall' mealCards={mealCards} />
   )
 }
 

@@ -4,10 +4,10 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
-import { MealCard, MealCardProps } from '../../atoms/card/Card';
+import { MealCard, MealCardData } from '../../atoms/card/Card';
 
 export interface TileDisplayProps {
-    mealCardData: MealCardProps[]
+    mealCards: MealCardData[]
 }
 
 export type Parity = 'even' | 'odd';
@@ -20,16 +20,13 @@ export const getItemsByParity = (array: Array<any>, parity: Parity) => {
 }
 
 export const TileDisplay = (props: TileDisplayProps) => {
-    const { mealCardData } = props
-    const mealTiles = mealCardData.map(
-        (data) => (
+    const { mealCards } = props
+    const mealTiles = mealCards.map(
+        (mealCard) => (
             <Box width={wp('50%')} mb={hp('0.8%')} alignItems='center'>
                 <MealCard
-                    key={data.meal.id}
-                    meal={data.meal}
-                    displayDistance={data.displayDistance}
-                    flagged={data.flagged}
-                    restaurantName={data.restaurantName}
+                    key={mealCard.meal.id}
+                    mealCardData={mealCard}
                     layoutType='random-height'
                     onPress={() => { }} />
             </Box>))

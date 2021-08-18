@@ -5,9 +5,18 @@ import { MOCK_MEALS_ALL_INFO } from '../../../src/models/meal/util';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export const TileDisplayStory = () => {
+    const mealCards = MOCK_MEALS_ALL_INFO.map(
+        (meal) => {
+            return { 
+                meal: meal, displayDistance: true, 
+                flagged: true, // Flags look like trash right now but will fix with redesign
+                restaurantName: "Restaurant Name Here" }
+        }
+    )
+    console.log(mealCards)
     return (
         <ScrollView>
-            <TileDisplay meals={MOCK_MEALS_ALL_INFO.concat(MOCK_MEALS_ALL_INFO)} />
+            <TileDisplay mealCards={mealCards} />
         </ScrollView>
     )
 }

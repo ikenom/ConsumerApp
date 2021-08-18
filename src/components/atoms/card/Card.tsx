@@ -12,18 +12,22 @@ import { defaultTheme } from '../../../defaultTheme';
 import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
 
 export interface MealCardProps {
-  meal: Meal;
-  displayDistance?: boolean;
-  flagged?: boolean;
-  restaurantName?: string;
+  mealCardData: MealCardData;
   layoutType: MealCardType;
   onPress: (meal: Meal) => void;
 }
 
+export interface MealCardData {
+  meal: Meal;
+  restaurantName?: string;
+  distance?: string;
+  flagged?: string;
+}
+
 export const MealCard = (props: MealCardProps) => {
 
-  const { meal, displayDistance, flagged, restaurantName, layoutType, onPress } = props;
-  const { name, price, distance, image } = meal
+  const { mealCardData, layoutType, onPress } = props;
+  const { meal, restaurantName, distance, flagged } = mealCardData;
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -60,7 +64,7 @@ export const MealCard = (props: MealCardProps) => {
           height={dimensions.height}
           width={dimensions.width}
           overflow={'hidden'} >
-          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: image}} />
+          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: meal.image}} />
         </Box>
         <FlexBox
           top={-dimensions.contentHeight}
@@ -73,7 +77,7 @@ export const MealCard = (props: MealCardProps) => {
           flexDirection={'column'}
           justifyContent={'space-evenly'}>
           <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
-            {truncateString(name, dimensions.truncateMealTo)}
+            {truncateString(meal.name, dimensions.truncateMealTo)}
           </Text>
           {restaurantName  &&
             (<Text
@@ -84,8 +88,8 @@ export const MealCard = (props: MealCardProps) => {
               {truncateString(restaurantName, dimensions.truncateRestaurantTo)}
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
-            {StatBox(`$${price}`)}
-            {displayDistance && StatBox(`${distance} mi`)}
+            {StatBox(`$${meal.price}`)}
+            {distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
         {flagged &&
@@ -97,4 +101,4 @@ export const MealCard = (props: MealCardProps) => {
   );
 };
 
-MealCard.displayName = 'Test Card';
+MealCard.displayName = 'Meal Card';
