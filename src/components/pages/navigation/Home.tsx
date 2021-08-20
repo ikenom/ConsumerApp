@@ -63,6 +63,19 @@ export const HomeView = (props: HomeViewProps) => {
     })
   }
 
+  const navigatetoRestaurant = () => {
+    navigation?.push("RestaurantStack", {
+      screen: "RestaurantView",
+      params: {
+        restaurant: MOCK_RESTAURANT,
+        meals: {
+          all: MOCK_RESTAURANT?.meals!!,
+          recommendations: MOCK_RESTAURANT?.meals!!
+        }
+      }
+    })
+  }
+
   const getNoticationIconName = (hasNotifications: boolean) => hasNotifications ? 'bell-alert' : 'bell'
 
   const onPressNotifications = () => {
@@ -79,11 +92,11 @@ export const HomeView = (props: HomeViewProps) => {
           </Text>
         </Box>
         <Box mt={wp('18%')} pr={wp('3%')}>
-          <MaterialCommunityIcon 
-          name={getNoticationIconName(hasNotifications)} 
-          onPress={onPressNotifications} 
-          size={29} 
-          color={defaultTheme.colors.greySeven} />
+          <MaterialCommunityIcon
+            name={getNoticationIconName(hasNotifications)}
+            onPress={onPressNotifications}
+            size={29}
+            color={defaultTheme.colors.greySeven} />
         </Box>
       </FlexBox>
       <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>
@@ -97,7 +110,7 @@ export const HomeView = (props: HomeViewProps) => {
               </Box>
             </FlexBox>
             <FlexBox key='popular' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Popular"} onPressSeeMore={() => onPressSeeMore("Popular", meals.popular)}  />
+              <CarouselHeader title={"Popular"} onPressSeeMore={() => onPressSeeMore("Popular", meals.popular)} />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.popular} />
               </Box>
@@ -111,7 +124,10 @@ export const HomeView = (props: HomeViewProps) => {
           </Box>
         </ScrollView>
       </FlexBox>
-      <NavigationFooter />
+      <NavigationFooter
+        navigateToHome={() => { }}
+        navigateToDiscover={navigatetoRestaurant}
+        navigateToProfile={() => { }} />
     </FlexBox>
   )
 }

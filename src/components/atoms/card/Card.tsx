@@ -14,12 +14,13 @@ import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
 export interface MealCardProps {
   meal: EnrichedMeal;
   layoutType: MealCardType;
+  suppressDistance?: boolean;
   onPress: (meal: Meal) => void;
 }
 
 export const MealCard = (props: MealCardProps) => {
 
-  const { meal, layoutType, onPress } = props;
+  const { meal, layoutType, onPress, suppressDistance } = props;
   const { image, name, price, distance, restaurantName, flagged } = meal;
 
 
@@ -82,7 +83,7 @@ export const MealCard = (props: MealCardProps) => {
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {StatBox(`$${price}`)}
-            {distance && StatBox(`${distance} mi`)}
+            {!suppressDistance && distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
         {flagged &&

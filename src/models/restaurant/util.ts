@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { MOCK_MEALS_ALL_INFO } from "../meal/util";
+import { MOCK_MEALS } from "../meal/util";
 import { BusinessHours, Restaurant } from "./restaurant";
 
 export const MOCK_RESTAURANT: Restaurant = {
@@ -18,7 +18,7 @@ export const MOCK_RESTAURANT: Restaurant = {
     city: "New York"
   },
   phoneNumber: '7702394828',
-  meals: MOCK_MEALS_ALL_INFO
+  meals: MOCK_MEALS
 }
 
 // Need to be smarter about timezones
