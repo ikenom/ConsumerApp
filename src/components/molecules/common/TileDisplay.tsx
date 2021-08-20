@@ -4,7 +4,8 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
-import { MealCard, EnrichedMeal } from '../../atoms/card/Card';
+import { MealCard } from '../../atoms/card/Card';
+import { EnrichedMeal } from '../../../models/meal/meal';
 
 export interface TileDisplayProps {
     meals: EnrichedMeal[]

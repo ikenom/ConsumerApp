@@ -1,10 +1,10 @@
 import { Box } from "../layout/Box"
 import { MealCardType, getMealCardLayoutDimensions } from "./util";
 import Carousel from 'react-native-snap-carousel';
-import { EnrichedMeal, MealCard } from "./Card";
+import { MealCard } from "./Card";
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import React from 'react';
-import { Meal } from "../../../models/meal/meal";
+import { Meal, EnrichedMeal } from "../../../models/meal/meal";
 
 export interface CardCarouselProps {
   layoutType: CardCarouselLayout;

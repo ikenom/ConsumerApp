@@ -5,18 +5,17 @@ import {
 } from 'react-native-responsive-screen';
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
-import { Meal } from "../../../models/meal/meal";
+import { EnrichedMeal, Meal } from "../../../models/meal/meal";
 import { ScrollView } from "react-native-gesture-handler";
 import { TileDisplay } from "../../molecules/common/TileDisplay";
 import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { HomeStackParamList } from "../../../../App";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
-import { MealCardData } from "../../atoms/card/Card";
 
 export interface SeeAsTilesProps{
   title: string;
-  tiles: MealCardData[];
+  tiles: EnrichedMeal[];
   navigation?: StackNavigationProp<HomeStackParamList, 'SeeAsTiles'>
 }
 
@@ -46,7 +45,7 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
       </Box>
       <ScrollView>
         <Box>
-          <TileDisplay mealCards={tiles} />
+          <TileDisplay meals={tiles} />
         </Box>
       </ScrollView>
       <Box mb={hp('2.5%')}>
