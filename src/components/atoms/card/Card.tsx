@@ -7,7 +7,7 @@ import {
 } from 'react-native-responsive-screen';
 import {Image, TouchableOpacity} from 'react-native';
 import { MealCardType, Dimension, getMealCardLayoutDimensions, truncateString } from './util';
-import { Meal } from '../../../models/meal/meal';
+import { Meal, EnrichedMeal } from '../../../models/meal/meal';
 import { defaultTheme } from '../../../defaultTheme';
 import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
 
@@ -15,11 +15,6 @@ export interface MealCardProps {
   meal: EnrichedMeal;
   layoutType: MealCardType;
   onPress: (meal: Meal) => void;
-}
-
-export interface EnrichedMeal extends Meal {
-  restaurantName?: string;
-  flagged?: boolean;
 }
 
 export const MealCard = (props: MealCardProps) => {

@@ -10,6 +10,11 @@ export interface Meal {
   distance: string;
 }
 
+export interface EnrichedMeal extends Meal {
+  restaurantName?: string;
+  flagged?: boolean;
+}
+
 export interface Nutrition {
   calories: number;
   macros: MacroNutrition;

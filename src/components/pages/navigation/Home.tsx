@@ -6,7 +6,7 @@ import {
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
 import { useState } from 'react';
-import { Meal } from "../../../models/meal/meal";
+import { Meal, EnrichedMeal } from "../../../models/meal/meal";
 import { Text } from "../../atoms/typography/Text";
 import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
 import { CardCarousel } from "../../atoms/card/CardCarousel";
@@ -18,7 +18,6 @@ import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { HomeStackParamList } from "../../../../App";
 import { Restaurant } from "../../../models/restaurant/restaurant";
 import { MOCK_RESTAURANT } from "../../../models/restaurant/util"; // TEMP
-import { EnrichedMeal } from "../../atoms/card/Card";
 
 export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
   const { navigation, route } = props;

@@ -21,8 +21,7 @@ import OrderStore from './src/store/orderStore';
 import { HomeNavContainer, HomeViewProps } from './src/components/pages/navigation/Home';
 import { LoadingView } from './src/components/pages/Loading';
 import { SeeAsTilesNavContainer, SeeAsTilesProps } from './src/components/pages/navigation/SeeAsTiles';
-import { Meal } from './src/models/meal/meal';
-import { EnrichedMeal } from './src/components/atoms/card/Card';
+import { Meal, EnrichedMeal } from './src/models/meal/meal';
 import { MOCK_MEALS } from './src/models/meal/util';
 
 type RootStackParamList = {
