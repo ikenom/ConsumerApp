@@ -20,10 +20,10 @@ import { Restaurant } from './src/models/restaurant/restaurant';
 import OrderStore from './src/store/orderStore';
 import { HomeNavContainer, HomeViewProps } from './src/components/pages/navigation/Home';
 import { LoadingView } from './src/components/pages/Loading';
-import { MOCK_MEALS_ALL_INFO } from './src/models/meal/util';
 import { SeeAsTilesNavContainer, SeeAsTilesProps } from './src/components/pages/navigation/SeeAsTiles';
 import { Meal } from './src/models/meal/meal';
-import { MealCardData } from './src/components/atoms/card/Card';
+import { EnrichedMeal } from './src/components/atoms/card/Card';
+import { MOCK_MEALS } from './src/models/meal/util';
 
 type RootStackParamList = {
   Loading: undefined;
@@ -60,9 +60,9 @@ const App = () => {
   const [location, setLocation] = useState("Harlem Prime");
   const [hasNotifications, setHasNotifications]  = useState(true);
   const [homeSlideshowImages, setHomeSlideshowImages] = useState<string[]>();
-  const [newMeals, setNewMeals] = useState<MealCardData[]>();
-  const [popularMeals, setPopularMeals] = useState<MealCardData[]>();
-  const [orderAgainMeals, setOrderAgainMeals] = useState<MealCardData[]>();
+  const [newMeals, setNewMeals] = useState<EnrichedMeal[]>();
+  const [popularMeals, setPopularMeals] = useState<EnrichedMeal[]>();
+  const [orderAgainMeals, setOrderAgainMeals] = useState<EnrichedMeal[]>();
   const [restaurant, setRestaurant] = useState<Restaurant>(); // DELETE
 
   const RootStack = createStackNavigator<RootStackParamList>();
@@ -78,7 +78,21 @@ const App = () => {
     const restaurants = restaurantStore.getRestaurants().get() // This should be .value if want to handle null or undefined
 
     // PLACEHOLDER Fake fns to be replaced with getting real data
-    const getDummySlideshowImages = () => MOCK_MEALS_ALL_INFO.map((meal) => meal.image);
+    const getDummySlideshowImages = () => MOCK_MEALS.map((meal) => meal.image);
+
+    const enrichMeals = (meals: Meal[]): EnrichedMeal[] => {
+      let mealCardData = [];
+      for (let i = 0; i < meals.length; i++) {
+        const restaurant = restaurantStore.getRestaurantById(meals[i].restaurantId)
+        mealCardData.push({
+          ...meals[i],
+          restaurantName: restaurant?.name,
+          flagged: true
+        })
+      }
+      console.log(mealCardData)
+      return mealCardData
+    }
     
     // Load Location
     setLocation("Harlem");
@@ -93,13 +107,13 @@ const App = () => {
     
     console.log(restaurantStore)
     // Load New on FYTR
-    setNewMeals(buildMealCardData(restaurantStore.getNewMeals()));
+    setNewMeals(enrichMeals(restaurantStore.getNewMeals()));
     
-    // TODO Load Popular
-    setPopularMeals(buildMealCardData(restaurantStore.getPopularMeals()));
+    // Load Popular
+    setPopularMeals(enrichMeals(restaurantStore.getPopularMeals()));
     
-    // TODO Load Order Again
-    setOrderAgainMeals(buildMealCardData(orderStore.getOrderAgainMeals()));
+    // Load Order Again
+    setOrderAgainMeals(enrichMeals(orderStore.getOrderAgainMeals()));
     
     setRestaurant(restaurants[0])
     setLoadingRestaurant(false)
@@ -108,20 +122,6 @@ const App = () => {
   useEffect(() => {
     startup()
   },[])
-
-  const buildMealCardData = (meals: Meal[]): MealCardData[] => {
-    // TODO Pull restaurant name by ID, figure out where flagged comes from
-    let mealCardData = [];
-    for (let i = 0; i < meals.length; i++) {
-      mealCardData.push({
-        meal: meals[i],
-        restaurantName: "Name from buildMealCardData",
-        flagged: true
-      })
-    }
-    console.log(mealCardData)
-    return mealCardData
-  }
 
   // TEMP Initial params for HomeNavigatorContainer are temp
   const HomeStackScreens = () => (

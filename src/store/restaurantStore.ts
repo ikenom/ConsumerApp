@@ -2,7 +2,7 @@ import { State, createState } from '@hookstate/core';
 import { DateTime } from 'luxon';
 import { getRestaurantsAsync } from '../api/restaurant_client';
 import { Meal } from '../models/meal/meal';
-import { MOCK_MEALS_ALL_INFO } from '../models/meal/util'; // TEMP
+import { MOCK_MEALS } from '../models/meal/util'; // TEMP
 import { Restaurant } from '../models/restaurant/restaurant';
 
 export default class RestaurantStore {
@@ -105,7 +105,6 @@ export default class RestaurantStore {
     const restaurants = this.restaurants.get()
     const foundRestaurant = restaurants.find(r => r.id === restaurantId)
     if (foundRestaurant) {
-      console.log("Found " + foundRestaurant.name + "with ID " + restaurantId)
       return foundRestaurant
     }
     else {
@@ -113,10 +112,10 @@ export default class RestaurantStore {
     }
   }
 
-  // TEMP
+  // PLACEHOLDER
   getDummyCarouselMeals = (): Meal[] => {
     const restaurants = this.restaurants.get()
-    return restaurants[0].meals.concat(MOCK_MEALS_ALL_INFO); // Combo of backend and mock data
+    return restaurants[0].meals.concat(MOCK_MEALS); // Combo of backend and mock data
   }
 
   getNewMeals = (): Meal[] => {

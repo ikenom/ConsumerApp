@@ -3,6 +3,7 @@ import { Image } from 'react-native';
 import wafflesImage from '../../../assets/testImages/waffles.jpeg';
 import chickenMealImage from '../../../assets/testImages/chickenMeal.jpeg';
 import pulledPorkImage from '../../../assets/testImages/pulledPork.jpeg';
+import { EnrichedMeal } from '../../components/atoms/card/Card';
 
 const wafflesUri = Image.resolveAssetSource(wafflesImage).uri;
 const chickenUri = Image.resolveAssetSource(chickenMealImage).uri;
@@ -36,7 +37,7 @@ export const MOCK_NUTRITION: Nutrition = {
   }
 }
 
-export const MOCK_MEALS_ALL_INFO: Meal[] = [
+export const MOCK_MEALS: Meal[] = [
   {
     id: "1",
     name: "Hazelnut Belgian Waffles",
@@ -96,6 +97,24 @@ export const MOCK_MEALS_ALL_INFO: Meal[] = [
     image: pulledPorkUri,
     description: "Delicious pulled pork",
     nutrition: MOCK_NUTRITION
+  }
+]
+
+export const MOCK_MEALS_ENRICHED: EnrichedMeal[] = [
+  {
+    ...MOCK_MEALS[0],
+    restaurantName: "Awful Waffle",
+    flagged: false
+  },
+  {
+    ...MOCK_MEALS[1],
+    restaurantName: "Wild Chix",
+    flagged: false
+  },
+  {
+    ...MOCK_MEALS[2],
+    restaurantName: "Curly Tail",
+    flagged: true
   }
 ]
 

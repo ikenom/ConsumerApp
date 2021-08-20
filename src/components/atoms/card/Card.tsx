@@ -12,21 +12,20 @@ import { defaultTheme } from '../../../defaultTheme';
 import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
 
 export interface MealCardProps {
-  mealCardData: MealCardData;
+  meal: EnrichedMeal;
   layoutType: MealCardType;
   onPress: (meal: Meal) => void;
 }
 
-export interface MealCardData {
-  meal: Meal;
+export interface EnrichedMeal extends Meal {
   restaurantName?: string;
   flagged?: boolean;
 }
 
 export const MealCard = (props: MealCardProps) => {
 
-  const { mealCardData, layoutType, onPress } = props;
-  const { meal, restaurantName, flagged } = mealCardData;
+  const { meal, layoutType, onPress } = props;
+  const { image, name, price, distance, restaurantName, flagged } = meal;
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -63,7 +62,7 @@ export const MealCard = (props: MealCardProps) => {
           height={dimensions.height}
           width={dimensions.width}
           overflow={'hidden'} >
-          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: meal.image}} />
+          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: image}} />
         </Box>
         <FlexBox
           top={-dimensions.contentHeight}
@@ -76,7 +75,7 @@ export const MealCard = (props: MealCardProps) => {
           flexDirection={'column'}
           justifyContent={'space-evenly'}>
           <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
-            {truncateString(meal.name, dimensions.truncateMealTo)}
+            {truncateString(name, dimensions.truncateMealTo)}
           </Text>
           {restaurantName  &&
             (<Text
@@ -87,8 +86,8 @@ export const MealCard = (props: MealCardProps) => {
               {truncateString(restaurantName, dimensions.truncateRestaurantTo)}
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
-            {StatBox(`$${meal.price}`)}
-            {meal.distance && StatBox(`${meal.distance} mi`)}
+            {StatBox(`$${price}`)}
+            {distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
         {flagged &&
