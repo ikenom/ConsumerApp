@@ -18,11 +18,13 @@ export default class UserStore {
 
   private constructor() { }
 
+  // PLACEHOLDER
   isMealFlagged = (meal: Meal): boolean => {
     // TODO Actually check ingredients
     return false
   }
 
+  // PLACEHOLDER
   getLocation = (): string => {
     // TODO Actually return location
     return "Harlem"
