@@ -56,7 +56,7 @@ export const HomeView = (props: HomeViewProps) => {
       :
       // If restaurant failed to load by ID, stop from crashing
       // Expected to get null restaurant for mock meals
-      Toast.show("Error loading restaurant data meal.", Toast.LONG)
+      Toast.show("Error loading restaurant data for meal.", Toast.LONG)
   }
 
   const onPressSeeMore = (title: string, tiles: EnrichedMeal[]) => {
