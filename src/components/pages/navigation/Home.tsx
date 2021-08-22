@@ -5,6 +5,7 @@ import {
 } from 'react-native-responsive-screen';
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
+import Toast from 'react-native-simple-toast';
 import { useState } from 'react';
 import { Meal, EnrichedMeal } from "../../../models/meal/meal";
 import { Text } from "../../atoms/typography/Text";
@@ -47,10 +48,15 @@ export const HomeView = (props: HomeViewProps) => {
 
   const onPressMeal = (meal: Meal) => {
     const restaurant = restaurantStore.getRestaurantById(meal.restaurantId)
-    navigation?.push("RestaurantStack", {
-      screen: "MealView",
-      params: { meal: meal, restaurant: restaurant }
-    })
+    restaurant ?
+      navigation?.push("RestaurantStack", {
+        screen: "MealView",
+        params: { meal: meal, restaurant: restaurant }
+      })
+      :
+      // If restaurant failed to load by ID, stop from crashing
+      // Expected to get null restaurant for mock meals
+      Toast.show("Error loading restaurant data meal.", Toast.LONG)
   }
 
   const onPressSeeMore = (title: string, tiles: EnrichedMeal[]) => {
@@ -126,7 +132,7 @@ export const HomeView = (props: HomeViewProps) => {
       </FlexBox>
       <NavigationFooter
         navigateToHome={() => { }}
-        navigateToDiscover={navigateToRestaurant}
+        navigateToDiscover={navigateToRestaurant} // TEMP
         navigateToProfile={() => { }} />
     </FlexBox>
   )
