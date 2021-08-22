@@ -19,8 +19,13 @@ export default class UserStore {
   private constructor() { }
 
   isMealFlagged = (meal: Meal): boolean => {
-    // TO DO Actually check ingredients
+    // TODO Actually check ingredients
     return false
+  }
+
+  getLocation = (): string => {
+    // TODO Actually return location
+    return "Harlem"
   }
 
 }

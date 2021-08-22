@@ -10,8 +10,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import { TileDisplay } from "../../molecules/common/TileDisplay";
 import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
-import { HomeStackParamList } from "../../../../App";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
+import { HomeStackParamList } from "../../../navigator/HomeStack";
 
 export interface SeeAsTilesProps{
   title: string;

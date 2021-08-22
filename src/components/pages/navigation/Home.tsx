@@ -16,8 +16,8 @@ import { CarouselHeader } from "../../atoms/card/CarouselHeader";
 import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
-import { HomeStackParamList } from "../../../../App";
 import RestaurantStore from "../../../store/restaurantStore";
+import { HomeStackParamList } from "../../../navigator/HomeStack";
 
 export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
   const { navigation, route } = props;
