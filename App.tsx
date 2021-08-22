@@ -23,6 +23,7 @@ import { LoadingView } from './src/components/pages/Loading';
 import { SeeAsTilesNavContainer, SeeAsTilesProps } from './src/components/pages/navigation/SeeAsTiles';
 import { Meal, EnrichedMeal } from './src/models/meal/meal';
 import { MOCK_MEALS } from './src/models/meal/util';
+import UserStore from './src/store/userStore';
 
 type RootStackParamList = {
   Loading: undefined;
@@ -71,6 +72,7 @@ const App = () => {
   const startup = async () => {
     await AuthStore.init()
     const orderStore = OrderStore.getInstance()
+    const userStore = UserStore.getInstance()
     const restaurantStore = RestaurantStore.getInstance()
     await restaurantStore.getRestaurantsAsync()
 
@@ -83,13 +85,13 @@ const App = () => {
       let mealCardData = [];
       for (let i = 0; i < meals.length; i++) {
         const restaurant = restaurantStore.getRestaurantById(meals[i].restaurantId)
+        const isFlagged = userStore.isMealFlagged(meals[i])
         mealCardData.push({
           ...meals[i],
           restaurantName: restaurant?.name,
-          flagged: true
+          flagged: isFlagged
         })
       }
-      console.log(mealCardData)
       return mealCardData
     }
     

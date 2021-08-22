@@ -16,8 +16,7 @@ import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { HomeStackParamList } from "../../../../App";
-import { Restaurant } from "../../../models/restaurant/restaurant";
-import { MOCK_RESTAURANT } from "../../../models/restaurant/util"; // TEMP
+import RestaurantStore from "../../../store/restaurantStore";
 
 export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
   const { navigation, route } = props;
@@ -44,12 +43,10 @@ export const HomeView = (props: HomeViewProps) => {
   const { locationName, slideshowImages, meals, navigation } = props;
   const [hasNotifications, setHasNotifications] = useState(true);
 
-  // PLACEHOLDER Replace with real backend call
-  // Don't want to look up restaurant by name in case there are duplicate names
-  const getRestaurantById = (id: string): Restaurant => MOCK_RESTAURANT
+  const restaurantStore = RestaurantStore.getInstance();
 
   const onPressMeal = (meal: Meal) => {
-    const restaurant = getRestaurantById(meal.restaurantId)
+    const restaurant = restaurantStore.getRestaurantById(meal.restaurantId)
     navigation?.push("RestaurantStack", {
       screen: "MealView",
       params: { meal: meal, restaurant: restaurant }
@@ -63,14 +60,17 @@ export const HomeView = (props: HomeViewProps) => {
     })
   }
 
-  const navigatetoRestaurant = () => {
+  const navigateToRestaurant = () => {
+    // Temporarily hooked this up to Discover on Navigation Footer, for demo purposes
+    const restaurants = restaurantStore.getRestaurants().get()
+    const restaurant = restaurants[0] // Show first restaurant for demo
     navigation?.push("RestaurantStack", {
       screen: "RestaurantView",
       params: {
-        restaurant: MOCK_RESTAURANT,
+        restaurant: restaurant,
         meals: {
-          all: MOCK_RESTAURANT?.meals!!,
-          recommendations: MOCK_RESTAURANT?.meals!!
+          all: restaurant.meals,
+          recommendations: restaurant.meals
         }
       }
     })
@@ -126,7 +126,7 @@ export const HomeView = (props: HomeViewProps) => {
       </FlexBox>
       <NavigationFooter
         navigateToHome={() => { }}
-        navigateToDiscover={navigatetoRestaurant}
+        navigateToDiscover={navigateToRestaurant}
         navigateToProfile={() => { }} />
     </FlexBox>
   )

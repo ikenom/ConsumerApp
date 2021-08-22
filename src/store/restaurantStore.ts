@@ -2,7 +2,6 @@ import { State, createState } from '@hookstate/core';
 import { DateTime } from 'luxon';
 import { getRestaurantsAsync } from '../api/restaurant_client';
 import { Meal } from '../models/meal/meal';
-import { MOCK_MEALS } from '../models/meal/util'; // TEMP
 import { Restaurant } from '../models/restaurant/restaurant';
 
 export default class RestaurantStore {
@@ -115,7 +114,7 @@ export default class RestaurantStore {
   // PLACEHOLDER
   getDummyCarouselMeals = (): Meal[] => {
     const restaurants = this.restaurants.get()
-    return restaurants[0].meals.concat(MOCK_MEALS); // Combo of backend and mock data
+    return restaurants[0].meals
   }
 
   getNewMeals = (): Meal[] => {

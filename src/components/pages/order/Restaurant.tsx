@@ -110,8 +110,8 @@ export const RestaurantView = (props: RestaurantViewProps) => {
             </Text>
           <Box mt={hp('1.5%')}>
             <CardCarousel
-              onPress={onPressMeal} l
-              ayoutType='tall'
+              onPress={onPressMeal} 
+              layoutType='tall'
               meals={meals.all}
               suppressDistance={true} />
           </Box>

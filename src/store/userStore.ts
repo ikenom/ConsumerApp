@@ -1,3 +1,5 @@
+import { Meal } from '../models/meal/meal';
+
 export default class UserStore {
 
   private static instance: UserStore
@@ -15,5 +17,10 @@ export default class UserStore {
   }
 
   private constructor() { }
+
+  isMealFlagged = (meal: Meal): boolean => {
+    // TO DO Actually check ingredients
+    return false
+  }
 
 }
