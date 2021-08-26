@@ -15,10 +15,6 @@ export const NavigationFooter = (props: NavigationFooterProps) => {
 
     const { navigateToHome, navigateToDiscover, navigateToProfile } = props;
 
-    const onPressHome = () => navigateToHome()
-    const onPressDiscover = () => navigateToDiscover()
-    const onPressProfile = () => navigateToProfile()
-
     return (
         <FlexBox flexDirection={'row'} pt={'13px'} justifyContent='center'>
             <Box flexGrow={1} alignItems='center'>
@@ -26,7 +22,7 @@ export const NavigationFooter = (props: NavigationFooterProps) => {
                     name={'home'}
                     size={27}
                     color={defaultTheme.colors.blue}
-                    onPress={onPressHome} />
+                    onPress={navigateToHome} />
                 <Text color={defaultTheme.colors.blue} fontSize={defaultTheme.fontSize.xsm}>Home</Text>
             </Box>
             <Box flexGrow={1} alignItems='center' pl={'33px'} pr={'33px'}>
@@ -34,7 +30,7 @@ export const NavigationFooter = (props: NavigationFooterProps) => {
                     name={'filter-variant'}
                     size={27}
                     color={defaultTheme.colors.greyEight}
-                    onPress={onPressDiscover} />
+                    onPress={navigateToDiscover} />
                 <Text color={defaultTheme.colors.greyEight} fontSize={defaultTheme.fontSize.xsm}>Discover</Text>
             </Box>
             <Box flexGrow={1} alignItems='center'>
@@ -42,7 +38,7 @@ export const NavigationFooter = (props: NavigationFooterProps) => {
                     name={'account-circle'}
                     size={27}
                     color={defaultTheme.colors.greyEight}
-                    onPress={onPressProfile} />
+                    onPress={navigateToProfile} />
                 <Text color={defaultTheme.colors.greyEight} fontSize={defaultTheme.fontSize.xsm}>Profile</Text>
             </Box>
         </FlexBox>

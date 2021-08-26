@@ -17,14 +17,12 @@ export type HomeStackParamList = {
   RestaurantStack: NavigatorScreenParams<RestaurantParamList>;
 }
 
-export const HomeStackScreens = () => {
-  
-  const HomeStack = createStackNavigator<HomeStackParamList>();
+export const loadHomeData = (): HomeViewProps => {
 
   const restaurantStore = RestaurantStore.getInstance();
   const orderStore = OrderStore.getInstance();
   const userStore = UserStore.getInstance();
-  
+
   // PLACEHOLDER Fake fns to be replaced with getting real data
   const getDummySlideshowImages = () => MOCK_MEALS.map((meal) => meal.image);
 
@@ -38,21 +36,24 @@ export const HomeStackScreens = () => {
         isFlaggedIngredient: isFlagged
       } as EnrichedMeal
     })
-    console.log(mealCardData)
     return mealCardData
   }
 
-  const loadHomeData = (): HomeViewProps => {
-    return {
-      locationName: userStore.getLocation(),
-      slideshowImages: getDummySlideshowImages(),
-      meals: {
-        new: enrichMeals(restaurantStore.getNewMeals()),
-        popular: enrichMeals(restaurantStore.getPopularMeals()),
-        orderAgain: enrichMeals(orderStore.getOrderAgainMeals())
-      }
+  return {
+    locationName: userStore.getLocation(),
+    slideshowImages: getDummySlideshowImages(),
+    meals: {
+      new: enrichMeals(restaurantStore.getNewMeals()),
+      popular: enrichMeals(restaurantStore.getPopularMeals()),
+      orderAgain: enrichMeals(orderStore.getOrderAgainMeals())
     }
   }
+}
+
+export const HomeStackScreens = () => {
+  
+  const HomeStack = createStackNavigator<HomeStackParamList>();
+
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen
