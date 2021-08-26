@@ -15,13 +15,13 @@ import RestaurantStore from '../../../store/restaurantStore';
 export interface MealCardProps {
   meal: EnrichedMeal;
   layoutType: MealCardType;
-  suppressDistance?: boolean;
+  hideDistance?: boolean;
   onPress: (meal: Meal) => void;
 }
 
 export const MealCard = (props: MealCardProps) => {
 
-  const { meal, layoutType, onPress, suppressDistance } = props;
+  const { meal, layoutType, onPress, hideDistance } = props;
   const { image, name, price, restaurantId, restaurantName, isFlaggedIngredient } = meal;
 
 
@@ -91,7 +91,7 @@ export const MealCard = (props: MealCardProps) => {
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {StatBox(`$${price}`)}
-            {!suppressDistance && distance && StatBox(`${distance} mi`)}
+            {!hideDistance && distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
         {isFlaggedIngredient &&

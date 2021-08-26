@@ -9,7 +9,7 @@ import { Meal, EnrichedMeal } from "../../../models/meal/meal";
 export interface CardCarouselProps {
   layoutType: CardCarouselLayout;
   meals: EnrichedMeal[];
-  suppressDistance?: boolean;
+  hideDistance?: boolean;
   onPress: (mealViewProps: Meal) => void;
 }
 
@@ -17,7 +17,7 @@ export type CardCarouselLayout = 'short' | 'tall'
 
 export const CardCarousel = (props: CardCarouselProps) => {
 
-  const { layoutType, meals, suppressDistance, onPress } = props;
+  const { layoutType, meals, hideDistance, onPress } = props;
   const mealCardLayout:MealCardType = ((layoutType === 'short') ? 'horizontal' : 'vertical')
   const dimensions = getMealCardLayoutDimensions(mealCardLayout)
 
@@ -27,7 +27,7 @@ export const CardCarousel = (props: CardCarouselProps) => {
       <MealCard 
         meal={item}
         layoutType={mealCardLayout}
-        suppressDistance={suppressDistance}
+        hideDistance={hideDistance}
         onPress={onPress}
       />
     )

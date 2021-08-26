@@ -101,7 +101,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               onPress={onPressMeal}
               layoutType='short'
               meals={meals.recommendations}
-              suppressDistance={true} />
+              hideDistance={true} />
           </Box>
         </FlexBox>
         <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
@@ -113,7 +113,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               onPress={onPressMeal} 
               layoutType='tall'
               meals={meals.all}
-              suppressDistance={true} />
+              hideDistance={true} />
           </Box>
         </FlexBox>
       </Box>
