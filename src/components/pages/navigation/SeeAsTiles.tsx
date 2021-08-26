@@ -15,7 +15,7 @@ import { HomeStackParamList } from "../../../navigator/HomeStack";
 
 export interface SeeAsTilesProps{
   title: string;
-  tiles: EnrichedMeal[];
+  meals: EnrichedMeal[];
   navigation?: StackNavigationProp<HomeStackParamList, 'SeeAsTiles'>
 }
 
@@ -28,7 +28,7 @@ export const SeeAsTilesNavContainer = (props: StackScreenProps<HomeStackParamLis
 
 export const SeeAsTilesView = (props: SeeAsTilesProps) => {
 
-  const { title, tiles, navigation } = props;
+  const { title, meals, navigation } = props;
 
   const onPressBack = () => {
     navigation?.goBack()
@@ -45,7 +45,7 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
       </Box>
       <ScrollView>
         <Box>
-          <TileDisplay meals={tiles} />
+          <TileDisplay meals={meals} />
         </Box>
       </ScrollView>
       <Box mb={hp('2.5%')}>

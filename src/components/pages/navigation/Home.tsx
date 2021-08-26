@@ -59,10 +59,10 @@ export const HomeView = (props: HomeViewProps) => {
       Toast.show("Error loading restaurant data for meal.", Toast.LONG)
   }
 
-  const onPressSeeMore = (title: string, tiles: EnrichedMeal[]) => {
+  const onPressSeeMore = (title: string, meals: EnrichedMeal[]) => {
     navigation?.push('SeeAsTiles', {
       title: title, 
-      tiles: tiles
+      meals: meals
     })
   }
 
