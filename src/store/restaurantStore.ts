@@ -72,7 +72,7 @@ export default class RestaurantStore {
 
   // TEMP Delete once distance is added to restaurant
   getDummyDistance = () => {
-    const dist = Math.random() * 10
+    const dist = 2.0
     return dist.toFixed(1)
   }
 
