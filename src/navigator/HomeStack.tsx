@@ -29,18 +29,19 @@ export const HomeStackScreens = () => {
   const getDummySlideshowImages = () => MOCK_MEALS.map((meal) => meal.image);
 
   const enrichMeals = (meals: Meal[]): EnrichedMeal[] => {
-    let mealCardData = [];
-    for (let i = 0; i < meals.length; i++) {
+    const mealCardData = meals.map((meal, i) => {
       const restaurant = restaurantStore.getRestaurantById(meals[i].restaurantId)
       const isFlagged = userStore.isFlaggedIngredient(meals[i])
-      mealCardData.push({
-        ...meals[i],
+      return {
+        ...meal,
         restaurantName: restaurant?.name,
         isFlaggedIngredient: isFlagged
-      })
-    }
+      } as EnrichedMeal
+    })
+    console.log(mealCardData)
     return mealCardData
   }
+
   const loadHomeData = (): HomeViewProps => {
     return {
       locationName: userStore.getLocation(),
