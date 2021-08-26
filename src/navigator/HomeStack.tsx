@@ -66,22 +66,32 @@ export const HomeStackScreens = () => {
   );
 }
 
-export const navigateToHome = (navigation: StackNavigationProp<HomeStackParamList>) => {
-  navigation?.push("Home", loadHomeData())
+export const navigateToHome = (navigation: StackNavigationProp<HomeStackParamList> | undefined) => {
+  if (navigation) {
+    navigation?.push("Home", loadHomeData())
+  }
+  else {
+    console.log("navigateToHome: navigation was undefined")
+  }
 }
 
-export const navigateToRestaurant = (navigation: StackNavigationProp<HomeStackParamList>) => {
-  const restaurantStore = RestaurantStore.getInstance();
+export const navigateToRestaurant = (navigation: StackNavigationProp<HomeStackParamList> | undefined) => {
+  if (navigation) {
+    const restaurantStore = RestaurantStore.getInstance();
     const restaurants = restaurantStore.getRestaurants().get()
-  const restaurant = restaurants[0] // TEMP Show first restaurant for demo
-  navigation?.push("RestaurantStack", {
-    screen: "RestaurantView",
-    params: {
-      restaurant: restaurant,
-      meals: {
-        all: restaurant.meals,
-        recommendations: restaurant.meals
+    const restaurant = restaurants[0] // TEMP Show first restaurant for demo
+    navigation?.push("RestaurantStack", {
+      screen: "RestaurantView",
+      params: {
+        restaurant: restaurant,
+        meals: {
+          all: restaurant.meals,
+          recommendations: restaurant.meals
+        }
       }
-    }
-  })
+    })
+  }
+  else {
+    console.log("navigateToRestaurant: navigation was undefined")
+  }
 }

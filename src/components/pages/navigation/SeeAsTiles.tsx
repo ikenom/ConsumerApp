@@ -49,7 +49,10 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
         </Box>
       </ScrollView>
       <Box mb={hp('2.5%')}>
-      <NavigationFooter navigateToHome={onPressBack} navigateToDiscover={() => navigateToRestaurant(navigation)} navigateToProfile={()=>{}} />
+        <NavigationFooter
+          navigateToHome={onPressBack}
+          navigateToDiscover={() => navigateToRestaurant(navigation)}
+          navigateToProfile={() => { }} />
       </Box>
     </FlexBox>
   )
