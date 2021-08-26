@@ -17,7 +17,7 @@ import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import RestaurantStore from "../../../store/restaurantStore";
-import { HomeStackParamList } from "../../../navigator/HomeStack";
+import { HomeStackParamList, navigateToHome, navigateToRestaurant } from "../../../navigator/HomeStack";
 
 export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
   const { navigation, route } = props;
@@ -44,9 +44,8 @@ export const HomeView = (props: HomeViewProps) => {
   const { locationName, slideshowImages, meals, navigation } = props;
   const [hasNotifications, setHasNotifications] = useState(true);
 
-  const restaurantStore = RestaurantStore.getInstance();
-
   const onPressMeal = (meal: Meal) => {
+    const restaurantStore = RestaurantStore.getInstance()
     const restaurant = restaurantStore.getRestaurantById(meal.restaurantId)
     restaurant ?
       navigation?.push("RestaurantStack", {
@@ -63,22 +62,6 @@ export const HomeView = (props: HomeViewProps) => {
     navigation?.push('SeeAsTiles', {
       title: title, 
       meals: meals
-    })
-  }
-
-  const navigateToRestaurant = () => {
-    // Temporarily hooked this up to Discover on Navigation Footer, for demo purposes
-    const restaurants = restaurantStore.getRestaurants().get()
-    const restaurant = restaurants[0] // Show first restaurant for demo
-    navigation?.push("RestaurantStack", {
-      screen: "RestaurantView",
-      params: {
-        restaurant: restaurant,
-        meals: {
-          all: restaurant.meals,
-          recommendations: restaurant.meals
-        }
-      }
     })
   }
 
@@ -131,8 +114,8 @@ export const HomeView = (props: HomeViewProps) => {
         </ScrollView>
       </FlexBox>
       <NavigationFooter
-        navigateToHome={() => { }}
-        navigateToDiscover={navigateToRestaurant} // TEMP
+        navigateToHome={() => navigateToHome(navigation)}
+        navigateToDiscover={() => navigateToRestaurant(navigation)} // TEMP
         navigateToProfile={() => { }} />
     </FlexBox>
   )

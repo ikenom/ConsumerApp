@@ -3,11 +3,13 @@ import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon
 import { defaultTheme } from "../../../defaultTheme";
 import { Text } from "../../atoms/typography/Text";
 import { FlexBox, Box } from "../../atoms/layout/Box";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { HomeStackParamList } from "../../../navigator/HomeStack";
 
 export interface NavigationFooterProps {
     profileImage?: any;
-    navigateToHome: () => void;
-    navigateToDiscover: () => void;
+    navigateToHome: (navigation: StackNavigationProp<HomeStackParamList>) => void;
+    navigateToDiscover: (navigation: StackNavigationProp<HomeStackParamList>) => void;
     navigateToProfile: () => void;
 }
 

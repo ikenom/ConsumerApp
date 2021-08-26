@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { HomeNavContainer, HomeViewProps } from '../components/pages/navigation/Home';
 import { SeeAsTilesProps, SeeAsTilesNavContainer } from '../components/pages/navigation/SeeAsTiles';
 import { RestaurantParamList, RestaurantStackScreens } from './RestaurantStack';
@@ -64,4 +64,24 @@ export const HomeStackScreens = () => {
       <HomeStack.Screen name="RestaurantStack" component={RestaurantStackScreens} />
     </HomeStack.Navigator>
   );
+}
+
+export const navigateToHome = (navigation: StackNavigationProp<HomeStackParamList>) => {
+  navigation?.push("Home", loadHomeData())
+}
+
+export const navigateToRestaurant = (navigation: StackNavigationProp<HomeStackParamList>) => {
+  const restaurantStore = RestaurantStore.getInstance();
+    const restaurants = restaurantStore.getRestaurants().get()
+  const restaurant = restaurants[0] // TEMP Show first restaurant for demo
+  navigation?.push("RestaurantStack", {
+    screen: "RestaurantView",
+    params: {
+      restaurant: restaurant,
+      meals: {
+        all: restaurant.meals,
+        recommendations: restaurant.meals
+      }
+    }
+  })
 }

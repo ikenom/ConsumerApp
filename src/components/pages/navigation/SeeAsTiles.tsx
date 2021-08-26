@@ -11,7 +11,7 @@ import { TileDisplay } from "../../molecules/common/TileDisplay";
 import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
-import { HomeStackParamList } from "../../../navigator/HomeStack";
+import { HomeStackParamList, navigateToRestaurant } from "../../../navigator/HomeStack";
 
 export interface SeeAsTilesProps{
   title: string;
@@ -49,7 +49,7 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
         </Box>
       </ScrollView>
       <Box mb={hp('2.5%')}>
-      <NavigationFooter navigateToHome={()=>{}} navigateToDiscover={()=>{}} navigateToProfile={()=>{}} />
+      <NavigationFooter navigateToHome={onPressBack} navigateToDiscover={() => navigateToRestaurant(navigation)} navigateToProfile={()=>{}} />
       </Box>
     </FlexBox>
   )
