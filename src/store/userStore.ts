@@ -19,9 +19,9 @@ export default class UserStore {
   private constructor() { }
 
   // PLACEHOLDER
-  isMealFlagged = (meal: Meal): boolean => {
+  isFlaggedIngredient = (meal: Meal): boolean => {
     // TODO Actually check ingredients
-    return false
+    return false // All not flagged for now
   }
 
   // PLACEHOLDER

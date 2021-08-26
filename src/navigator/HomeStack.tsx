@@ -32,11 +32,11 @@ export const HomeStackScreens = () => {
     let mealCardData = [];
     for (let i = 0; i < meals.length; i++) {
       const restaurant = restaurantStore.getRestaurantById(meals[i].restaurantId)
-      const isFlagged = userStore.isMealFlagged(meals[i])
+      const isFlagged = userStore.isFlaggedIngredient(meals[i])
       mealCardData.push({
         ...meals[i],
         restaurantName: restaurant?.name,
-        flagged: isFlagged
+        isFlaggedIngredient: isFlagged
       })
     }
     return mealCardData

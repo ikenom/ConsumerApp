@@ -12,7 +12,8 @@ export interface Meal {
 
 export interface EnrichedMeal extends Meal {
   restaurantName?: string;
-  flagged?: boolean;
+  isFlaggedIngredient?: boolean;
+  containsExcludedIngredients?: boolean;
 }
 
 export interface Nutrition {

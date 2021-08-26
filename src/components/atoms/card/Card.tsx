@@ -21,7 +21,7 @@ export interface MealCardProps {
 export const MealCard = (props: MealCardProps) => {
 
   const { meal, layoutType, onPress, suppressDistance } = props;
-  const { image, name, price, distance, restaurantName, flagged } = meal;
+  const { image, name, price, distance, restaurantName, isFlaggedIngredient } = meal;
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -86,7 +86,7 @@ export const MealCard = (props: MealCardProps) => {
             {!suppressDistance && distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
-        {flagged &&
+        {isFlaggedIngredient &&
           (<Box position={'absolute'} right={10} top={145}>
             <MaterialCommunityIcon name={'flag-variant'} color={'#EDCD27'} size={28} />
           </Box>)}
