@@ -63,7 +63,7 @@ const App = () => {
       backgroundColor: defaultTheme.colors.black
     }} >
       <StatusBar barStyle={'light-content'} />
-      <NavigationContainer>
+      <NavigationContainer theme={MyTheme}>
         {
           isLoadingRestaurant ? (
             <LoadingView />
