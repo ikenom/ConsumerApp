@@ -8,6 +8,7 @@ export interface Restaurant {
   image?: any;
   businessHours: BusinessHours;
   location: Location;
+  distance: string;
   phoneNumber: string;
   meals: Meal[]
 }

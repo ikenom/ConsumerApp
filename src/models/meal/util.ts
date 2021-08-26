@@ -42,7 +42,6 @@ export const MOCK_MEALS: Meal[] = [
     name: "Hazelnut Belgian Waffles",
     restaurantId: "10",
     price: "12.99",
-    distance: "0.8",
     image: wafflesUri,
     description: "Crispy waffles with a hint of hazelnut.Hazelnuts for breakfast! This family-favorite will start anybody’s day off right.",
     nutrition: MOCK_NUTRITION
@@ -52,7 +51,6 @@ export const MOCK_MEALS: Meal[] = [
     name: "Lemon Grilled Chicken",
     restaurantId: "20",
     price: "17.02",
-    distance: "2.4",
     image: chickenUri,
     description: "Chicken glazed with lemon and cooked to perfection",
     nutrition: MOCK_NUTRITION
@@ -62,7 +60,6 @@ export const MOCK_MEALS: Meal[] = [
     name: "Spicy Pulled Pork",
     restaurantId: "30",
     price: "8.53",
-    distance:  "3.1",
     image: pulledPorkUri,
     description: "Delicious pulled pork",
     nutrition: MOCK_NUTRITION
@@ -72,7 +69,6 @@ export const MOCK_MEALS: Meal[] = [
     name: "Hazelnut Belgian Waffles",
     restaurantId: "40",
     price: "12.99",
-    distance: "0.8",
     image: wafflesUri,
     description: "Crispy waffles with a hint of hazelnut.Hazelnuts for breakfast! This family-favorite will start anybody’s day off right.",
     nutrition: MOCK_NUTRITION
@@ -82,7 +78,6 @@ export const MOCK_MEALS: Meal[] = [
     name: "Lemon Grilled Chicken",
     restaurantId: "50",
     price: "17.02",
-    distance: "2.4",
     image: chickenUri,
     description: "Chicken glazed with lemon and cooked to perfection",
     nutrition: MOCK_NUTRITION
@@ -92,7 +87,6 @@ export const MOCK_MEALS: Meal[] = [
     name: "Spicy Pulled Pork",
     restaurantId: "60",
     price: "8.53",
-    distance:  "3.1",
     image: pulledPorkUri,
     description: "Delicious pulled pork",
     nutrition: MOCK_NUTRITION

@@ -14,7 +14,7 @@ import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon
 import { CardCarousel } from "../../atoms/card/CardCarousel";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
-import { RestaurantParamList } from "../../../../App";
+import { RestaurantParamList } from "../../../navigator/RestaurantStack";
 
 
 export interface RestaurantViewProps {

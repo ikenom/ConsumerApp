@@ -7,7 +7,6 @@ export interface Meal {
   restaurantId: string;
   description: string;
   nutrition: Nutrition;
-  distance: string;
 }
 
 export interface EnrichedMeal extends Meal {

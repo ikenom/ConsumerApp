@@ -62,6 +62,7 @@ export default class RestaurantStore {
       zipCode: node.location.zipCode,
       street: node.location.street
     },
+    distance: this.getDummyDistance(),
     businessHours: {
       openingTime: DateTime.fromISO(node.businessHours.openTime).toFormat('hh:mm a'),
       closingTime: DateTime.fromISO(node.businessHours.closeTime).toFormat('hh:mm a')
@@ -86,7 +87,6 @@ export default class RestaurantStore {
       image: `https:${meal.imageUrl}`,
       name: meal.name,
       restaurantId,
-      distance, 
       price: meal.price,
       description: meal.description,
       nutrition: {

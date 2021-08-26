@@ -10,6 +10,7 @@ import { MealCardType, Dimension, getMealCardLayoutDimensions, truncateString } 
 import { Meal, EnrichedMeal } from '../../../models/meal/meal';
 import { defaultTheme } from '../../../defaultTheme';
 import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
+import RestaurantStore from '../../../store/restaurantStore';
 
 export interface MealCardProps {
   meal: EnrichedMeal;
@@ -21,7 +22,7 @@ export interface MealCardProps {
 export const MealCard = (props: MealCardProps) => {
 
   const { meal, layoutType, onPress, suppressDistance } = props;
-  const { image, name, price, distance, restaurantName, isFlaggedIngredient } = meal;
+  const { image, name, price, restaurantId, restaurantName, isFlaggedIngredient } = meal;
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -29,6 +30,11 @@ export const MealCard = (props: MealCardProps) => {
   const onNavigate = () => {
     onPress(meal)
   };
+
+  const getRestaurantDistance = (restaurantId: string) => {
+    const restaurantStore = RestaurantStore.getInstance()
+    return restaurantStore.getRestaurantById(restaurantId)?.distance
+  }
 
   const StatBox = (str: string) => {
     // Small gray box that contains price or distance
@@ -46,6 +52,8 @@ export const MealCard = (props: MealCardProps) => {
       </Box>
     );
   }
+
+  const distance = getRestaurantDistance(restaurantId)
 
   return (
     <Box

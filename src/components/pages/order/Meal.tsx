@@ -23,12 +23,12 @@ import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon
 import styled from "styled-components";
 import { getFatsInCalories, getProteinInCalories } from "../../../models/meal/util";
 import { Easing } from "react-native-reanimated";
-import { isOpen, MOCK_DISTANCE } from "../../../models/restaurant/util";
+import { isOpen } from "../../../models/restaurant/util";
 import { RestaurantInfoModal } from "../../atoms/modals/RestaurantInfoModal";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
-import { RestaurantParamList } from "../../../../App";
 import OrderStore from "../../../store/orderStore";
 import { useState } from "@hookstate/core";
+import { RestaurantParamList } from "../../../navigator/RestaurantStack";
 
 LogBox.ignoreLogs(['Easing', 'expected']);
 
@@ -158,7 +158,7 @@ const RestaurantInfo = (props: RestaurantInfoProps) => {
             <MaterialCommunityIcon name={'clock-time-three-outline'} size={23} color={defaultTheme.colors.greyTwo}/>
             <Text  mt={'1px'} ml={wp('2.3%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{isOpen(restaurant.businessHours) ? 'Open' : 'Closed'}</Text>
             <Ionicon name={'md-location-sharp'} size={25} color={defaultTheme.colors.greyTwo}/>
-            <Text  mt={'1px'} ml={wp('2%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${MOCK_DISTANCE} mi`}</Text>
+            <Text  mt={'1px'} ml={wp('2%')} mr={wp('5.8%')} fontWeight={'400'} fontSize={defaultTheme.fontSize.m} color={'#FFFFFF'}>{`${restaurant.distance} mi`}</Text>
           </FlexBox>
         </FlexBox>
         <IconButton onPress={toggleModal} icon={<MaterialCommunityIcon name={"chevron-right"} size={25} color={"#FFFFFF"}/>} />
