@@ -1,7 +1,9 @@
 import { DateTime } from "luxon";
+import { MOCK_MEALS } from "../meal/util";
 import { BusinessHours, Restaurant } from "./restaurant";
 
 export const MOCK_RESTAURANT: Restaurant = {
+  id: "restaurant_1",
   name: "Harlem Tavern",
   description: "New York City’s Neighborhood Bar, Restaurant & Beer Garden",
   image: require('../../../assets/testImages/HarlemTavern.png'),
@@ -16,6 +18,7 @@ export const MOCK_RESTAURANT: Restaurant = {
     city: "New York"
   },
   phoneNumber: '7702394828',
+  meals: MOCK_MEALS
 }
 
 // Need to be smarter about timezones

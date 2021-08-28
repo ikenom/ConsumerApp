@@ -1,14 +1,18 @@
 
 export interface Meal {
   id: string;
-  image: any;
+  image: string; // Ought to rename to imageUri but this breaks backend-frontend data send
   name: string;
   price: string;
-  distance?: string;
-  restaurant?: string;
-  flagged?: boolean;
+  restaurantId: string;
   description: string;
   nutrition: Nutrition;
+}
+
+export interface EnrichedMeal extends Meal {
+  restaurantName?: string;
+  isFlaggedIngredient?: boolean;
+  containsExcludedIngredients?: boolean;
 }
 
 export interface Nutrition {

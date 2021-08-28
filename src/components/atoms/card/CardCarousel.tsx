@@ -1,14 +1,15 @@
 import { Box } from "../layout/Box"
-import { MealCardType, Dimension, getMealCardLayoutDimensions } from "./util";
+import { MealCardType, getMealCardLayoutDimensions } from "./util";
 import Carousel from 'react-native-snap-carousel';
-import { MealCard, MealCardProps } from "./Card";
+import { MealCard } from "./Card";
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import React from 'react';
-import { Meal } from "../../../models/meal/meal";
+import { Meal, EnrichedMeal } from "../../../models/meal/meal";
 
-interface CardCarouselProps {
+export interface CardCarouselProps {
   layoutType: CardCarouselLayout;
-  meals: Meal[];
+  meals: EnrichedMeal[];
+  hideDistance?: boolean;
   onPress: (mealViewProps: Meal) => void;
 }
 
@@ -16,17 +17,17 @@ export type CardCarouselLayout = 'short' | 'tall'
 
 export const CardCarousel = (props: CardCarouselProps) => {
 
-  const { layoutType, meals, onPress } = props;
-  const mealCardLayout = ((layoutType === 'short') ? 'horizontal' : 'vertical')
+  const { layoutType, meals, hideDistance, onPress } = props;
+  const mealCardLayout:MealCardType = ((layoutType === 'short') ? 'horizontal' : 'vertical')
   const dimensions = getMealCardLayoutDimensions(mealCardLayout)
 
   //@ts-ignore
   const CardWrapper = ({item, index}) => {
-    const meal = item as Meal;
     return(
       <MealCard 
-        meal={meal}
+        meal={item}
         layoutType={mealCardLayout}
+        hideDistance={hideDistance}
         onPress={onPress}
       />
     )

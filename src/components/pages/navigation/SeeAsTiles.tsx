@@ -5,36 +5,55 @@ import {
 } from 'react-native-responsive-screen';
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
-import { Meal } from "../../../models/meal/meal";
-import { Text } from "../../atoms/typography/Text";
+import { EnrichedMeal, Meal } from "../../../models/meal/meal";
 import { ScrollView } from "react-native-gesture-handler";
 import { TileDisplay } from "../../molecules/common/TileDisplay";
 import { OrderConfirmationHeader } from "../order/common/OrderConfirmationHeader";
-import { MOCK_MEALS_ALL_INFO } from '../../../models/meal/util';
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
-import { HttpLink } from "@apollo/client";
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
+import { HomeStackParamList, navigateToRestaurant } from "../../../navigator/HomeStack";
 
 export interface SeeAsTilesProps{
   title: string;
+  meals: EnrichedMeal[];
+  navigation?: StackNavigationProp<HomeStackParamList, 'SeeAsTiles'>
+}
+
+export const SeeAsTilesNavContainer = (props: StackScreenProps<HomeStackParamList, 'SeeAsTiles'>) => {
+  const { navigation, route } = props;
+  return (
+    <SeeAsTilesView {...route.params} navigation={navigation} />
+  )
 }
 
 export const SeeAsTilesView = (props: SeeAsTilesProps) => {
-  const { title } = props;
+
+  const { title, meals, navigation } = props;
+
+  const onPressBack = () => {
+    navigation?.goBack()
+  }
+
   return (
-    <FlexBox flexDirection='column' bg={defaultTheme.colors.black}>
+    <FlexBox flexDirection='column' bg={defaultTheme.colors.black} height={hp('100%')}>
       <Box mt={hp('6.5%')} mb={hp('3%')} pl={'14px'} pr={'14px'}>
         <OrderConfirmationHeader
           label={title}
           icon="chevron-left"
           iconPosition="left"
-          onPress={() => { }} />
+          onPress={onPressBack} />
       </Box>
       <ScrollView>
-        <Box height={hp('78%')}>
-          <TileDisplay meals={MOCK_MEALS_ALL_INFO} />
+        <Box>
+          <TileDisplay meals={meals} />
         </Box>
       </ScrollView>
-      <NavigationFooter />
+      <Box mb={hp('2.5%')}>
+        <NavigationFooter
+          navigateToHome={onPressBack}
+          navigateToDiscover={() => navigateToRestaurant(navigation)}
+          navigateToProfile={() => { }} />
+      </Box>
     </FlexBox>
   )
 }

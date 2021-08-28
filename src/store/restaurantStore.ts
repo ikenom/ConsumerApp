@@ -62,22 +62,31 @@ export default class RestaurantStore {
       zipCode: node.location.zipCode,
       street: node.location.street
     },
+    distance: this.getDummyDistance(),
     businessHours: {
       openingTime: DateTime.fromISO(node.businessHours.openTime).toFormat('hh:mm a'),
       closingTime: DateTime.fromISO(node.businessHours.closeTime).toFormat('hh:mm a')
     },
-    meals: this.getMealsFromPayload(node.meals)
+    meals: this.getMealsFromPayload(node.meals, node.id, this.getDummyDistance())
   })
+
+  // TEMP Delete once distance is added to restaurant
+  getDummyDistance = () => {
+    const dist = 2.0
+    return dist.toFixed(1)
+  }
 
   getRestaurantsFromPayload = (payload: any): Restaurant[] => {
     return payload.edges.map(edge => this.getRestaurantFromPayload(edge.node));
   }
 
-  getMealsFromPayload = (payload: any[]): Meal[] => {
+  getMealsFromPayload = (payload: any[], restaurantId: string, distance: string): Meal[] => {
+    // Extract Meal data from payload, add info restaurantId and distance in
     return payload.map(meal => ({
       id: meal.id,
       image: `https:${meal.imageUrl}`,
       name: meal.name,
+      restaurantId,
       price: meal.price,
       description: meal.description,
       nutrition: {
@@ -89,5 +98,30 @@ export default class RestaurantStore {
         }
       }
     }))
+  }
+
+  getRestaurantById = (restaurantId: string): (Restaurant | null) => {
+    const restaurants = this.restaurants.get()
+    const foundRestaurant = restaurants.find(r => r.id === restaurantId)
+    if (foundRestaurant) {
+      return foundRestaurant
+    }
+    else {
+      return null
+    }
+  }
+
+  // PLACEHOLDER
+  getDummyCarouselMeals = (): Meal[] => {
+    const restaurants = this.restaurants.get()
+    return restaurants[0].meals
+  }
+
+  getNewMeals = (): Meal[] => {
+    return this.getDummyCarouselMeals() // PLACEHOLDER
+  }
+
+  getPopularMeals = (): Meal[] => {
+    return this.getDummyCarouselMeals() // PLACEHOLDER
   }
 }

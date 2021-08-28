@@ -5,7 +5,9 @@ import {
 } from 'react-native-responsive-screen';
 import { defaultTheme } from "../../../defaultTheme";
 import React from "react";
-import { Meal } from "../../../models/meal/meal";
+import Toast from 'react-native-simple-toast';
+import { useState } from 'react';
+import { Meal, EnrichedMeal } from "../../../models/meal/meal";
 import { Text } from "../../atoms/typography/Text";
 import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
 import { CardCarousel } from "../../atoms/card/CardCarousel";
@@ -13,27 +15,60 @@ import { ScrollView } from "react-native-gesture-handler";
 import { CarouselHeader } from "../../atoms/card/CarouselHeader";
 import { SlideshowCarousel } from "../../atoms/card/SlideshowCarousel";
 import { NavigationFooter } from "../../molecules/common/NavigationFooter";
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
+import RestaurantStore from "../../../store/restaurantStore";
+import { HomeStackParamList, navigateToHome, navigateToRestaurant } from "../../../navigator/HomeStack";
+
+export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
+  const { navigation, route } = props;
+    return (
+      <HomeView {...route.params} navigation={navigation} />
+    )
+  }
 
 export interface HomeViewProps {
   locationName: string;
-  newsTiles: Array<any>;
+  slideshowImages: Array<any>;
   meals: HomeViewMeals;
-  navigation?: any; // TODO hook this boi up
+  navigation?: StackNavigationProp<HomeStackParamList>;
 }
 
 export interface HomeViewMeals {
-  new: Meal[];
-  popular: Meal[];
-  orderAgain: Meal[];
+  new: EnrichedMeal[];
+  popular: EnrichedMeal[];
+  orderAgain: EnrichedMeal[];
 }
 
 export const HomeView = (props: HomeViewProps) => {
 
-  const { locationName, newsTiles, meals, navigation } = props;
+  const { locationName, slideshowImages, meals, navigation } = props;
+  const [hasNotifications, setHasNotifications] = useState(true);
 
   const onPressMeal = (meal: Meal) => {
-    // TODO Figure out where to get restaurant for this to work
-    // navigation?.push('MealView', {meal: meal, restaurant: restaurant});
+    const restaurantStore = RestaurantStore.getInstance()
+    const restaurant = restaurantStore.getRestaurantById(meal.restaurantId)
+    restaurant ?
+      navigation?.push("RestaurantStack", {
+        screen: "MealView",
+        params: { meal: meal, restaurant: restaurant }
+      })
+      :
+      // If restaurant failed to load by ID, stop from crashing
+      // Expected to get null restaurant for mock meals
+      Toast.show("Error loading restaurant data for meal.", Toast.LONG)
+  }
+
+  const onPressSeeMore = (title: string, meals: EnrichedMeal[]) => {
+    navigation?.push('SeeAsTiles', {
+      title: title, 
+      meals: meals
+    })
+  }
+
+  const getNoticationIconName = (hasNotifications: boolean) => hasNotifications ? 'bell-alert' : 'bell'
+
+  const onPressNotifications = () => {
+    setHasNotifications(!hasNotifications)
   }
 
   return (
@@ -46,28 +81,31 @@ export const HomeView = (props: HomeViewProps) => {
           </Text>
         </Box>
         <Box mt={wp('18%')} pr={wp('3%')}>
-          <MaterialCommunityIcon name={'bell'} size={29} color={defaultTheme.colors.greySeven} />
-          {/* Use bell-badge for notification pending*/}
+          <MaterialCommunityIcon
+            name={getNoticationIconName(hasNotifications)}
+            onPress={onPressNotifications}
+            size={29}
+            color={defaultTheme.colors.greySeven} />
         </Box>
       </FlexBox>
       <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>
         <ScrollView>
           <Box>
-            <SlideshowCarousel slides={newsTiles} />
-            <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"New on FYTR"} />
+            <SlideshowCarousel slides={slideshowImages} />
+            <FlexBox key='new' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
+              <CarouselHeader title={"New on FYTR"} onPressSeeMore={() => onPressSeeMore("New on FYTR", meals.new)} />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.new} />
               </Box>
             </FlexBox>
-            <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Popular"} />
+            <FlexBox key='popular' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
+              <CarouselHeader title={"Popular"} onPressSeeMore={() => onPressSeeMore("Popular", meals.popular)} />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.popular} />
               </Box>
             </FlexBox>
-            <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Order Again"} />
+            <FlexBox key='orderAgain' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
+              <CarouselHeader title={"Order Again"} onPressSeeMore={() => onPressSeeMore("Order Again", meals.orderAgain)} />
               <Box mt={hp('1.5%')}>
                 <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.orderAgain} />
               </Box>
@@ -75,7 +113,10 @@ export const HomeView = (props: HomeViewProps) => {
           </Box>
         </ScrollView>
       </FlexBox>
-      <NavigationFooter />
+      <NavigationFooter
+        navigateToHome={() => navigateToHome(navigation)}
+        navigateToDiscover={() => navigateToRestaurant(navigation)} // TEMP
+        navigateToProfile={() => { }} />
     </FlexBox>
   )
 }

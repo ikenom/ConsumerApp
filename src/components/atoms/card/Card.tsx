@@ -7,21 +7,22 @@ import {
 } from 'react-native-responsive-screen';
 import {Image, TouchableOpacity} from 'react-native';
 import { MealCardType, Dimension, getMealCardLayoutDimensions, truncateString } from './util';
-import { Meal } from '../../../models/meal/meal';
+import { Meal, EnrichedMeal } from '../../../models/meal/meal';
 import { defaultTheme } from '../../../defaultTheme';
 import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
+import RestaurantStore from '../../../store/restaurantStore';
 
 export interface MealCardProps {
-  meal: Meal
+  meal: EnrichedMeal;
   layoutType: MealCardType;
+  hideDistance?: boolean;
   onPress: (meal: Meal) => void;
 }
 
 export const MealCard = (props: MealCardProps) => {
 
-  const { meal , layoutType, onPress } = props;
-
-  const { name, restaurant, price, distance, image, flagged } = meal
+  const { meal, layoutType, onPress, hideDistance } = props;
+  const { image, name, price, restaurantId, restaurantName, isFlaggedIngredient } = meal;
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -29,6 +30,11 @@ export const MealCard = (props: MealCardProps) => {
   const onNavigate = () => {
     onPress(meal)
   };
+
+  const getRestaurantDistance = (restaurantId: string) => {
+    const restaurantStore = RestaurantStore.getInstance()
+    return restaurantStore.getRestaurantById(restaurantId)?.distance
+  }
 
   const StatBox = (str: string) => {
     // Small gray box that contains price or distance
@@ -47,6 +53,8 @@ export const MealCard = (props: MealCardProps) => {
     );
   }
 
+  const distance = getRestaurantDistance(restaurantId)
+
   return (
     <Box
       height={dimensions.height}
@@ -58,7 +66,7 @@ export const MealCard = (props: MealCardProps) => {
           height={dimensions.height}
           width={dimensions.width}
           overflow={'hidden'} >
-          <Image style={{ flex: 1, height: undefined, width: undefined }} source={image} />
+          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: image}} />
         </Box>
         <FlexBox
           top={-dimensions.contentHeight}
@@ -73,20 +81,20 @@ export const MealCard = (props: MealCardProps) => {
           <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
             {truncateString(name, dimensions.truncateMealTo)}
           </Text>
-          {restaurant  &&
+          {restaurantName  &&
             (<Text
               height={hp('2%')}
               fontWeight={'500'}
               fontSize={'14px'}
               color={'#B7B7B7'}>
-              {truncateString(restaurant, dimensions.truncateRestaurantTo)}
+              {truncateString(restaurantName, dimensions.truncateRestaurantTo)}
             </Text>)}
           <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
             {StatBox(`$${price}`)}
-            {distance && StatBox(`${distance} mi`)}
+            {!hideDistance && distance && StatBox(`${distance} mi`)}
           </FlexBox>
         </FlexBox>
-        {flagged &&
+        {isFlaggedIngredient &&
           (<Box position={'absolute'} right={10} top={145}>
             <MaterialCommunityIcon name={'flag-variant'} color={'#EDCD27'} size={28} />
           </Box>)}
@@ -95,4 +103,4 @@ export const MealCard = (props: MealCardProps) => {
   );
 };
 
-MealCard.displayName = 'Test Card';
+MealCard.displayName = 'Meal Card';

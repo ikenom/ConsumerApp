@@ -28,7 +28,7 @@ const Slide = (props: SlideProps) => {
                     height: '100%',
                     width: '100%',
                 }}
-                source={props.slideImage}>
+                source={{uri: props.slideImage}}>
                 <LinearGradient
                     colors={['#00000000', '#000000CC']}
                     style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, }} />

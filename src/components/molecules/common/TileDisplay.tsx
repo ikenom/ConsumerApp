@@ -5,10 +5,10 @@ import {
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
 import { MealCard } from '../../atoms/card/Card';
-import { Meal } from '../../../models/meal/meal';
+import { EnrichedMeal } from '../../../models/meal/meal';
 
 export interface TileDisplayProps {
-    meals: Array<Meal>
+    meals: EnrichedMeal[]
 }
 
 export type Parity = 'even' | 'odd';
@@ -35,11 +35,13 @@ export const TileDisplay = (props: TileDisplayProps) => {
     return (
         <FlexBox flexDirection='row'>
             <FlexBox
+                key="evens"
                 width={wp('50%')}
                 flexDirection='column'>
                 {getItemsByParity(mealTiles, 'even')}
             </FlexBox>
-            <FlexBox 
+            <FlexBox
+                key="odds"
                 width={wp('50%')}
                 flexDirection='column'>
                 {getItemsByParity(mealTiles, 'odd')}

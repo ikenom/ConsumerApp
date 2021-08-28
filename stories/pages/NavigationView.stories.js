@@ -12,7 +12,7 @@ export const NavigationHomeStory = () => {
     return (
         <HomeView
             locationName="Harlem"
-            newsTiles={slideshowImages}
+            slideshowImages={slideshowImages}
             meals={{
                 new: MOCK_MEALS_ALL_INFO,
                 popular: MOCK_MEALS_ALL_INFO,
