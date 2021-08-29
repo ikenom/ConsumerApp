@@ -4,25 +4,17 @@ import {storiesOf} from '@storybook/react-native';
 import React from "react";
 import { MOCK_MEALS, MOCK_MEALS_ENRICHED } from '../../../src/models/meal/util';
 import { FlexBox } from '../../../src/components/atoms/layout/Box';
+import { Icons } from '../../../src/components/atoms/card/Icons';
 
 const Horizontalmealstory = () => {
   return(
-      <MealCard meal={MOCK_MEALS[0]} type='horizontal' onPress={() => {}} />
+      <MealCard meal={MOCK_MEALS[0]} layoutType='horizontal' onPress={() => {}} />
   )
 }
 
 const Verticalmealstory = () => {
   return(
-      <MealCard meal={MOCK_MEALS_ENRICHED[1]} type='vertical' onPress={() => {}} />
-  )
-}
-
-const RandomHeightCardStory = () => {
-  return (
-    <FlexBox flexDimension='row'>
-      <MealCard meal={MOCK_MEALS_ENRICHED[1]} type='random-height' onPress={() => { }} />
-      <MealCard meal={MOCK_MEALS_ENRICHED[2]} type='random-height' onPress={() => { }} />
-    </FlexBox>
+      <MealCard meal={MOCK_MEALS_ENRICHED[2]} layoutType='vertical' onPress={() => {}} />
   )
 }
 
@@ -46,8 +38,7 @@ const TallCarouselMoreInfo = () => {
 
 storiesOf('Card', module)
   .add('HorizontalMealCard', () => Horizontalmealstory())
-  .add('VerticalMealCard', () => Verticalmealstory())
-  .add('RandomHeightCard', () => RandomHeightCardStory());
+  .add('VerticalMealCard', () => Verticalmealstory());
 
 storiesOf('Carousel', module)
   .add('Short Carousel', () => ShortCarousel())

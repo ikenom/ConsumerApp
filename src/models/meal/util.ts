@@ -57,11 +57,11 @@ export const MOCK_MEALS: Meal[] = [
   },
   {
     id: "3",
-    name: "Spicy Pulled Pork",
+    name: "Spiciest of All Spicy Spicy Pulled Pork",
     restaurantId: "30",
     price: "8.53",
     image: pulledPorkUri,
-    description: "Delicious pulled pork",
+    description: "Delicious pulled pork that is marinated in ghost pepper sauce and the tears of your enemies",
     nutrition: MOCK_NUTRITION
   },
   {
@@ -108,7 +108,7 @@ export const MOCK_MEALS_ENRICHED: EnrichedMeal[] = [
   },
   {
     ...MOCK_MEALS[2],
-    restaurantName: "Curly Tail",
+    restaurantName: "Curly Tail Bar Upon Avon on the Bluffs Creekside",
     isFlaggedIngredient: true,
     containsExcludedIngredients: true
   }

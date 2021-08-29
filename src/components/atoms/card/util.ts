@@ -3,22 +3,20 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-export type MealCardType = 'horizontal' | 'vertical' | 'random-height';
+export type MealCardType = 'horizontal' | 'vertical';
 
 const VERTICAL_DIM: Dimension = {
-  width: wp('44%'),
+  width: wp('48%'),
   height: hp('22%'),
   contentHeight: hp('6.7%'), 
-  truncateMealTo: 19,
-  truncateRestaurantTo: 19
+  truncateStrTo: 20
 }
 
 const HORIZONTAL_DIM: Dimension = {
   width: wp('58%'),
   height: hp('13%'),
   contentHeight: hp('5%'), 
-  truncateMealTo: 27,
-  truncateRestaurantTo: 25,
+  truncateStrTo: 25
 }
 
 export const truncateString = (str: string, limit: number): string => {
@@ -39,18 +37,8 @@ export const getMealCardLayoutDimensions = (layoutType: MealCardType): Dimension
   if (layoutType === 'horizontal') {
     return HORIZONTAL_DIM;
   }
-  else if (layoutType === 'vertical') {
+  else {
     return VERTICAL_DIM;
-  }
-  else { // Random height
-    const randomHeight = generateRandomNumber(22,33);
-    return({
-      width: wp('48%'),
-      height: hp(randomHeight),
-      contentHeight: hp('6.7%'), 
-      truncateMealTo: 20,
-      truncateRestaurantTo: 20,
-    })
   }
 }
 
@@ -58,6 +46,5 @@ export interface Dimension {
   width: number;
   height: number;
   contentHeight: number;
-  truncateMealTo: number;
-  truncateRestaurantTo: number;
+  truncateStrTo: number; // Num characters
 } 

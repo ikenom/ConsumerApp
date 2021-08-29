@@ -33,7 +33,7 @@ export const CardCarousel = (props: CardCarouselProps) => {
     )
   }
   return(
-    <Box height={dimensions.height} >
+    <Box>
       <Carousel 
         firstItem={1}
         vertical={false}
