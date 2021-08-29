@@ -5,16 +5,27 @@ import React from "react";
 import { MOCK_MEALS, MOCK_MEALS_ENRICHED } from '../../../src/models/meal/util';
 import { FlexBox } from '../../../src/components/atoms/layout/Box';
 import { Icons } from '../../../src/components/atoms/card/Icons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Horizontalmealstory = () => {
-  return(
-      <MealCard meal={MOCK_MEALS[0]} layoutType='horizontal' onPress={() => {}} />
+  return (
+    <FlexBox flexDirection='column' >
+      <MealCard meal={MOCK_MEALS_ENRICHED[0]} layoutType='horizontal' onPress={() => { }} />
+      <MealCard meal={MOCK_MEALS_ENRICHED[1]} layoutType='horizontal' onPress={() => { }} />
+      <MealCard meal={MOCK_MEALS_ENRICHED[2]} layoutType='horizontal' onPress={() => { }} />
+    </FlexBox>
   )
 }
 
 const Verticalmealstory = () => {
-  return(
-      <MealCard meal={MOCK_MEALS_ENRICHED[2]} layoutType='vertical' onPress={() => {}} />
+  return (
+    <ScrollView>
+      <FlexBox flexDirection='column' >
+        <MealCard meal={MOCK_MEALS_ENRICHED[0]} layoutType='vertical' onPress={() => { }} />
+        <MealCard meal={MOCK_MEALS_ENRICHED[1]} layoutType='vertical' onPress={() => { }} />
+        <MealCard meal={MOCK_MEALS_ENRICHED[2]} layoutType='vertical' onPress={() => { }} />
+      </FlexBox>
+    </ScrollView>
   )
 }
 

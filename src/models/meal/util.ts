@@ -97,14 +97,14 @@ export const MOCK_MEALS_ENRICHED: EnrichedMeal[] = [
   {
     ...MOCK_MEALS[0],
     restaurantName: "Awful Waffle",
-    isFlaggedIngredient: false,
+    isFlaggedIngredient: true,
     containsExcludedIngredients: false
   },
   {
     ...MOCK_MEALS[1],
     restaurantName: "Wild Chix",
     isFlaggedIngredient: false,
-    containsExcludedIngredients: false
+    containsExcludedIngredients: true
   },
   {
     ...MOCK_MEALS[2],

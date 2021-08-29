@@ -16,7 +16,7 @@ const HORIZONTAL_DIM: Dimension = {
   width: wp('58%'),
   height: hp('13%'),
   contentHeight: hp('5%'), 
-  truncateStrTo: 25
+  truncateStrTo: 30
 }
 
 export const truncateString = (str: string, limit: number): string => {

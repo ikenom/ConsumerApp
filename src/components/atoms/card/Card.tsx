@@ -23,7 +23,14 @@ export interface MealCardProps {
 export const MealCard = (props: MealCardProps) => {
 
   const { meal, layoutType, onPress, hideDistance } = props;
-  const { image, name, price, restaurantId, restaurantName, isFlaggedIngredient, containsExcludedIngredients } = meal;
+  const { image,
+    name,
+    price,
+    description,
+    restaurantId,
+    restaurantName,
+    isFlaggedIngredient,
+    containsExcludedIngredients } = meal;
 
 
   const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
@@ -39,11 +46,11 @@ export const MealCard = (props: MealCardProps) => {
 
   const distance = getRestaurantDistance(restaurantId)
 
-  return (
+  const verticalLayout = () => (
     <FlexBox
       backgroundColor={defaultTheme.colors.blackTwo}
       width={dimensions.width}
-      flexDirection='column'
+      flexDirection={'column'}
       overflow={'hidden'}
       borderRadius={'10px'}>
       <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
@@ -83,11 +90,77 @@ export const MealCard = (props: MealCardProps) => {
             <StatBox string={`$${price}`} />
             {!hideDistance && distance && (<StatBox string={`${distance} mi`} />)}
           </FlexBox>
-          {isFlaggedIngredient && containsExcludedIngredients &&
-            (<Icons isFlagged={isFlaggedIngredient} containsExcluded={containsExcludedIngredients} />)}
+          <Icons isFlagged={isFlaggedIngredient} containsExcluded={containsExcludedIngredients} />
         </FlexBox>
       </TouchableOpacity>
     </FlexBox>
+  );
+
+  const horizontalLayout = () => (
+    <FlexBox
+      backgroundColor={defaultTheme.colors.blackTwo}
+      width={wp('95%')}
+      flexDirection={'row'}
+      overflow={'hidden'}
+      borderRadius={'10px'}>
+      <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
+        <FlexBox flexDirection={'row'}>
+          <Box
+            height={'auto'}
+            width={wp('35%')}
+            overflow={'hidden'} >
+            <Image style={{ flex: 1, height: dimensions.height, width: 'auto' }} source={{ uri: image }} />
+          </Box>
+          <FlexBox
+            overflow={'hidden'}
+            padding={1}
+            flexDirection={'column'}
+            justifyContent={'space-evenly'}
+            pl={wp('2.0%')}
+            pr={wp('2.0%')}
+            pb={hp('1.3%')}>
+            <Text fontWeight={'600'} fontSize={'16px'} color={'#FFFFFF'} mb={hp('0.75%')}>
+              {truncateString(name, dimensions.truncateStrTo)}
+            </Text>
+            {description &&
+              (<Text
+                height={hp('2%')}
+                fontWeight={'500'}
+                fontSize={'15px'}
+                color={'#B7B7B7'}
+                mb={hp('0.9%')}>
+                {truncateString(description, dimensions.truncateStrTo)}
+              </Text>)}
+            <FlexBox flexDirection={'row'} >
+              <FlexBox
+                width={wp('24%')}
+                br={'25px'}
+                mt={'2px'}
+                alignContent={'center'}
+                flexDirection={'row'}
+                mb={hp('1.2%')}>
+                <StatBox string={`$${price}`} />
+                {!hideDistance && distance && (<StatBox string={`${distance} mi`} />)}
+              </FlexBox>
+              <Icons isFlagged={isFlaggedIngredient} containsExcluded={containsExcludedIngredients} />
+            </FlexBox>
+          </FlexBox>
+        </FlexBox>
+      </TouchableOpacity>
+    </FlexBox>
+  );
+
+  const getLayout = () => {
+    if (layoutType === 'horizontal') {
+      return horizontalLayout()
+    }
+    else {
+      return verticalLayout()
+    }
+  }
+
+  return (
+    getLayout()
   );
 };
 

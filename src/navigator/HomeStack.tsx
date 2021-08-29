@@ -28,12 +28,14 @@ export const loadHomeData = (): HomeViewProps => {
 
   const enrichMeals = (meals: Meal[]): EnrichedMeal[] => {
     const mealCardData = meals.map((meal, i) => {
-      const restaurant = restaurantStore.getRestaurantById(meals[i].restaurantId)
-      const isFlagged = userStore.isFlaggedIngredient(meals[i])
+      const restaurant = restaurantStore.getRestaurantById(meal.restaurantId)
+      const isFlagged = userStore.isFlaggedIngredient(meal)
+      const containsExcluded = userStore.containsExcludedIngredients(meal)
       return {
         ...meal,
         restaurantName: restaurant?.name,
-        isFlaggedIngredient: isFlagged
+        isFlaggedIngredient: isFlagged,
+        containsExcludedIngredients: containsExcluded
       } as EnrichedMeal
     })
     return mealCardData
