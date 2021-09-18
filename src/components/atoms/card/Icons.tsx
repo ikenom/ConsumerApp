@@ -1,6 +1,7 @@
 import React from "react";
-import { MaterialCommunityIcon } from "../icons/matericalCommunictyIcon";
-import { FlexBox } from "../layout/Box";
+import { Box, FlexBox } from "../layout/Box";
+import FlaggedIngredient from "../../../../assets/svg/FlaggedIngredient.svg";
+import ExcludedIngredient from "../../../../assets/svg/ExcludedIngredient.svg";
 
 
 interface IconsProps {
@@ -14,9 +15,9 @@ export const Icons = (props: IconsProps) => {
   return (
     <FlexBox flexDirection={'row'}>
       {isFlagged &&
-        (<MaterialCommunityIcon name={'flag-variant'} color={'#EDCD27'} size={27} />)}
+        (<Box pr={'8px'}><FlaggedIngredient /></Box>)}
       {containsExcluded &&
-        (<MaterialCommunityIcon name={'cancel'} color={'red'} size={27} />)}
+        (<Box><ExcludedIngredient /></Box>)}
     </FlexBox>
   );
 }

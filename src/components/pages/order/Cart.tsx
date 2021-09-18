@@ -19,10 +19,10 @@ import { LocationDisplay } from "../../molecules/common/LocationDisplay"
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { OrderConfirmationHeader } from "./common/OrderConfirmationHeader";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
-import { RestaurantParamList } from "../../../../App";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import OrderStore from "../../../store/orderStore";
 import { useState } from "@hookstate/core";
+import { RestaurantParamList } from "../../../navigator/RestaurantStack";
 
 LogBox.ignoreLogs(['margin', 'width']);
 
