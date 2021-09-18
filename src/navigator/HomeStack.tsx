@@ -27,6 +27,7 @@ export const loadHomeData = (): HomeViewProps => {
   const getDummySlideshowImages = () => MOCK_MEALS.map((meal) => meal.image);
 
   const enrichMeals = (meals: Meal[]): EnrichedMeal[] => {
+    // Enrich meal (what comes from DB) with more info from other places
     const mealCardData = meals.map((meal, i) => {
       const restaurant = restaurantStore.getRestaurantById(meal.restaurantId)
       const isFlagged = userStore.isFlaggedIngredient(meal)

@@ -58,7 +58,7 @@ export const HomeView = (props: HomeViewProps) => {
       Toast.show("Error loading restaurant data for meal.", Toast.LONG)
   }
 
-  const onPressSeeMore = (title: string, meals: EnrichedMeal[]) => {
+  const navigateToShowAll = (title: string, meals: EnrichedMeal[]) => {
     navigation?.push('SeeAsTiles', {
       title: title, 
       meals: meals
@@ -93,21 +93,21 @@ export const HomeView = (props: HomeViewProps) => {
           <Box>
             <SlideshowCarousel slides={slideshowImages} />
             <FlexBox key='new' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"New on FYTR"} onPressSeeMore={() => onPressSeeMore("New on FYTR", meals.new)} />
+              <CarouselHeader title={"New on FYTR"} navigateToShowAll={() => navigateToShowAll("New on FYTR", meals.new)} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.new} />
+                <CardCarousel onPress={onPressMeal} meals={meals.new} />
               </Box>
             </FlexBox>
             <FlexBox key='popular' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Popular"} onPressSeeMore={() => onPressSeeMore("Popular", meals.popular)} />
+              <CarouselHeader title={"Popular"} navigateToShowAll={() => navigateToShowAll("Popular", meals.popular)} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.popular} />
+                <CardCarousel onPress={onPressMeal} meals={meals.popular} />
               </Box>
             </FlexBox>
             <FlexBox key='orderAgain' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
-              <CarouselHeader title={"Order Again"} onPressSeeMore={() => onPressSeeMore("Order Again", meals.orderAgain)} />
+              <CarouselHeader title={"Order Again"} navigateToShowAll={() => navigateToShowAll("Order Again", meals.orderAgain)} />
               <Box mt={hp('1.5%')}>
-                <CardCarousel onPress={onPressMeal} layoutType='tall' meals={meals.orderAgain} />
+                <CardCarousel onPress={onPressMeal} meals={meals.orderAgain} />
               </Box>
             </FlexBox>
           </Box>

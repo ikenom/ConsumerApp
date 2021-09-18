@@ -11,7 +11,6 @@ import { EnrichedMeal, Meal } from "../../../models/meal/meal";
 import { Text } from "../../atoms/typography/Text";
 import { Ionicon } from "../../atoms/icons/Ionicons";
 import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
-import { CardCarousel } from "../../atoms/card/CardCarousel";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { RestaurantParamList } from "../../../navigator/RestaurantStack";
