@@ -15,7 +15,7 @@ import { CardCarousel } from "../../atoms/card/CardCarousel";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import { RestaurantParamList } from "../../../navigator/RestaurantStack";
-import { MealCard } from "../../atoms/card/Card";
+import { BannerCard } from "../../atoms/card/Card";
 import { ScrollView } from "react-native-gesture-handler";
 
 
@@ -57,7 +57,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
       (m) => (
         <Box
           mb={hp('1.5%')}>
-          <MealCard meal={m} layoutType={'horizontal'} onPress={onPressMeal} hideDistance={true} />
+          <BannerCard meal={m} onPress={onPressMeal} hideDistance={true} />
         </Box>
       )
     )

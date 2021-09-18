@@ -1,12 +1,12 @@
 import React from 'react';
-import {Text} from '../../atoms/typography/Text';
-import {FlexBox, Box} from '../layout/Box';
+import { Text } from '../../atoms/typography/Text';
+import { FlexBox, Box } from '../layout/Box';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {Image, TouchableOpacity} from 'react-native';
-import { MealCardType, Dimension, getMealCardLayoutDimensions, truncateString } from './util';
+import { Image, TouchableOpacity } from 'react-native';
+import { BANNER_CARD_DIM, MEAL_CARD_DIM, truncateString } from './util';
 import { Meal, EnrichedMeal } from '../../../models/meal/meal';
 import { defaultTheme } from '../../../defaultTheme';
 import RestaurantStore from '../../../store/restaurantStore';
@@ -15,14 +15,13 @@ import { Icons } from './Icons';
 
 export interface MealCardProps {
   meal: EnrichedMeal;
-  layoutType: MealCardType;
   hideDistance?: boolean;
   onPress: (meal: Meal) => void;
 }
 
 export const MealCard = (props: MealCardProps) => {
 
-  const { meal, layoutType, onPress, hideDistance } = props;
+  const { meal, onPress, hideDistance } = props;
   const { image,
     name,
     price,
@@ -32,8 +31,7 @@ export const MealCard = (props: MealCardProps) => {
     isFlaggedIngredient,
     containsExcludedIngredients } = meal;
 
-
-  const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
+  const dimensions = MEAL_CARD_DIM
 
   const onNavigate = () => {
     onPress(meal)
@@ -46,7 +44,7 @@ export const MealCard = (props: MealCardProps) => {
 
   const distance = getRestaurantDistance(restaurantId)
 
-  const verticalLayout = () => (
+  return (
     <FlexBox
       backgroundColor={defaultTheme.colors.blackTwo}
       width={dimensions.width}
@@ -95,8 +93,26 @@ export const MealCard = (props: MealCardProps) => {
       </TouchableOpacity>
     </FlexBox>
   );
+};
 
-  const horizontalLayout = () => (
+export const BannerCard = (props: MealCardProps) => {
+  const { meal, onPress } = props;
+  const { image,
+    name,
+    price,
+    description,
+    restaurantId,
+    restaurantName,
+    isFlaggedIngredient,
+    containsExcludedIngredients } = meal;
+
+  const onNavigate = () => {
+    onPress(meal)
+  };
+
+  const dimensions = BANNER_CARD_DIM
+
+  return (
     <FlexBox
       backgroundColor={defaultTheme.colors.blackTwo}
       width={wp('95%')}
@@ -140,7 +156,6 @@ export const MealCard = (props: MealCardProps) => {
                 flexDirection={'row'}
                 mb={hp('1.2%')}>
                 <StatBox string={`$${price}`} />
-                {!hideDistance && distance && (<StatBox string={`${distance} mi`} />)}
               </FlexBox>
               <Icons isFlagged={isFlaggedIngredient} containsExcluded={containsExcludedIngredients} />
             </FlexBox>
@@ -149,19 +164,6 @@ export const MealCard = (props: MealCardProps) => {
       </TouchableOpacity>
     </FlexBox>
   );
-
-  const getLayout = () => {
-    if (layoutType === 'horizontal') {
-      return horizontalLayout()
-    }
-    else {
-      return verticalLayout()
-    }
-  }
-
-  return (
-    getLayout()
-  );
-};
+}
 
 MealCard.displayName = 'Meal Card';

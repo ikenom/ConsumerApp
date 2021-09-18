@@ -3,22 +3,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-export type MealCardType = 'horizontal' | 'vertical';
-
-const VERTICAL_DIM: Dimension = {
-  width: wp('48%'),
-  height: hp('22%'),
-  contentHeight: hp('6.7%'), 
-  truncateStrTo: 20
-}
-
-const HORIZONTAL_DIM: Dimension = {
-  width: wp('58%'),
-  height: hp('13%'),
-  contentHeight: hp('5%'), 
-  truncateStrTo: 30
-}
-
+// Needs test
 export const truncateString = (str: string, limit: number): string => {
   // Shorten string with "..." so that it is under the specified length
   if (str.length > limit) {
@@ -29,22 +14,29 @@ export const truncateString = (str: string, limit: number): string => {
   }
 }
 
-const generateRandomNumber = (min: number, max: number) => {
+// Used previously to generate random tile heights like pinterest
+// No longer needed after redesign
+/* const generateRandomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) + min);
-}
-
-export const getMealCardLayoutDimensions = (layoutType: MealCardType): Dimension => {
-  if (layoutType === 'horizontal') {
-    return HORIZONTAL_DIM;
-  }
-  else {
-    return VERTICAL_DIM;
-  }
-}
+} */
 
 export interface Dimension {
   width: number;
   height: number;
   contentHeight: number;
   truncateStrTo: number; // Num characters
-} 
+}
+
+export const MEAL_CARD_DIM: Dimension = {
+  width: wp('48%'),
+  height: hp('22%'),
+  contentHeight: hp('6.7%'),
+  truncateStrTo: 20
+}
+
+export const BANNER_CARD_DIM: Dimension = {
+    width: wp('58%'),
+    height: hp('13%'),
+    contentHeight: hp('5%'),
+    truncateStrTo: 30
+}

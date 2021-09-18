@@ -5,8 +5,8 @@ import { FlexBox } from "../layout/Box";
 
 interface IconsProps {
   creatorPicture?: string;
-  isFlagged: boolean;
-  containsExcluded: boolean;
+  isFlagged: boolean | undefined;
+  containsExcluded: boolean | undefined;
 }
 
 export const Icons = (props: IconsProps) => {
