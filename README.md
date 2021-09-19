@@ -23,3 +23,12 @@ React Native is a little weird with storybook. In order for it to work the story
 4. Refresh storybook in the browser and put it side to side with the emulator. You should see something like this:
 
 ![](react-native-storybook.gif)
+
+
+# Topics to cover
+- [ ] Storybook
+- [ ] React Router
+- [ ] Box and Flexbox
+- [ ] Running locally connected to dev cluster
+- [ ] Graphql
+- [ ] Insomnia
