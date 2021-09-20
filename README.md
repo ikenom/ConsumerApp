@@ -1,7 +1,5 @@
 # Consumer App
 
-This repo is the fytr consumer app used by users who can order meals.
-
 # Setup
 
 ### Install React Native
