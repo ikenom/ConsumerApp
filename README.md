@@ -9,6 +9,18 @@ This repo is the fytr consumer app used by users who can order meals.
 
 Make sure install react native locally before going through the setup: `npm install react-native`.
 
+### Install XCode
+Link to apple store: https://apps.apple.com/us/app/xcode/id497799835?mt=12
+
+
+# First time running app
+We use `yarn` as the package manager for the app.
+
+1. Clone the repository locally `git clone https://github.com/ikenom/ConsumerApp.git`
+2. Install dependencies with `yarn install`
+3. Run the app `yarn ios`
+  
+  
 
 # Running storybook
 
