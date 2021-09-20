@@ -10,26 +10,26 @@ Make sure install react native locally before going through the setup: `npm inst
 ### Install XCode
 Link to apple store: https://apps.apple.com/us/app/xcode/id497799835?mt=12
 
+Configure a few devices on Xcodes simulator: https://developer.apple.com/documentation/xcode/running-your-app-in-the-simulator-or-on-a-device
+
+The iphone 8, iphone X and iphone 12 are usually the different screens we use for validating UI.
+
 
 # First time running app
 We use `yarn` as the package manager for the app.
 
-1. Clone the repository locally `git clone https://github.com/ikenom/ConsumerApp.git`
-2. Install dependencies with `yarn install`
-3. Run the app `yarn ios`
-  
-  
+1. Clone the repository locally `git clone https://github.com/ikenom/ConsumerApp.git`.
+2. Install dependencies with `yarn install`.
+3. Make sure you have created an iPhone X and iPhone 8 in your xcode simulator.
+4. Run the app `yarn ios`. This should open the aoo in the ios emulated device.
+
+
 
 # Running storybook
 
-React Native is a little weird with storybook. In order for it to work the storybook component in `./storybook/index.js` needs to be returned as the root component of the react app. Here are the steps to running storybook.
+React Native is a little weird with storybook.
 
-1. Make sure in `App.tsx` the default export in `export default Storybook;`
+1. Make sure in `App.tsx` to uncomment the storybook code at the bottom of the file: https://github.com/ikenom/ConsumerApp/blob/master/App.tsx#L83 
 
-2. Run storybook `yarn storybook`. This will launch storybook on port 7007 and it will be waiting for you to start your emulator. Open it on in the browser **not on the device**.
+2. Run the app `yarn ios`. This will launch storybook on your device emulator.
 
-3. Run the ios app. In one terminal run `yarn start` to run the bundler. In another terminal run `yarn ios`.
-
-4. Refresh storybook in the browser and put it side to side with the emulator. You should see something like this:
-
-![](react-native-storybook.gif)
