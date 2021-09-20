@@ -7,7 +7,6 @@ import {
 } from '@react-navigation/native'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
-//import StorybookUIRoot from './storybook'; // This will break promises so they never resolve so only uncomment when testing
 import AuthStore from './src/store/authStore';
 import RestaurantStore from './src/store/restaurantStore';
 import OrderStore from './src/store/orderStore';
@@ -68,7 +67,7 @@ const App = () => {
   
 };
 
-const SafeAreaWrapper = () => {
+let SafeAreaWrapper = () => {
 
   return (
     <SafeAreaProvider>
@@ -77,8 +76,16 @@ const SafeAreaWrapper = () => {
   )
 }
 
-/* const Storybook = () => {
-  return <StorybookUIRoot />;
-}; */
+ 
+// Uncomment this code block to run the storybook
+// Comment out this block to run the app
+
+// import StorybookUIRoot from './storybook';
+
+// SafeAreaWrapper = () => {
+//   return <StorybookUIRoot />;
+// }; 
+
+
 
 export default SafeAreaWrapper;
