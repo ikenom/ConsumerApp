@@ -14,12 +14,6 @@ export const truncateString = (str: string, limit: number): string => {
   }
 }
 
-// Used previously to generate random tile heights like pinterest
-// No longer needed after redesign
-/* const generateRandomNumber = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min) + min);
-} */
-
 export interface Dimension {
   width: number;
   height: number;

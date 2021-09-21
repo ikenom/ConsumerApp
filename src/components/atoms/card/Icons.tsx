@@ -5,13 +5,12 @@ import ExcludedIngredient from "../../../../assets/svg/ExcludedIngredient.svg";
 
 
 interface IconsProps {
-  creatorPicture?: string;
   isFlagged: boolean | undefined;
   containsExcluded: boolean | undefined;
 }
 
 export const Icons = (props: IconsProps) => {
-  const { creatorPicture, isFlagged, containsExcluded } = props;
+  const { isFlagged, containsExcluded } = props;
   return (
     <FlexBox flexDirection={'row'}>
       {isFlagged &&
