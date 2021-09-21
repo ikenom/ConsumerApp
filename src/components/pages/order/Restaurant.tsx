@@ -51,7 +51,8 @@ export const RestaurantView = (props: RestaurantViewProps) => {
     navigation?.goBack()
   }
 
-  const getMealItemsTsx = (meals: Meal[]) => {
+  const MealList = (meals: Meal[]) => {
+    // Turn this into separate component if it is needed elsewhere
     return meals.map(
       (m) => (
         <Box
@@ -110,7 +111,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               For You
             </Text>
             <Box mt={hp('1.5%')}>
-              {getMealItemsTsx(meals.recommendations)}
+              {MealList(meals.recommendations)}
             </Box>
           </FlexBox>
           <FlexBox flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
@@ -118,7 +119,7 @@ export const RestaurantView = (props: RestaurantViewProps) => {
               All
             </Text>
             <Box mt={hp('1.5%')}>
-              {getMealItemsTsx(meals.all)}
+              {MealList(meals.all)}
             </Box>
           </FlexBox>
         </Box>
