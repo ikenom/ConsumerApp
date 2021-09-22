@@ -67,7 +67,7 @@ export const MealCard = (props: MealCardProps) => {
           pl={wp('2.0%')}
           pr={wp('2.0%')}
           pb={hp('1.3%')}>
-          <Text fontWeight={'600'} fontSize={'16px'} color={'#FFFFFF'} mb={hp('0.75%')}>
+          <Text fontWeight={'600'} fontSize={'16px'} color={defaultTheme.colors.white} mb={hp('0.75%')}>
             {name}
           </Text>
           {restaurantName &&
@@ -145,7 +145,7 @@ export const BigCard = (props: MealCardProps) => {
           pr={wp('4.1%')}
           pb={hp('1.3%')}>
           <Box pb={hp('0.8%')}>
-            <Text fontWeight={'700'} fontSize={'17px'} color={'#FFFFFF'} mb={hp('0.75%')}>
+            <Text fontWeight={'700'} fontSize={'17px'} color={defaultTheme.colors.white} mb={hp('0.75%')}>
               {name}
             </Text>
           </Box>
@@ -230,7 +230,7 @@ export const BannerCard = (props: MealCardProps) => {
             pl={wp('2.0%')}
             pr={wp('2.0%')}
             pb={hp('1.3%')}>
-            <Text fontWeight={'600'} fontSize={'16px'} color={'#FFFFFF'} mb={hp('0.75%')}>
+            <Text fontWeight={'600'} fontSize={'16px'} color={defaultTheme.colors.white} mb={hp('0.75%')}>
               {truncateString(name, dimensions.truncateStrTo)}
             </Text>
             {description &&
