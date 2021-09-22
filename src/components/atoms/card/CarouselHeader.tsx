@@ -1,20 +1,20 @@
 import React from 'react';
 import { FlexBox, Box } from "../../atoms/layout/Box";
-import { MaterialCommunityIcon } from "../../atoms/icons/matericalCommunictyIcon";
 import { Text } from "../../atoms/typography/Text";
 import { defaultTheme } from "../../../defaultTheme";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface CarouselHeaderProps {
   title: string
-  onPressSeeMore: (title: string) => void;
+  navigateToShowAll: (title: string) => void;
 }
 
 export const CarouselHeader = (props: CarouselHeaderProps) => {
 
-    const { title, onPressSeeMore } = props;
+    const { title, navigateToShowAll } = props;
 
-    const onPressIcon = () => {
-        onPressSeeMore(title)
+    const onPressShowAll = () => {
+        navigateToShowAll(title)
     }
 
     return (
@@ -24,12 +24,16 @@ export const CarouselHeader = (props: CarouselHeaderProps) => {
                     {title}
                 </Text>
             </Box>
+            <TouchableOpacity onPress={onPressShowAll}>
             <Box>
-                <MaterialCommunityIcon
-                    onPress={onPressIcon}
-                    name={'dots-horizontal'}
-                    size={27} color={defaultTheme.colors.blue} />
+                <Text
+                    color={defaultTheme.colors.blue}
+                    fontWeight={'600'}
+                    fontSize={defaultTheme.fontSize.m}
+                    font={defaultTheme.fontFamily.hnt}>Show All
+                    </Text>
             </Box>
+            </TouchableOpacity>
         </FlexBox>
     )
 }

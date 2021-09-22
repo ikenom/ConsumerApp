@@ -21,7 +21,11 @@ export default class UserStore {
   // PLACEHOLDER
   isFlaggedIngredient = (meal: Meal): boolean => {
     // TODO Actually check ingredients
-    return false // All not flagged for now
+    return true; // TEMP Hard-coded
+  }
+
+  containsExcludedIngredients = (meal: Meal): boolean => {
+    return true; // TEMP Hard-coded
   }
 
   // PLACEHOLDER

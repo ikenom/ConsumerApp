@@ -28,7 +28,6 @@ export const TileDisplay = (props: TileDisplayProps) => {
                 <MealCard
                     key={meal.id}
                     meal={meal}
-                    layoutType='random-height'
                     onPress={() => { }} />
             </Box>))
 

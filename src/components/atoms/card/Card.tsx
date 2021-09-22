@@ -1,31 +1,37 @@
 import React from 'react';
-import {Text} from '../../atoms/typography/Text';
-import {FlexBox, Box} from '../layout/Box';
+import { Text } from '../../atoms/typography/Text';
+import { FlexBox, Box } from '../layout/Box';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {Image, TouchableOpacity} from 'react-native';
-import { MealCardType, Dimension, getMealCardLayoutDimensions, truncateString } from './util';
+import { Image, TouchableOpacity } from 'react-native';
+import { BANNER_CARD_DIM, MEAL_CARD_DIM, truncateString } from './util';
 import { Meal, EnrichedMeal } from '../../../models/meal/meal';
 import { defaultTheme } from '../../../defaultTheme';
-import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
 import RestaurantStore from '../../../store/restaurantStore';
+import { StatBox } from './StatBox';
+import { Icons } from './Icons';
 
 export interface MealCardProps {
   meal: EnrichedMeal;
-  layoutType: MealCardType;
   hideDistance?: boolean;
   onPress: (meal: Meal) => void;
 }
 
 export const MealCard = (props: MealCardProps) => {
 
-  const { meal, layoutType, onPress, hideDistance } = props;
-  const { image, name, price, restaurantId, restaurantName, isFlaggedIngredient } = meal;
+  const { meal, onPress, hideDistance } = props;
+  const { image,
+    name,
+    price,
+    description,
+    restaurantId,
+    restaurantName,
+    isFlaggedIngredient,
+    containsExcludedIngredients } = meal;
 
-
-  const dimensions: Dimension = getMealCardLayoutDimensions(layoutType)
+  const dimensions = MEAL_CARD_DIM
 
   const onNavigate = () => {
     onPress(meal)
@@ -36,29 +42,13 @@ export const MealCard = (props: MealCardProps) => {
     return restaurantStore.getRestaurantById(restaurantId)?.distance
   }
 
-  const StatBox = (str: string) => {
-    // Small gray box that contains price or distance
-    return (
-      <Box backgroundColor={defaultTheme.colors.greyNine} mr={wp('1.2%')}>
-        <Text
-          height={hp('2%')}
-          fontWeight={'300'}
-          fontSize={'12px'}
-          color={'#FFFFFF'}
-          mr={wp('1.2%')}
-          ml={wp('1.2%')}>
-          {str}
-        </Text>
-      </Box>
-    );
-  }
-
   const distance = getRestaurantDistance(restaurantId)
 
   return (
-    <Box
-      height={dimensions.height}
+    <FlexBox
+      backgroundColor={defaultTheme.colors.blackTwo}
       width={dimensions.width}
+      flexDirection={'column'}
       overflow={'hidden'}
       borderRadius={'10px'}>
       <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
@@ -66,41 +56,114 @@ export const MealCard = (props: MealCardProps) => {
           height={dimensions.height}
           width={dimensions.width}
           overflow={'hidden'} >
-          <Image style={{ flex: 1, height: undefined, width: undefined }} source={{uri: image}} />
+          <Image style={{ flex: 1, height: undefined, width: dimensions.width }} source={{ uri: image }} />
         </Box>
         <FlexBox
-          top={-dimensions.contentHeight}
-          bg={'#000000'}
-          height={dimensions.contentHeight}
-          width={dimensions.width}
           overflow={'hidden'}
           padding={1}
-          style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
           flexDirection={'column'}
-          justifyContent={'space-evenly'}>
-          <Text fontWeight={'600'} fontSize={'14px'} color={'#FFFFFF'}>
-            {truncateString(name, dimensions.truncateMealTo)}
+          justifyContent={'space-evenly'}
+          pl={wp('2.0%')}
+          pr={wp('2.0%')}
+          pb={hp('1.3%')}>
+          <Text fontWeight={'600'} fontSize={'16px'} color={'#FFFFFF'} mb={hp('0.75%')}>
+            {name}
           </Text>
-          {restaurantName  &&
+          {restaurantName &&
             (<Text
               height={hp('2%')}
               fontWeight={'500'}
-              fontSize={'14px'}
-              color={'#B7B7B7'}>
-              {truncateString(restaurantName, dimensions.truncateRestaurantTo)}
+              fontSize={'15px'}
+              color={'#B7B7B7'}
+              mb={hp('0.9%')}>
+              {restaurantName}
             </Text>)}
-          <FlexBox width={wp('24%')} br={'25px'} mt={'2px'} alignContent={'center'} flexDirection={'row'}>
-            {StatBox(`$${price}`)}
-            {!hideDistance && distance && StatBox(`${distance} mi`)}
+          <FlexBox
+            width={wp('24%')}
+            br={'25px'}
+            mt={'2px'}
+            alignContent={'center'}
+            flexDirection={'row'}
+            mb={hp('1.2%')}>
+            <StatBox string={`$${price}`} />
+            {!hideDistance && distance && (<StatBox string={`${distance} mi`} />)}
           </FlexBox>
+          <Icons isFlagged={isFlaggedIngredient} containsExcluded={containsExcludedIngredients} />
         </FlexBox>
-        {isFlaggedIngredient &&
-          (<Box position={'absolute'} right={10} top={145}>
-            <MaterialCommunityIcon name={'flag-variant'} color={'#EDCD27'} size={28} />
-          </Box>)}
       </TouchableOpacity>
-    </Box>
+    </FlexBox>
   );
 };
+
+export const BannerCard = (props: MealCardProps) => {
+  const { meal, onPress } = props;
+  const { image,
+    name,
+    price,
+    description,
+    restaurantId,
+    restaurantName,
+    isFlaggedIngredient,
+    containsExcludedIngredients } = meal;
+
+  const onNavigate = () => {
+    onPress(meal)
+  };
+
+  const dimensions = BANNER_CARD_DIM
+
+  return (
+    <FlexBox
+      backgroundColor={defaultTheme.colors.blackTwo}
+      width={wp('95%')}
+      flexDirection={'row'}
+      overflow={'hidden'}
+      borderRadius={'10px'}>
+      <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
+        <FlexBox flexDirection={'row'}>
+          <Box
+            height={'auto'}
+            width={wp('35%')}
+            overflow={'hidden'} >
+            <Image style={{ flex: 1, height: dimensions.height, width: 'auto' }} source={{ uri: image }} />
+          </Box>
+          <FlexBox
+            overflow={'hidden'}
+            padding={1}
+            flexDirection={'column'}
+            justifyContent={'space-evenly'}
+            pl={wp('2.0%')}
+            pr={wp('2.0%')}
+            pb={hp('1.3%')}>
+            <Text fontWeight={'600'} fontSize={'16px'} color={'#FFFFFF'} mb={hp('0.75%')}>
+              {truncateString(name, dimensions.truncateStrTo)}
+            </Text>
+            {description &&
+              (<Text
+                height={hp('2%')}
+                fontWeight={'500'}
+                fontSize={'15px'}
+                color={'#B7B7B7'}
+                mb={hp('0.9%')}>
+                {truncateString(description, dimensions.truncateStrTo)}
+              </Text>)}
+            <FlexBox flexDirection={'row'} >
+              <FlexBox
+                width={wp('24%')}
+                br={'25px'}
+                mt={'2px'}
+                alignContent={'center'}
+                flexDirection={'row'}
+                mb={hp('1.2%')}>
+                <StatBox string={`$${price}`} />
+              </FlexBox>
+              <Icons isFlagged={isFlaggedIngredient} containsExcluded={containsExcludedIngredients} />
+            </FlexBox>
+          </FlexBox>
+        </FlexBox>
+      </TouchableOpacity>
+    </FlexBox>
+  );
+}
 
 MealCard.displayName = 'Meal Card';

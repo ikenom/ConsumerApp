@@ -17,8 +17,8 @@ import { Restaurant } from '../../../models/restaurant/restaurant';
 import { OrderConfirmationHeader } from './common/OrderConfirmationHeader';
 import { LocationDisplay } from '../../molecules/common/LocationDisplay';
 import { Ionicon } from "../../atoms/icons/Ionicons";
-import { RestaurantParamList } from "../../../../App";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { RestaurantParamList } from '../../../navigator/RestaurantStack';
 
 
 const StyledDivider = styled(Divider)<{height: number, mt: number, mb?: number}>`
