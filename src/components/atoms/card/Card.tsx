@@ -6,12 +6,13 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { Image, TouchableOpacity } from 'react-native';
-import { BANNER_CARD_DIM, MEAL_CARD_DIM, truncateString } from './util';
+import { BANNER_CARD_DIM, BIG_CARD_DIM, MEAL_CARD_DIM, truncateString } from './util';
 import { Meal, EnrichedMeal } from '../../../models/meal/meal';
 import { defaultTheme } from '../../../defaultTheme';
 import RestaurantStore from '../../../store/restaurantStore';
 import { StatBox } from './StatBox';
 import { Icons } from './Icons';
+import { MaterialCommunityIcon } from '../icons/matericalCommunictyIcon';
 
 export interface MealCardProps {
   meal: EnrichedMeal;
@@ -89,6 +90,100 @@ export const MealCard = (props: MealCardProps) => {
             {!hideDistance && distance && (<StatBox string={`${distance} mi`} />)}
           </FlexBox>
           <Icons isFlagged={isFlaggedIngredient} containsExcluded={containsExcludedIngredients} />
+        </FlexBox>
+      </TouchableOpacity>
+    </FlexBox>
+  );
+};
+
+export const BigCard = (props: MealCardProps) => {
+
+  const { meal, onPress, hideDistance } = props;
+  const { image,
+    name,
+    price,
+    description,
+    restaurantId,
+    restaurantName,
+    isFlaggedIngredient,
+    containsExcludedIngredients } = meal;
+
+  const dimensions = BIG_CARD_DIM
+
+  const onNavigate = () => {
+    onPress(meal)
+  };
+
+  const getRestaurantDistance = (restaurantId: string) => {
+    const restaurantStore = RestaurantStore.getInstance()
+    return restaurantStore.getRestaurantById(restaurantId)?.distance
+  }
+
+  const distance = getRestaurantDistance(restaurantId)
+
+  return (
+    <FlexBox
+      backgroundColor={defaultTheme.colors.blackTwo}
+      width={dimensions.width}
+      flexDirection={'column'}
+      overflow={'hidden'}
+      borderRadius={'10px'}>
+      <TouchableOpacity activeOpacity={.5} onPress={onNavigate}>
+        <Box
+          height={dimensions.height}
+          width={dimensions.width}
+          overflow={'hidden'}
+          pb={hp('2%')} >
+          <Image style={{ flex: 1, height: undefined, width: dimensions.width }} source={{ uri: image }} />
+        </Box>
+        <FlexBox
+          overflow={'hidden'}
+          padding={1}
+          flexDirection={'column'}
+          justifyContent={'space-evenly'}
+          pl={wp('4.1%')}
+          pr={wp('4.1%')}
+          pb={hp('1.3%')}>
+          <Box pb={hp('0.8%')}>
+            <Text fontWeight={'700'} fontSize={'17px'} color={'#FFFFFF'} mb={hp('0.75%')}>
+              {name}
+            </Text>
+          </Box>
+          <FlexBox
+            flexDirection={'row'}
+            alignItems={'center'}
+            justifyContent={'space-between'}
+            mb={hp('1.3%')}>
+            <FlexBox
+              width={wp('24%')}
+              br={'25px'}
+              alignContent={'center'}
+              flexDirection={'row'}>
+              <StatBox string={`$${price}`} />
+              {!hideDistance && distance && (<StatBox string={`${distance} mi`} />)}
+            </FlexBox>
+            <Icons isFlagged={isFlaggedIngredient} containsExcluded={containsExcludedIngredients} />
+          </FlexBox>
+          <FlexBox
+            flexDirection={'row'}
+            pt={hp('1.5%')}
+            borderTopWidth={'1px'}
+            borderColor={defaultTheme.colors.greyNine}
+            alignItems={'center'}
+            justifyContent={'space-between'}>
+            {restaurantName &&
+              (<Text
+                  height={hp('2%')}
+                  fontWeight={'600'}
+                  fontSize={'17px'}
+                  color={defaultTheme.colors.greyTen}>
+                  {truncateString(restaurantName, dimensions.truncateStrTo)}
+                </Text>)}
+            <MaterialCommunityIcon
+              name={'silverware'}
+              color={defaultTheme.colors.greyTen}
+              size={22} />
+          </FlexBox>
         </FlexBox>
       </TouchableOpacity>
     </FlexBox>

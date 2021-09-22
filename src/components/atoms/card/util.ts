@@ -28,6 +28,13 @@ export const MEAL_CARD_DIM: Dimension = {
   truncateStrTo: 20
 }
 
+export const BIG_CARD_DIM: Dimension = {
+  width: wp('95%'),
+  height: hp('28%'),
+  contentHeight: hp('6.7%'),
+  truncateStrTo: 38
+}
+
 export const BANNER_CARD_DIM: Dimension = {
     width: wp('58%'),
     height: hp('13%'),

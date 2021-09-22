@@ -14,9 +14,9 @@ export const Icons = (props: IconsProps) => {
   return (
     <FlexBox flexDirection={'row'}>
       {isFlagged &&
-        (<Box pr={'8px'}><FlaggedIngredient /></Box>)}
+        (<Box><FlaggedIngredient /></Box>)}
       {containsExcluded &&
-        (<Box><ExcludedIngredient /></Box>)}
+        (<Box pl={'8px'}><ExcludedIngredient /></Box>)}
     </FlexBox>
   );
 }

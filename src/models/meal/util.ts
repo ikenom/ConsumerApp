@@ -57,7 +57,7 @@ export const MOCK_MEALS: Meal[] = [
   },
   {
     id: "3",
-    name: "Spiciest of All Spicy Spicy Pulled Pork",
+    name: "Spiciest of All Spicy Spicy Spiciest Pulled Pork",
     restaurantId: "30",
     price: "8.53",
     image: pulledPorkUri,
