@@ -46,10 +46,9 @@ export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => 
   return(
     <Box>
       <FlexBox flexDirection={'column'} height={hp('3.5%')} ml={"auto"} mr={"auto"}>
-        <Text fontSize={'26px'} color={'#FFFFFF'} weight={600}>{label}</Text>
-        <StyledDivider />
+      <Text fontWeight={'700'} fontSize={'18px'} color={defaultTheme.colors.white}>{label}</Text>
       </FlexBox>
-      <Box position={"absolute"} bottom={-20} left={leftPos}>
+      <Box position={"absolute"} bottom={-hp('1.2%')} left={leftPos}>
         <Button 
           buttonStyle={{backgroundColor: 'transparent'}} 
           onPress={onPress} 
