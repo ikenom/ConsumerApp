@@ -22,7 +22,7 @@ export const FeaturedView = (props: FeaturedViewProps) => {
   return (
     <FlexBox flexDirection='column' bg={defaultTheme.colors.black}>
       <Box>
-        <OrderConfirmationHeader label={''} icon='chevron-left' iconPosition='left' onPress={() => { }} />
+        <OrderConfirmationHeader label={''} leftIcon={"back-arrow"} rightIcon={"share"} />
       </Box>
       <FlexBox
         flexDirection={'column'}

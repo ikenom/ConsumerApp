@@ -22,39 +22,56 @@ const StyledDivider = styled(Divider)`
   marginTop: 6px;
 `;
 
-type IconPosition = "left" | "right";
-
-type IconType = "chevron-left" | "cross"
+type Icons = "back-arrow" | "share" | "info" | "skip";
 
 interface OrderConfirmationHeaderProps {
   label: string
-  icon: IconType
-  iconPosition: IconPosition
-  onPress: () => void
+  leftIcon?: Icons;
+  rightIcon?: Icons;
+  onPressLeft?: () => void;
+  onPressRight?: () => void;
 }
 
 export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => {
-  const { label, icon, iconPosition, onPress } = props;
+  const { label, leftIcon, rightIcon, onPressLeft, onPressRight } = props;
 
-  const leftPos = iconPosition === 'left' ? -wp('5%') : wp('82%');
+  const getIcon = (icon: Icons) => {
+    if (icon === "back-arrow") {
+      return (<MaterialCommunityIcon name={"chevron-left"} size={40} color={defaultTheme.colors.white} />)
+    }
+    if (icon === "share") {
+      return (<MaterialCommunityIcon name={"export-variant"} size={24} color={defaultTheme.colors.white} />)
+    }
+    if (icon === "info") {
+      return (<MaterialCommunityIcon name={"information"} size={40} color={defaultTheme.colors.white} />)
+    }
+    else {
+      return (<MaterialCommunityIcon name={"help"} size={23} color='red' />)
+    }
+  }
 
-  const Icon = icon === 'chevron-left' 
-    ?
-      <MaterialCommunityIcon name={icon} size={40} color={defaultTheme.colors.white}/>
-    :
-      <Entypo name={icon} size={40} color={defaultTheme.colors.white}/>
-  return(
+  const leftPos = -wp('5%') // Left dimension for Box
+  const rightPos = wp('82%');
+
+  return (
     <Box>
       <FlexBox flexDirection={'column'} height={hp('3.5%')} ml={"auto"} mr={"auto"}>
-      <Text fontWeight={'700'} fontSize={'18px'} color={defaultTheme.colors.white}>{label}</Text>
+        <Text fontWeight={'700'} fontSize={'18px'} color={defaultTheme.colors.white}>{label}</Text>
       </FlexBox>
-      <Box position={"absolute"} bottom={-hp('1.2%')} left={leftPos}>
-        <Button 
-          buttonStyle={{backgroundColor: 'transparent'}} 
-          onPress={onPress} 
-          icon={Icon}
-        />
-      </Box> 
+      {leftIcon &&
+        (<Box position={"absolute"} bottom={-hp('1.2%')} left={leftPos}>
+          <Button
+            buttonStyle={{ backgroundColor: 'transparent' }}
+            onPress={onPressLeft}
+            icon={getIcon(leftIcon)} />
+        </Box>)}
+      {rightIcon &&
+        (<Box position={"absolute"} bottom={-hp('1.2%')} left={rightPos}>
+          <Button
+            buttonStyle={{ backgroundColor: 'transparent' }}
+            onPress={onPressRight}
+            icon={getIcon(rightIcon)} />
+        </Box>)}
     </Box>
   )
 }

@@ -7,24 +7,36 @@ import { Box } from '../../../src/components/atoms/layout/Box';
 export const ActionHeaderStory = () => {
   const testProps = [
     {
-      label: 'Chevron Left - Left',
-      icon: 'chevron-left',
-      iconPosition: 'left'
+      label: 'Back Arrow - Left',
+      leftIcon: "back-arrow"
     },
     {
-      label: 'Chevron - Left',
-      icon: 'chevron',
-      iconPosition: 'left'
+      label: 'Back Arrow - Right',
+      rightIcon: "back-arrow"
     },
     {
-      label: 'Chevron Left - Right',
-      icon: 'chevron-left',
-      iconPosition: 'right'
+      label: 'Share - Left',
+      leftIcon: "share"
     },
     {
-      label: 'Chevron - Right',
-      icon: 'chevron',
-      iconPosition: 'right'
+      label: 'Share - Right',
+      rightIcon: "share"
+    },
+    {
+      label: 'Info - Left',
+      leftIcon: "info"
+    },
+    {
+      label: 'Info - Right',
+      rightIcon: "info"
+    },
+    {
+      label: 'Unsupported Icon - Left',
+      leftIcon: 'not-supported'
+    },
+    {
+      label: 'Unsupported Icon - Right',
+      rightIcon: 'not-supported'
     }
   ]
   return (
@@ -32,7 +44,7 @@ export const ActionHeaderStory = () => {
       {testProps.map(
         (element) => (
           <Box backgroundColor='black'>
-            <OrderConfirmationHeader label={element.label} icon={element.icon} iconPosition={element.iconPosition} />
+            <OrderConfirmationHeader label={element.label} leftIcon={element.leftIcon} rightIcon={element.rightIcon} />
           </Box>
         )
       )}
