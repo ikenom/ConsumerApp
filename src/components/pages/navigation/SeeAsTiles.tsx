@@ -39,9 +39,8 @@ export const SeeAsTilesView = (props: SeeAsTilesProps) => {
       <Box mt={hp('6.5%')} mb={hp('3%')} pl={'14px'} pr={'14px'}>
         <OrderConfirmationHeader
           label={title}
-          icon="chevron-left"
-          iconPosition="left"
-          onPress={onPressBack} />
+          leftIcon={'back-arrow'}
+          onPressLeft={onPressBack} />
       </Box>
       <ScrollView>
         <Box>

@@ -89,7 +89,7 @@ export const OrderConfirmationCart = (props: OrderConfirmationCartProps) => {
   return(
     <FlexBox flexDirection={'column'} pt={insets.top}>
       <Box pl={'16px'} pr={'16px'} mb={getHeightInPixels("3%")}>
-        <OrderConfirmationHeader label={"Your Cart"} icon={"chevron-left"} onPress={onBackPressed} iconPosition={'left'}/>
+        <OrderConfirmationHeader label={"Your Cart"} leftIcon={"back-arrow"} onPressLeft={onBackPressed} />
       </Box>
       <Box width= {wp('100%')} height={getHeightInPixels('17%')} borderRadius={'5px'} mb={getHeightInPixels("3.2%")}>
           <Image style={{flex: 1, height: undefined, width: undefined}} source={{ uri: meal.image}} />

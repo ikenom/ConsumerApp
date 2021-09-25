@@ -33,6 +33,11 @@ export const ActionHeaderStory = () => {
       rightIcon: "info"
     },
     {
+      label: 'Back Arrow - Close',
+      leftIcon: "back-arrow",
+      rightIcon: "close"
+    },
+    {
       label: 'Unsupported Icon (Left)',
       leftIcon: 'not-supported'
     },

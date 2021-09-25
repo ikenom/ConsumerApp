@@ -20,7 +20,7 @@ const StyledDivider = styled(Divider)`
   marginTop: 6px;
 `;
 
-type Icons = "back-arrow" | "share" | "info" | "skip";
+type Icons = "back-arrow" | "share" | "info" | "skip" | "close";
 
 interface OrderConfirmationHeaderProps {
   label: string
@@ -44,6 +44,9 @@ export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => 
     }
     if (icon === "info") {
       return (<MaterialCommunityIcon name={"information"} size={24} color={defaultTheme.colors.white} />)
+    }
+    if (icon === "close") {
+      return (<MaterialCommunityIcon name={"close"} size={24} color={defaultTheme.colors.white} />)
     }
     else {
       return (<MaterialCommunityIcon name={"help"} size={23} color='red' />)
@@ -74,6 +77,9 @@ export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => 
     }
     if (icon === "info") {
       return { left: wp('89%'), bottom: -hp('0.2%') }
+    }
+    if (icon === "close") {
+      return { left: wp('89%'), bottom: -hp('0.3%') }
     }
     else {
       return { left: wp('89%'), bottom: -hp('0%') }
