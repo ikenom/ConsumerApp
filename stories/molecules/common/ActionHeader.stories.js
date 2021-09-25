@@ -5,11 +5,37 @@ import React from 'react';
 import { Box } from '../../../src/components/atoms/layout/Box';
 
 export const ActionHeaderStory = () => {
+  const testProps = [
+    {
+      label: 'Chevron Left - Left',
+      icon: 'chevron-left',
+      iconPosition: 'left'
+    },
+    {
+      label: 'Chevron - Left',
+      icon: 'chevron',
+      iconPosition: 'left'
+    },
+    {
+      label: 'Chevron Left - Right',
+      icon: 'chevron-left',
+      iconPosition: 'right'
+    },
+    {
+      label: 'Chevron - Right',
+      icon: 'chevron',
+      iconPosition: 'right'
+    }
+  ]
   return (
     <ScrollView>
-      <Box backgroundColor='black'>
-        <OrderConfirmationHeader label='Text Here' icon='chevron-left' iconPosition='left' />
-      </Box>
+      {testProps.map(
+        (element) => (
+          <Box backgroundColor='black'>
+            <OrderConfirmationHeader label={element.label} icon={element.icon} iconPosition={element.iconPosition} />
+          </Box>
+        )
+      )}
     </ScrollView>
   );
 }
