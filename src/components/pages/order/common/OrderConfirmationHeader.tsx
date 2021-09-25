@@ -43,15 +43,45 @@ export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => 
       return (<MaterialCommunityIcon name={"export-variant"} size={24} color={defaultTheme.colors.white} />)
     }
     if (icon === "info") {
-      return (<MaterialCommunityIcon name={"information"} size={40} color={defaultTheme.colors.white} />)
+      return (<MaterialCommunityIcon name={"information"} size={24} color={defaultTheme.colors.white} />)
     }
     else {
       return (<MaterialCommunityIcon name={"help"} size={23} color='red' />)
     }
   }
 
-  const leftPos = -wp('5%') // Left dimension for Box
-  const rightPos = wp('82%');
+  const getLeftIconPosition = (icon: Icons) => {
+    if (icon === "back-arrow") {
+      return { left: -wp('5%'), bottom: -hp('1.2%') }
+    }
+    if (icon === "share") {
+      return { left: -wp('5%'), bottom: -hp('1.2%') }
+    }
+    if (icon === "info") {
+      return { left: -wp('5%'), bottom: -hp('1.2%') }
+    }
+    else {
+      return { left: -wp('5%'), bottom: -hp('1.2%') }
+    }
+  }
+
+  const getRightIconPosition = (icon: Icons) => {
+    if (icon === "back-arrow") {
+      return { left: wp('82%'), bottom: -hp('1.2%') }
+    }
+    if (icon === "share") {
+      return { left: wp('82%'), bottom: -hp('1.2%') }
+    }
+    if (icon === "info") {
+      return { left: wp('82%'), bottom: -hp('1.2%') }
+    }
+    else {
+      return { left: wp('82%'), bottom: -hp('1.2%') }
+    }
+  }
+
+  const leftPos = getLeftIconPosition(leftIcon)
+  const rightPos = getRightIconPosition(rightIcon)
 
   return (
     <Box>
@@ -59,14 +89,20 @@ export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => 
         <Text fontWeight={'700'} fontSize={'18px'} color={defaultTheme.colors.white}>{label}</Text>
       </FlexBox>
       {leftIcon &&
-        (<Box position={"absolute"} bottom={-hp('1.2%')} left={leftPos}>
+        (<Box 
+        position={"absolute"} 
+        bottom={leftPos.bottom} 
+        left={leftPos.left}>
           <Button
             buttonStyle={{ backgroundColor: 'transparent' }}
             onPress={onPressLeft}
             icon={getIcon(leftIcon)} />
         </Box>)}
       {rightIcon &&
-        (<Box position={"absolute"} bottom={-hp('1.2%')} left={rightPos}>
+        (<Box 
+        position={"absolute"} 
+        bottom={rightPos.bottom} 
+        left={rightPos.left}>
           <Button
             buttonStyle={{ backgroundColor: 'transparent' }}
             onPress={onPressRight}
