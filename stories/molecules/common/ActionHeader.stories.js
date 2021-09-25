@@ -7,15 +7,15 @@ import { Box } from '../../../src/components/atoms/layout/Box';
 export const ActionHeaderStory = () => {
   const testProps = [
     {
-      label: 'Back Arrow - Left',
+      label: 'Back Arrow (Left)',
       leftIcon: "back-arrow"
     },
     {
-      label: 'Back Arrow - Right',
+      label: 'Back Arrow (Right)',
       rightIcon: "back-arrow"
     },
     {
-      label: 'Share - Left',
+      label: 'Share (Left)',
       leftIcon: "share"
     },
     {
@@ -24,19 +24,20 @@ export const ActionHeaderStory = () => {
       rightIcon: "share"
     },
     {
-      label: 'Info - Left',
+      label: 'Info (Left)',
       leftIcon: "info"
     },
     {
-      label: 'Info - Right',
+      label: 'Back Arrow - Info',
+      leftIcon: "back-arrow",
       rightIcon: "info"
     },
     {
-      label: 'Unsupported Icon - Left',
+      label: 'Unsupported Icon (Left)',
       leftIcon: 'not-supported'
     },
     {
-      label: 'Unsupported Icon - Right',
+      label: 'Unsupported Icon (Right)',
       rightIcon: 'not-supported'
     }
   ]

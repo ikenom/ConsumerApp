@@ -57,6 +57,8 @@ interface SlideshowCarouselProps {
     slides: Array<any>;
 }
 
+// ORG Move to molecules
+
 export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
 
     const { slides } = props;

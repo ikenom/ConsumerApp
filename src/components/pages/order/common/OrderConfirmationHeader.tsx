@@ -10,8 +10,6 @@ import { defaultTheme } from "../../../../defaultTheme";
 import { Box, FlexBox, FlexItem } from "../../../atoms/layout/Box";
 import { Text } from "../../../atoms/typography/Text";
 import { MaterialCommunityIcon } from "../../../atoms/icons/matericalCommunictyIcon";
-import { Entypo } from "../../../atoms/icons/entypo";
-
 
 const StyledDivider = styled(Divider)`
   backgroundColor: ${defaultTheme.colors.whiteTwo};
@@ -31,6 +29,8 @@ interface OrderConfirmationHeaderProps {
   onPressLeft?: () => void;
   onPressRight?: () => void;
 }
+
+// ORG Move and rename
 
 export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => {
   const { label, leftIcon, rightIcon, onPressLeft, onPressRight } = props;
