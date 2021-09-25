@@ -19,7 +19,8 @@ export const ActionHeaderStory = () => {
       leftIcon: "share"
     },
     {
-      label: 'Share - Right',
+      label: 'Back Arrow - Share',
+      leftIcon: "back-arrow",
       rightIcon: "share"
     },
     {
@@ -43,7 +44,7 @@ export const ActionHeaderStory = () => {
     <ScrollView>
       {testProps.map(
         (element) => (
-          <Box backgroundColor='black'>
+          <Box backgroundColor='black' mb='10px' pt='5px' pb='5px'>
             <OrderConfirmationHeader label={element.label} leftIcon={element.leftIcon} rightIcon={element.rightIcon} />
           </Box>
         )

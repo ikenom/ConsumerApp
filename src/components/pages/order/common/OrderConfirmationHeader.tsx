@@ -55,28 +55,28 @@ export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => 
       return { left: -wp('5%'), bottom: -hp('1.2%') }
     }
     if (icon === "share") {
-      return { left: -wp('5%'), bottom: -hp('1.2%') }
+      return { left: -wp('3%'), bottom: hp('0%') }
     }
     if (icon === "info") {
-      return { left: -wp('5%'), bottom: -hp('1.2%') }
+      return { left: -wp('2.5%'), bottom: -hp('0.1%') }
     }
     else {
-      return { left: -wp('5%'), bottom: -hp('1.2%') }
+      return { left: -wp('2.8%'), bottom: -hp('0%') }
     }
   }
 
   const getRightIconPosition = (icon: Icons) => {
     if (icon === "back-arrow") {
-      return { left: wp('82%'), bottom: -hp('1.2%') }
+      return { left: wp('87%'), bottom: -hp('1.2%') }
     }
     if (icon === "share") {
-      return { left: wp('82%'), bottom: -hp('1.2%') }
+      return { left: wp('89%'), bottom: -hp('0%') }
     }
     if (icon === "info") {
-      return { left: wp('82%'), bottom: -hp('1.2%') }
+      return { left: wp('89%'), bottom: -hp('0.2%') }
     }
     else {
-      return { left: wp('82%'), bottom: -hp('1.2%') }
+      return { left: wp('89%'), bottom: -hp('0%') }
     }
   }
 
