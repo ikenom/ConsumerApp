@@ -65,7 +65,7 @@ export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
     const renderSlide = ({ item, index }) => <Slide slideImage={item} />
 
     return (
-        <Box height={hp('25%')} width={wp('93%')} justifyContent='center'>
+        <Box height={hp('28%')} width={wp('93%')} justifyContent='center'>
             <Carousel
                 data={slides}
                 renderItem={renderSlide}

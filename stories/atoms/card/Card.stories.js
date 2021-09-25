@@ -5,6 +5,7 @@ import React from "react";
 import { MOCK_MEALS, MOCK_MEALS_ENRICHED } from '../../../src/models/meal/util';
 import { FlexBox } from '../../../src/components/atoms/layout/Box';
 import { ScrollView } from 'react-native-gesture-handler';
+import { SlideshowCarousel } from '../../../src/components/atoms/card/SlideshowCarousel';
 
 const MealCardStory = () => {
   return (
@@ -42,6 +43,14 @@ const BannerCardStory = () => {
   )
 }
 
+const SlideshowCarouselStory = () => {
+  const slideshowImages = MOCK_MEALS.map(
+    (m) => { return m.image }
+  )
+  console.log(slideshowImages)
+  return <SlideshowCarousel slides={slideshowImages} />
+}
+
 const CarouselLessInfoStory = () => {
   return (
     <CardCarousel meals={MOCK_MEALS} />
@@ -61,4 +70,5 @@ storiesOf('Card', module)
 
 storiesOf('Carousel', module)
   .add('Carousel Less Info', () => CarouselLessInfoStory())
-  .add('Carousel More Info', () => CarouselMoreInfoStory());
+  .add('Carousel More Info', () => CarouselMoreInfoStory())
+  .add('Slideshow Carousel', () => SlideshowCarouselStory());
