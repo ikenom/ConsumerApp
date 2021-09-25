@@ -8,12 +8,22 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { OrderConfirmationHeader } from '../order/common/OrderConfirmationHeader';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import { HomeStackParamList } from '../../../navigator/HomeStack';
 
 export interface FeaturedViewProps {
   title: string;
   subtitle: string;
   imageUri: string;
   text: string;
+  navigation?: StackNavigationProp<HomeStackParamList, 'Featured'>;
+}
+
+export const FeaturedNavContainer = (props: StackScreenProps<HomeStackParamList, 'Featured'>) => {
+  const { navigation, route } = props;
+  return(
+    <FeaturedView {...route.params} navigation={navigation} />
+  )
 }
 
 export const FeaturedView = (props: FeaturedViewProps) => {
