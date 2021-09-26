@@ -27,23 +27,27 @@ export const FeaturedNavContainer = (props: StackScreenProps<HomeStackParamList,
 }
 
 export const FeaturedView = (props: FeaturedViewProps) => {
-  const { title, subtitle, imageUri, text } = props;
+  const { title, subtitle, imageUri, text, navigation } = props;
   const imgHeight = hp('23.5%')
+  const goBack = () => {
+    navigation?.goBack()
+  }
   return (
-    <FlexBox flexDirection='column' bg={defaultTheme.colors.black}>
-      <Box>
-        <OrderConfirmationHeader label={''} leftIcon={"back-arrow"} rightIcon={"share"} />
-      </Box>
-      <FlexBox
-        flexDirection={'column'}
-        pl={'14px'}
+    <FlexBox 
+    flexDirection='column' 
+    bg={defaultTheme.colors.black}
+    pl={'14px'}
         pr={'14px'}>
+      <Box pt={hp('6.5%')} pb={hp('3.1%')}>
+        <OrderConfirmationHeader label={''} leftIcon={"back-arrow"} rightIcon={"share"} onPressLeft={goBack} />
+      </Box>
+      <FlexBox flexDirection={'column'}>
         <Box
           mb={hp('1.0%')}>
           <Text
             font={defaultTheme.fontFamily.hnt}
             fontSize={defaultTheme.fontSize.mlg}
-            fontWeight={'800'}
+            fontWeight={'700'}
             color={defaultTheme.colors.white}>
             {title}
           </Text>

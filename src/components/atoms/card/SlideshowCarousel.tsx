@@ -15,44 +15,43 @@ export interface SlideProps {
 }
 
 export const Slide = (props: SlideProps) => {
-    const { onPress } = props;
+    const { slideImage, onPress } = props;
     return (
-        <Box
-            position={'absolute'}
-            overflow={'hidden'}
-            right={0}
-            left={0}
-            bottom={0}
-            top={0}
-            borderRadius={'8px'}>
-            <ImageBackground
-                style={{
-                    flex: 1,
-                    height: '100%',
-                    width: '100%',
-                }}
-                source={{uri: props.slideImage}}>
-                <LinearGradient
-                    colors={['#00000000', '#000000CC']}
-                    style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, }} />
-            </ImageBackground>
-            <Box position={'absolute'} left={0} bottom={0} ml={wp('2%')} mb={wp('2.5%')}>
-                <Text
-                    font={defaultTheme.fontFamily.dual_lg}
-                    fontSize={defaultTheme.fontSize.lg}
-                    fontWeight={'500'}
-                    color={defaultTheme.colors.white}>
-                    Where to eat in NYC
+        <TouchableOpacity onPress={onPress} activeOpacity={100}>
+            <Box
+                overflow={'hidden'}
+                height={hp('27%')}
+                width={wp('93%')}
+                borderRadius={'8px'}>
+                <ImageBackground
+                    style={{
+                        flex: 1,
+                        height: '100%',
+                        width: '100%',
+                    }}
+                    source={{ uri: slideImage }}>
+                    <LinearGradient
+                        colors={['#00000000', '#000000CC']}
+                        style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, }} />
+                </ImageBackground>
+                <Box position={'absolute'} left={0} bottom={0} ml={wp('2%')} mb={wp('2.5%')}>
+                    <Text
+                        font={defaultTheme.fontFamily.dual_lg}
+                        fontSize={defaultTheme.fontSize.lg}
+                        fontWeight={'500'}
+                        color={defaultTheme.colors.white}>
+                        Where to eat in NYC
                     </Text>
-                <Text
-                    font={defaultTheme.fontFamily.hnt_medium}
-                    fontSize={defaultTheme.fontSize.m}
-                    fontWeight={'500'}
-                    color={defaultTheme.colors.white}>
-                    We put together the best locales.
+                    <Text
+                        font={defaultTheme.fontFamily.hnt_medium}
+                        fontSize={defaultTheme.fontSize.m}
+                        fontWeight={'500'}
+                        color={defaultTheme.colors.white}>
+                        We put together the best locales.
                     </Text>
+                </Box>
             </Box>
-        </Box>
+        </TouchableOpacity>
     )
 }
 
@@ -71,7 +70,7 @@ export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
     const renderSlide = ({ item, index }) => <Slide slideImage={item} onPress={onPressSlide} />
 
     return (
-        <Box height={hp('28%')} width={wp('93%')} justifyContent='center'>
+        <Box height={hp('30.5%')} width={wp('93%')} justifyContent='center'>
             <Carousel
                 data={slides}
                 renderItem={renderSlide}

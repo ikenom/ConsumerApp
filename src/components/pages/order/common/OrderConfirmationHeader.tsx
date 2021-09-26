@@ -73,7 +73,7 @@ export const OrderConfirmationHeader = (props: OrderConfirmationHeaderProps) => 
       return { left: wp('87%'), bottom: -hp('1.2%') }
     }
     if (icon === "share") {
-      return { left: wp('89%'), bottom: -hp('0%') }
+      return { left: wp('82.5%'), bottom: -hp('0%') }
     }
     if (icon === "info") {
       return { left: wp('89%'), bottom: -hp('0.2%') }
