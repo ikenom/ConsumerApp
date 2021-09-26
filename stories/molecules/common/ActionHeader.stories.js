@@ -4,7 +4,7 @@ import { OrderConfirmationHeader } from '../../../src/components/pages/order/com
 import React from 'react';
 import { Box } from '../../../src/components/atoms/layout/Box';
 
-export const ActionHeaderStory = () => {
+const ActionHeaderStory = () => {
   const testProps = [
     {
       label: 'Back Arrow (Left)',

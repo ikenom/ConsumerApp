@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import { NavigationFooter } from '../../../src/components/molecules/common/NavigationFooter';
 
-export const NavigationFooterStory = () => {
+const NavigationFooterStory = () => {
     return (
         <NavigationFooter />
     );

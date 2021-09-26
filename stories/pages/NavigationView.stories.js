@@ -6,7 +6,7 @@ import { SeeAsTilesView } from '../../src/components/pages/navigation/SeeAsTiles
 import { MOCK_MEALS, MOCK_MEALS_ENRICHED } from '../../src/models/meal/util';
 
 
-export const NavigationHomeStory = () => {
+const NavigationHomeStory = () => {
     const slideshowImages = MOCK_MEALS_ENRICHED.map(
         (meal) => meal.image
     );
@@ -23,13 +23,13 @@ export const NavigationHomeStory = () => {
     )
 }
 
-export const NavigationTilesStory = () => {
+const NavigationTilesStory = () => {
     return(
         <SeeAsTilesView title="Order Again" meals={MOCK_MEALS_ENRICHED}/>
     )
 }
 
-export const NavigationSlideshowStory = () => {
+const NavigationSlideshowStory = () => {
     const featureImg = MOCK_MEALS[0].image;
     return (<FeaturedView
         title={'Where to eat in NYC'}

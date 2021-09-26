@@ -4,9 +4,7 @@ import { MealOrderView } from '../../src/components/pages/order/Meal';
 import { MOCK_MEALS_ENRICHED } from '../../src/models/meal/util';
 import { MOCK_RESTAURANT } from '../../src/models/restaurant/util';
 
-
-
-export const OrderMealPageStory = () => {
+const OrderMealPageStory = () => {
   return (
     <MealOrderView meal={MOCK_MEALS_ENRICHED[0]} restaurant={MOCK_RESTAURANT}/>
   )
