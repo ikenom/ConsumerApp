@@ -65,6 +65,15 @@ export const HomeView = (props: HomeViewProps) => {
     })
   }
 
+  const onPressSlide = () => {
+    navigation?.push('Featured', {
+      title: 'Test',
+      subtitle: 'Subtitle here',
+      imageUri: 'none',
+      text: 'text here',
+    })
+  }
+
   const getNoticationIconName = (hasNotifications: boolean) => hasNotifications ? 'bell-alert' : 'bell'
 
   const onPressNotifications = () => {
@@ -91,7 +100,7 @@ export const HomeView = (props: HomeViewProps) => {
       <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>
         <ScrollView>
           <Box>
-            <SlideshowCarousel slides={slideshowImages} />
+            <SlideshowCarousel slides={slideshowImages} onPressSlide={onPressSlide} />
             <FlexBox key='new' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"New on FYTR"} navigateToShowAll={() => navigateToShowAll("New on FYTR", meals.new)} />
               <Box mt={hp('1.5%')}>

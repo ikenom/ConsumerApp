@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, View, Image } from 'react-native';
 import { Box } from '../../atoms/layout/Box';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -7,12 +7,15 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { defaultTheme } from "../../../defaultTheme";
 import { Text } from "../../atoms/typography/Text";
 import LinearGradient from 'react-native-linear-gradient';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export interface SlideProps {
     slideImage: any;
+    onPress?: () => void;
 }
 
-const Slide = (props: SlideProps) => {
+export const Slide = (props: SlideProps) => {
+    const { onPress } = props;
     return (
         <Box
             position={'absolute'}
@@ -55,16 +58,17 @@ const Slide = (props: SlideProps) => {
 
 interface SlideshowCarouselProps {
     slides: Array<any>;
+    onPressSlide: () => void;
 }
 
 // ORG Move to molecules
 
 export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
 
-    const { slides } = props;
+    const { slides, onPressSlide } = props;
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const renderSlide = ({ item, index }) => <Slide slideImage={item} />
+    const renderSlide = ({ item, index }) => <Slide slideImage={item} onPress={onPressSlide} />
 
     return (
         <Box height={hp('28%')} width={wp('93%')} justifyContent='center'>
