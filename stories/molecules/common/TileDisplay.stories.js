@@ -4,7 +4,7 @@ import { TileDisplay } from '../../../src/components/molecules/common/TileDispla
 import { MOCK_MEALS_ENRICHED } from '../../../src/models/meal/util';
 import { ScrollView } from 'react-native-gesture-handler';
 
-export const TileDisplayStory = () => {
+const TileDisplayStory = () => {
     return (
         <ScrollView>
             <TileDisplay meals={MOCK_MEALS_ENRICHED} />

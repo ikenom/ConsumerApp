@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, View, Image } from 'react-native';
 import { Box } from '../../atoms/layout/Box';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -7,65 +7,70 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { defaultTheme } from "../../../defaultTheme";
 import { Text } from "../../atoms/typography/Text";
 import LinearGradient from 'react-native-linear-gradient';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export interface SlideProps {
     slideImage: any;
+    onPress?: () => void;
 }
 
-const Slide = (props: SlideProps) => {
+export const Slide = (props: SlideProps) => {
+    const { slideImage, onPress } = props;
     return (
-        <Box
-            position={'absolute'}
-            overflow={'hidden'}
-            right={0}
-            left={0}
-            bottom={0}
-            top={0}
-            borderRadius={'8px'}>
-            <ImageBackground
-                style={{
-                    flex: 1,
-                    height: '100%',
-                    width: '100%',
-                }}
-                source={{uri: props.slideImage}}>
-                <LinearGradient
-                    colors={['#00000000', '#000000CC']}
-                    style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, }} />
-            </ImageBackground>
-            <Box position={'absolute'} left={0} bottom={0} ml={wp('2%')} mb={wp('2.5%')}>
-                <Text
-                    font={defaultTheme.fontFamily.dual_lg}
-                    fontSize={defaultTheme.fontSize.lg}
-                    fontWeight={'500'}
-                    color={defaultTheme.colors.white}>
-                    Where to eat in NYC
+        <TouchableOpacity onPress={onPress} activeOpacity={100}>
+            <Box
+                overflow={'hidden'}
+                height={hp('27%')}
+                width={wp('93%')}
+                borderRadius={'8px'}>
+                <ImageBackground
+                    style={{
+                        flex: 1,
+                        height: '100%',
+                        width: '100%',
+                    }}
+                    source={{ uri: slideImage }}>
+                    <LinearGradient
+                        colors={['#00000000', '#000000CC']}
+                        style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, }} />
+                </ImageBackground>
+                <Box position={'absolute'} left={0} bottom={0} ml={wp('2%')} mb={wp('2.5%')}>
+                    <Text
+                        font={defaultTheme.fontFamily.dual_lg}
+                        fontSize={defaultTheme.fontSize.lg}
+                        fontWeight={'500'}
+                        color={defaultTheme.colors.white}>
+                        Where to eat in NYC
                     </Text>
-                <Text
-                    font={defaultTheme.fontFamily.hnt_medium}
-                    fontSize={defaultTheme.fontSize.m}
-                    fontWeight={'500'}
-                    color={defaultTheme.colors.white}>
-                    We put together the best locales.
+                    <Text
+                        font={defaultTheme.fontFamily.hnt_medium}
+                        fontSize={defaultTheme.fontSize.m}
+                        fontWeight={'500'}
+                        color={defaultTheme.colors.white}>
+                        We put together the best locales.
                     </Text>
+                </Box>
             </Box>
-        </Box>
+        </TouchableOpacity>
     )
 }
 
 interface SlideshowCarouselProps {
     slides: Array<any>;
+    onPressSlide: () => void;
 }
+
+// ORG Move to molecules
 
 export const SlideshowCarousel = (props: SlideshowCarouselProps) => {
 
-    const { slides } = props;
+    const { slides, onPressSlide } = props;
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const renderSlide = ({ item, index }) => <Slide slideImage={item} />
+    const renderSlide = ({ item, index }) => <Slide slideImage={item} onPress={onPressSlide} />
 
     return (
-        <Box height={hp('25%')} width={wp('93%')} justifyContent='center'>
+        <Box height={hp('30.5%')} width={wp('93%')} justifyContent='center'>
             <Carousel
                 data={slides}
                 renderItem={renderSlide}

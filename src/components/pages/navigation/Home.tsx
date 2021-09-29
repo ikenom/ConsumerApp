@@ -18,6 +18,7 @@ import { NavigationFooter } from "../../molecules/common/NavigationFooter";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack'
 import RestaurantStore from "../../../store/restaurantStore";
 import { HomeStackParamList, navigateToHome, navigateToRestaurant } from "../../../navigator/HomeStack";
+import { MOCK_MEALS } from "../../../models/meal/util";
 
 export const HomeNavContainer = (props: StackScreenProps<HomeStackParamList, "Home">) => {
   const { navigation, route } = props;
@@ -65,6 +66,21 @@ export const HomeView = (props: HomeViewProps) => {
     })
   }
 
+  const onPressSlide = () => {
+    navigation?.push('Featured', {
+      title: 'Where to eat in NYC',
+      subtitle: 'We put together the best locales.',
+      imageUri: MOCK_MEALS[0].image,
+      text: 'Running a restaurant in New York City in any era is a herculean task. '
+      + 'We tend to love any place willing to feed us, but some simply stand out for their excellent ingredients.'
+      + '\r\n\r\n'
+      + 'And these are those: our favorite places to eat and drink, '
+      + 'and our favorite places to tell everyone else to eat and drink, at this very moment. '
+      + 'Some are old, some are new, some are finally getting their due, and each one is worth your time, '
+      + 'money and attention.',
+    })
+  }
+
   const getNoticationIconName = (hasNotifications: boolean) => hasNotifications ? 'bell-alert' : 'bell'
 
   const onPressNotifications = () => {
@@ -91,7 +107,7 @@ export const HomeView = (props: HomeViewProps) => {
       <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('77%')} pl={'14px'}>
         <ScrollView>
           <Box>
-            <SlideshowCarousel slides={slideshowImages} />
+            <SlideshowCarousel slides={slideshowImages} onPressSlide={onPressSlide} />
             <FlexBox key='new' flexDirection={'column'} alignContent={'center'} pt={hp('1.5%')}>
               <CarouselHeader title={"New on FYTR"} navigateToShowAll={() => navigateToShowAll("New on FYTR", meals.new)} />
               <Box mt={hp('1.5%')}>

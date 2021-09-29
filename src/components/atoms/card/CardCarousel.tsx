@@ -12,6 +12,8 @@ export interface CardCarouselProps {
   onPress: (mealViewProps: Meal) => void;
 }
 
+// ORG Move to molecules
+
 export const CardCarousel = (props: CardCarouselProps) => {
 
   const { meals, hideDistance, onPress } = props;

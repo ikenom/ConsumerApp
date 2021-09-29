@@ -9,11 +9,13 @@ import RestaurantStore from '../store/restaurantStore';
 import UserStore from '../store/userStore';
 import { Meal, EnrichedMeal } from '../models/meal/meal';
 import OrderStore from '../store/orderStore';
+import { FeaturedNavContainer, FeaturedViewProps } from '../components/pages/navigation/Featured';
 
 export type HomeStackParamList = {
   Home: HomeViewProps;
-  SeeAsTiles: SeeAsTilesProps
+  SeeAsTiles: SeeAsTilesProps;
   Notifications: undefined;
+  Featured: FeaturedViewProps;
   RestaurantStack: NavigatorScreenParams<RestaurantParamList>;
 }
 
@@ -64,6 +66,7 @@ export const HomeStackScreens = () => {
         component={HomeNavContainer}
         initialParams={loadHomeData()} />
       <HomeStack.Screen name="SeeAsTiles" component={SeeAsTilesNavContainer} />
+      <HomeStack.Screen name="Featured" component={FeaturedNavContainer} />
       <HomeStack.Screen name="RestaurantStack" component={RestaurantStackScreens} />
     </HomeStack.Navigator>
   );

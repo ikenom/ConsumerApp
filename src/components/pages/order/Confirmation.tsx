@@ -51,7 +51,7 @@ export const Confirmation = (props: OrderConfirmationProps) => {
   return (
     <FlexBox flexDirection={'column'} bg={defaultTheme.colors.black} width={wp("100%")} height={hp('92%')} justifyContent={'space-between'} pt={insets.top}>
       <FlexBox flexDirection={'column'} pl={wp('4%')} pr={wp('4%')}>
-        <OrderConfirmationHeader label={'Order Complete'} icon={'cross'} iconPosition={'right'} onPress={() => {}}/>
+        <OrderConfirmationHeader label={'Order Complete'} leftIcon={'close'} onPressLeft={() => {}}/>
         <TimeDisplay dateTime={unSerializedOrder.fulfillmentDetails.fulfillmentTime}/>
         <StyledDivider height={1} mt={hp('1.1%')} mb={hp('2%')}/>
         <RestaurantDisplay restaurant={restaurant}/>
