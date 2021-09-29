@@ -71,13 +71,13 @@ export const HomeView = (props: HomeViewProps) => {
       title: 'Where to eat in NYC',
       subtitle: 'We put together the best locales.',
       imageUri: MOCK_MEALS[0].image,
-      text: 'Running a restaurant in New York City in any era is a herculean task.'
-      + ' We tend to love any place willing to feed us, but some simply stand out for their excellent ingredients.'
+      text: 'Running a restaurant in New York City in any era is a herculean task. '
+      + 'We tend to love any place willing to feed us, but some simply stand out for their excellent ingredients.'
       + '\r\n\r\n'
-      + ' And these are those: our favorite places to eat and drink,'
-      + ' and our favorite places to tell everyone else to eat and drink, at this very moment.'
-      + ' Some are old, some are new, some are finally getting their due, and each one is worth your time,'
-      + ' money and attention.',
+      + 'And these are those: our favorite places to eat and drink, '
+      + 'and our favorite places to tell everyone else to eat and drink, at this very moment. '
+      + 'Some are old, some are new, some are finally getting their due, and each one is worth your time, '
+      + 'money and attention.',
     })
   }
 
